@@ -45,14 +45,17 @@ public class TaskTask implements Task, Initializable {
 
 	@Override
 	public void initialize() throws InitializationException {
-		//http://s97.game.hanjiangsanguo.com/index.php?v=2013091306&c=worldboss&&m=battle&&token_uid=3912248&token=fABHoVcI6gF21pOPggkLOQ&channel=150&lang=zh-cn&rand=139243696758278&now=0
+		m_types.put("1", "武将突飞");
 		m_types.put("2", "银币征收");
 		m_types.put("3", "银矿抢占");
 		m_types.put("4", "每日通商");
+		m_types.put("5", "元宝消费");
+		m_types.put("6", "关卡挑战");
 		m_types.put("7", "属性培养");
 		m_types.put("8", "装备升级");
 		m_types.put("9", "金银守卫");
 		m_types.put("10", "演武竞技");
 		m_types.put("11", "宝石贸易");
+		m_types.put("12", "世界BOSS");
 	}
 }
