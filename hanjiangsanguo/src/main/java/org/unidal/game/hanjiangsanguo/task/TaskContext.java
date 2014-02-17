@@ -9,6 +9,8 @@ public interface TaskContext {
 
 	public int getIntAttribute(String name, int defaultValue);
 
+	public int getIntAttribute(String category, String name, int defaultValue);
+
 	public void setAttribute(String name, String value);
 
 	public void setAttribute(String category, String name, String value);

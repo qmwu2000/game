@@ -83,7 +83,7 @@ public class MapTask implements Task, Initializable {
 		String url = m_helper.buildUrl2(ctx, "map", "action", "&l=%s&s=%s&id=%s", "info.missionlevel",
 		      "info.missionstage", "info.missionid");
 
-		m_helper.doGet(ctx, url);
+		m_helper.doGet(ctx, url, "info.win");
 	}
 
 	private void handleMission(TaskContext ctx) throws Exception {
@@ -105,9 +105,15 @@ public class MapTask implements Task, Initializable {
 		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 1, 7));
 		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 1, 8));
 		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 1, 9));
-		m_reputations.add(new Triple<Integer, Integer, Integer>(12, 1, 10));
+		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 1, 10));
 		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 2, 6));
 		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 2, 7));
+		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 2, 10));
+
+		m_reputations.add(new Triple<Integer, Integer, Integer>(7, 1, 8));
+		m_reputations.add(new Triple<Integer, Integer, Integer>(7, 2, 8));
+		m_reputations.add(new Triple<Integer, Integer, Integer>(7, 3, 8));
+		m_reputations.add(new Triple<Integer, Integer, Integer>(7, 4, 8));
 	}
 
 	static class Mission {

@@ -6,16 +6,22 @@ import org.unidal.game.hanjiangsanguo.task.Task;
 import org.unidal.game.hanjiangsanguo.task.TaskDriver;
 import org.unidal.lookup.ComponentTestCase;
 
-public class TaskTest extends ComponentTestCase {
+public class youyong2014 extends ComponentTestCase {
 	@Before
 	public void before() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, LoginTask.ID);
 
-//		driver.setup("qmwu2000", "Passw0rd", "97");
-		// driver.setup("youyong2014", "forever123", "107", "practice/gid", "67302");
-		 driver.setup("qmwu2010", "forever123", "99", "practice/gid", "138179");
+		driver.setup("youyong2014", "forever123", "107", "practice/gid", "67302", "general/gid", "67302", "general/id", "86");
 		driver.execute(task);
+	}
+
+	@Test
+	public void all() throws Exception {
+		vipwage();
+		lottery();
+		drink();
+		general();
 	}
 
 	@Test
@@ -95,9 +101,17 @@ public class TaskTest extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, PracticeTask.ID);
 
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 57; i++) {
 			driver.execute(task, "practice/action", "go_leap");
 		}
+	}
+	
+	@Test
+	public void general() throws Exception {
+		TaskDriver driver = lookup(TaskDriver.class);
+		Task task = lookup(Task.class, GeneralTask.ID);
+		
+		driver.execute(task);
 	}
 
 	@Test

@@ -3,15 +3,32 @@ package org.unidal.game.hanjiangsanguo.build;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.unidal.game.hanjiangsanguo.task.DefaultTaskActionManager;
 import org.unidal.game.hanjiangsanguo.task.DefaultTaskContext;
 import org.unidal.game.hanjiangsanguo.task.Task;
+import org.unidal.game.hanjiangsanguo.task.TaskAction;
+import org.unidal.game.hanjiangsanguo.task.TaskActionManager;
 import org.unidal.game.hanjiangsanguo.task.TaskContext;
 import org.unidal.game.hanjiangsanguo.task.TaskDriver;
 import org.unidal.game.hanjiangsanguo.task.TaskHelper;
+import org.unidal.game.hanjiangsanguo.task.action.ArenaAction;
+import org.unidal.game.hanjiangsanguo.task.action.BusinessAction;
+import org.unidal.game.hanjiangsanguo.task.action.CityImpose;
+import org.unidal.game.hanjiangsanguo.task.action.CultivateRoll;
+import org.unidal.game.hanjiangsanguo.task.action.GoldUse;
+import org.unidal.game.hanjiangsanguo.task.action.IslandMission;
+import org.unidal.game.hanjiangsanguo.task.action.MapMission;
+import org.unidal.game.hanjiangsanguo.task.action.MineOccupy;
+import org.unidal.game.hanjiangsanguo.task.action.PracticeLeap;
+import org.unidal.game.hanjiangsanguo.task.action.StrengthenUpgrade;
+import org.unidal.game.hanjiangsanguo.task.action.TavernTrade;
+import org.unidal.game.hanjiangsanguo.task.action.WorldbossBattle;
 import org.unidal.game.hanjiangsanguo.task.core.ActivityTask;
 import org.unidal.game.hanjiangsanguo.task.core.ArenaTask;
 import org.unidal.game.hanjiangsanguo.task.core.BusinessTask;
+import org.unidal.game.hanjiangsanguo.task.core.DiceTask;
 import org.unidal.game.hanjiangsanguo.task.core.DrinkTask;
+import org.unidal.game.hanjiangsanguo.task.core.GeneralTask;
 import org.unidal.game.hanjiangsanguo.task.core.LoginTask;
 import org.unidal.game.hanjiangsanguo.task.core.LotteryTask;
 import org.unidal.game.hanjiangsanguo.task.core.MapTask;
@@ -25,6 +42,10 @@ import org.unidal.lookup.configuration.AbstractResourceConfigurator;
 import org.unidal.lookup.configuration.Component;
 
 public class ComponentsConfigurator extends AbstractResourceConfigurator {
+	public static void main(String[] args) {
+		generatePlexusComponentsXmlFile(new ComponentsConfigurator());
+	}
+
 	@Override
 	public List<Component> defineComponents() {
 		List<Component> all = new ArrayList<Component>();
@@ -34,9 +55,32 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskContext.class, DefaultTaskContext.class).is(PER_LOOKUP));
 
 		all.addAll(defineTaskComponents());
+		all.addAll(defineTaskActionComponents());
 
 		// Please keep it as last
 		all.addAll(new WebComponentConfigurator().defineComponents());
+
+		return all;
+	}
+
+	private List<Component> defineTaskActionComponents() {
+		List<Component> all = new ArrayList<Component>();
+
+		all.add(C(TaskActionManager.class, DefaultTaskActionManager.class) //
+				.req(TaskHelper.class));
+
+		all.add(C(TaskAction.class, PracticeLeap.ID, PracticeLeap.class));
+		all.add(C(TaskAction.class, CityImpose.ID, CityImpose.class));
+		all.add(C(TaskAction.class, MineOccupy.ID, MineOccupy.class));
+		all.add(C(TaskAction.class, BusinessAction.ID, BusinessAction.class));
+		all.add(C(TaskAction.class, GoldUse.ID, GoldUse.class));
+		all.add(C(TaskAction.class, MapMission.ID, MapMission.class));
+		all.add(C(TaskAction.class, CultivateRoll.ID, CultivateRoll.class));
+		all.add(C(TaskAction.class, StrengthenUpgrade.ID, StrengthenUpgrade.class));
+		all.add(C(TaskAction.class, IslandMission.ID, IslandMission.class));
+		all.add(C(TaskAction.class, ArenaAction.ID, ArenaAction.class));
+		all.add(C(TaskAction.class, TavernTrade.ID, TavernTrade.class));
+		all.add(C(TaskAction.class, WorldbossBattle.ID, WorldbossBattle.class));
 
 		return all;
 	}
@@ -73,23 +117,22 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 
 		all.add(C(Task.class, WorkshopTask.ID, WorkshopTask.class) //
 		      .req(TaskHelper.class));
-		
+
 		all.add(C(Task.class, WorldbossTask.ID, WorldbossTask.class) //
-				.req(TaskHelper.class));
-		
+		      .req(TaskHelper.class));
+
+		all.add(C(Task.class, GeneralTask.ID, GeneralTask.class) //
+		      .req(TaskHelper.class));
+
+		all.add(C(Task.class, DiceTask.ID, DiceTask.class) //
+		      .req(TaskHelper.class));
+
 		all.add(C(Task.class, TaskTask.ID, TaskTask.class) //
-				.req(TaskHelper.class));
-		
-		all.add(C(Task.class, TaskTask.ID, TaskTask.class) //
-				.req(TaskHelper.class));
+		      .req(TaskHelper.class, TaskActionManager.class));
 
 		all.add(C(Task.class, ActivityTask.ID, ActivityTask.class) //
 		      .req(TaskHelper.class));
 
 		return all;
-	}
-
-	public static void main(String[] args) {
-		generatePlexusComponentsXmlFile(new ComponentsConfigurator());
 	}
 }

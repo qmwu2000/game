@@ -48,7 +48,12 @@ public class DefaultTaskContext implements TaskContext, LogEnabled {
 
 	@Override
 	public int getIntAttribute(String name, int defaultValue) {
-		String value = getAttribute(name);
+		return getIntAttribute(m_defaultCategory, name, defaultValue);
+	}
+
+	@Override
+	public int getIntAttribute(String category, String name, int defaultValue) {
+		String value = getAttribute(category, name);
 
 		try {
 			if (value != null) {

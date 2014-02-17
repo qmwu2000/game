@@ -125,8 +125,18 @@
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>task</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.TaskTask</implementation>
+			<role-hint>general</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.core.GeneralTask</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
+			<role-hint>dice</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.core.DiceTask</implementation>
 			<requirements>
 				<requirement>
 					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
@@ -140,6 +150,9 @@
 			<requirements>
 				<requirement>
 					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskActionManager</role>
 				</requirement>
 			</requirements>
 		</component>
@@ -152,6 +165,75 @@
 					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
 				</requirement>
 			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskActionManager</role>
+			<implementation>org.unidal.game.hanjiangsanguo.task.DefaultTaskActionManager</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
+			<role-hint>practice.leap</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.action.PracticeLeap</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
+			<role-hint>city.impose</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.action.CityImpose</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
+			<role-hint>mine.occupy</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.action.MineOccupy</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
+			<role-hint>business.go_business</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.action.BusinessAction</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
+			<role-hint>gold.use</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.action.GoldUse</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
+			<role-hint>map.mission</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.action.MapMission</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
+			<role-hint>cultivate.roll</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.action.CultivateRoll</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
+			<role-hint>strengthen.strengthen_start</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.action.StrengthenUpgrade</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
+			<role-hint>island.mission</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.action.IslandMission</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
+			<role-hint>arena.action</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.action.ArenaAction</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
+			<role-hint>tavern.trade</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.action.TavernTrade</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
+			<role-hint>tavern.trade</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.action.WorldbossBattle</implementation>
 		</component>
 		<component>
 			<role>org.unidal.web.mvc.model.ModuleRegistry</role>

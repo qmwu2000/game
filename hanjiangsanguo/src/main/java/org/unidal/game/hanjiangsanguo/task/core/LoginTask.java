@@ -58,10 +58,15 @@ public class LoginTask implements Task {
 
 		String url = m_helper.buildUrl2(ctx, "member", "index", null);
 		String[] keys = { "nickname", "level", "act", "act_limit", "silver", "gold", "rank", "soul", "gem", "jade",
-		      "reputation" };
+		      "reputation", "missionlevel", "missionstage", "missionid" };
 
-		return m_helper.doGet(ctx, url, keys);
-//		 return m_helper.doGet(ctx, url, "*");
+		boolean showAll = false;
+
+		if (showAll) {
+			return m_helper.doGet(ctx, url, "*");
+		} else {
+			return m_helper.doGet(ctx, url, keys);
+		}
 	}
 
 	private void loadFromFile(TaskContext ctx, File file) throws IOException, FileNotFoundException {

@@ -96,7 +96,7 @@ public class TaskHelper implements Initializable, LogEnabled {
 
 		ctx.setAttribute("status", String.valueOf(status));
 
-		if (value == 1) {
+		if (value == 1 || value == 2) {
 			return true;
 		} else if (value == -2) {
 			m_logger.warn("Done already");
@@ -142,26 +142,13 @@ public class TaskHelper implements Initializable, LogEnabled {
 			return;
 		}
 
-		int pos1 = mapping.indexOf(':');
-		int pos2 = mapping.indexOf('/');
+		Triple<String, String, String> t = parseMapping(ctx, mapping);
+		String category = t.getMiddle();
+		String name = t.getLast();
 
-		if (pos1 > 0) {
-			String key = mapping.substring(0, pos1);
-			String category;
-			String name;
+		Object value = m_engine.eval("var o=" + json + ";" + script);
 
-			if (pos2 > pos1) {
-				category = mapping.substring(pos1 + 1, pos2);
-				name = mapping.substring(pos2 + 1);
-			} else {
-				category = mapping.substring(pos1 + 1);
-				name = key;
-			}
-
-			Object value = m_engine.eval("var o=" + json + ";" + script);
-
-			ctx.setAttribute(category, name, value.toString());
-		}
+		ctx.setAttribute(category, name, value.toString());
 	}
 
 	@Override

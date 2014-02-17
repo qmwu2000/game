@@ -6,13 +6,13 @@ import org.unidal.game.hanjiangsanguo.task.Task;
 import org.unidal.game.hanjiangsanguo.task.TaskDriver;
 import org.unidal.lookup.ComponentTestCase;
 
-public class qmwu2010 extends ComponentTestCase {
+public class youyong2009 extends ComponentTestCase {
 	@Before
 	public void before() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, LoginTask.ID);
 
-		driver.setup("qmwu2010", "forever123", "99", "practice/gid", "138179", "general/gid", "138179", "general/id", "86");
+		driver.setup("youyong2009", "forever123", "99", "practice/gid", "137664", "general/gid", "137664", "general/id", "86");
 		driver.execute(task);
 	}
 
@@ -128,7 +128,7 @@ public class qmwu2010 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
 
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 10; i++) {
 			driver.execute(task, "map/action", "reputation");
 		}
 	}
