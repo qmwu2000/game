@@ -22,33 +22,38 @@ public class MapTask implements Task, Initializable {
 
 	private Map<String, Pair<Integer, Integer>> m_scrolls = new HashMap<String, Pair<Integer, Integer>>();
 
-	private List<Triple<Integer, Integer, Integer>> m_reputations = new ArrayList<Triple<Integer, Integer, Integer>>();
+	private List<Triple<Integer, Integer, Integer>> m_map = new ArrayList<Triple<Integer, Integer, Integer>>();
 
 	@Override
 	public void execute(TaskContext ctx) throws Exception {
 		ctx.setDefaultCategory(ID);
 
 		String action = ctx.getAttribute("action");
+		int maxTimes = ctx.getIntAttribute("maxtimes", 1);
 
 		if ("reputation".equals(action)) {
-			handleReputation(ctx);
+			doMapAction(ctx, 12, maxTimes);
+		} else if ("scroll".equals(action)) {
+			doMapAction(ctx, 7, maxTimes);
 		} else {
 			handleScroll(ctx);
 		}
 	}
 
-	private void handleReputation(TaskContext ctx) throws Exception {
-		for (Triple<Integer, Integer, Integer> e : m_reputations) {
-			ctx.setAttribute("info.missionlevel", String.valueOf(e.getFirst()));
-			ctx.setAttribute("info.missionstage", String.valueOf(e.getMiddle()));
-			ctx.setAttribute("info.missionid", String.valueOf(e.getLast()));
+	private void doMapAction(TaskContext ctx, int level, int maxTimes) throws Exception {
+		for (Triple<Integer, Integer, Integer> e : m_map) {
+			if (e.getFirst() == level) {
+				ctx.setAttribute("info.missionlevel", String.valueOf(e.getFirst()));
+				ctx.setAttribute("info.missionstage", String.valueOf(e.getMiddle()));
+				ctx.setAttribute("info.missionid", String.valueOf(e.getLast()));
 
-			handleMission(ctx);
+				handleMission(ctx);
 
-			int times = ctx.getIntAttribute("info.nowmaxtimes", 0);
+				int times = ctx.getIntAttribute("info.nowmaxtimes", maxTimes);
 
-			for (int i = 0; i < times; i++) {
-				handleAction(ctx);
+				for (int i = 0; i < times; i++) {
+					handleAction(ctx);
+				}
 			}
 		}
 	}
@@ -101,19 +106,14 @@ public class MapTask implements Task, Initializable {
 		m_scrolls.put("yellow", new Pair<Integer, Integer>(9, 7));
 		m_scrolls.put("purple", new Pair<Integer, Integer>(10, 7));
 
-		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 1, 6));
-		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 1, 7));
-		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 1, 8));
-		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 1, 9));
-		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 1, 10));
-		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 2, 6));
-		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 2, 7));
-		// m_reputations.add(new Triple<Integer, Integer, Integer>(12, 2, 10));
+		for (int i = 6; i <= 10; i++) {
+			m_map.add(new Triple<Integer, Integer, Integer>(12, 1, i));
+		}
 
-		m_reputations.add(new Triple<Integer, Integer, Integer>(7, 1, 8));
-		m_reputations.add(new Triple<Integer, Integer, Integer>(7, 2, 8));
-		m_reputations.add(new Triple<Integer, Integer, Integer>(7, 3, 8));
-		m_reputations.add(new Triple<Integer, Integer, Integer>(7, 4, 8));
+		m_map.add(new Triple<Integer, Integer, Integer>(7, 1, 6));
+		m_map.add(new Triple<Integer, Integer, Integer>(7, 2, 6));
+		m_map.add(new Triple<Integer, Integer, Integer>(7, 3, 6));
+		m_map.add(new Triple<Integer, Integer, Integer>(7, 4, 6));
 	}
 
 	static class Mission {

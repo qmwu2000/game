@@ -12,7 +12,11 @@ public class qmwu2010 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, LoginTask.ID);
 
-		driver.setup("qmwu2010", "forever123", "99", "practice/gid", "138179", "general/gid", "138179", "general/id", "86");
+		driver.setup("qmwu2010", "forever123", "99", //
+		      "practice/gid", "138179", //
+		      "general/gid", "138179", "general/id", "86", //
+		      "worldboss/list", "145262,-1,147040,-1,150467,-1,136810,-1,138179", "worldboss/mid", "4" //
+		);
 		driver.execute(task);
 	}
 
@@ -22,9 +26,10 @@ public class qmwu2010 extends ComponentTestCase {
 		lottery();
 		drink();
 		general();
+		business();
 		workshop();
 	}
-	
+
 	@Test
 	public void nop() {
 	}
@@ -33,18 +38,18 @@ public class qmwu2010 extends ComponentTestCase {
 	public void worldboss() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, WorldbossTask.ID);
-		
+
 		driver.execute(task);
 	}
-	
+
 	@Test
 	public void general() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, GeneralTask.ID);
-		
+
 		driver.execute(task);
 	}
-	
+
 	@Test
 	public void activity() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
@@ -92,7 +97,7 @@ public class qmwu2010 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, TavernTask.ID);
 
-		for (int i = 0; i < 200; i++) {
+		for (int i = 0; i < 175; i++) {
 			driver.execute(task, "tavern/action", "buy", "tavern/generalid", "1000");
 		}
 	}
@@ -118,7 +123,7 @@ public class qmwu2010 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, PracticeTask.ID);
 
-		for (int i = 0; i < 106; i++) {
+		for (int i = 0; i < 70; i++) {
 			driver.execute(task, "practice/action", "go_leap");
 		}
 	}
@@ -128,9 +133,17 @@ public class qmwu2010 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
 
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 2; i++) {
 			driver.execute(task, "map/action", "reputation");
 		}
+	}
+
+	@Test
+	public void mapScroll() throws Exception {
+		TaskDriver driver = lookup(TaskDriver.class);
+		Task task = lookup(Task.class, MapTask.ID);
+
+		driver.execute(task, "map/action", "scroll", "map/scroll.color", "green", "map/scroll.type", "6");
 	}
 
 	@Test

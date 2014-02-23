@@ -27,7 +27,7 @@ public class IslandMission extends AbstractTaskAction {
 			}
 		}
 
-		return Math.min(10, times);
+		return Math.min(10 - startAct, times);
 	}
 
 	private int getStartAct(TaskContext ctx) throws Exception {

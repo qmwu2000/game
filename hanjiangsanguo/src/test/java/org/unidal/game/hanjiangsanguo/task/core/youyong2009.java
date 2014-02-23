@@ -12,7 +12,11 @@ public class youyong2009 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, LoginTask.ID);
 
-		driver.setup("youyong2009", "forever123", "99", "practice/gid", "137664", "general/gid", "137664", "general/id", "86");
+		driver.setup("youyong2009", "forever123", "99", //
+				"practice/gid", "137664", //
+				"general/gid", "137664", "general/id", "86", //
+				"worldboss/list", "136503,-1,145409,-1,139938,-1,147050,-1,137664", "worldboss/mid", "4" //
+				);
 		driver.execute(task);
 	}
 

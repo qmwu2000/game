@@ -20,6 +20,8 @@ public class WorldbossTask implements Task {
 		int countdown = ctx.getIntAttribute("countdown", -1);
 		int times = countdown / 60;
 
+		handleMatrix(ctx);
+
 		for (int i = 0; i < times; i++) {
 			long start = System.currentTimeMillis();
 
@@ -43,6 +45,12 @@ public class WorldbossTask implements Task {
 		String url = m_helper.buildUrl2(ctx, "worldboss", "index", null);
 
 		m_helper.doGet(ctx, url, "countdown");
+	}
+
+	private void handleMatrix(TaskContext ctx) throws Exception {
+		String url = m_helper.buildUrl2(ctx, "matrix", "update_matrix", "&list=%s&mid=%s", "list", "mid");
+
+		m_helper.doGet(ctx, url);
 	}
 
 	private void handleReward(TaskContext ctx) throws Exception {

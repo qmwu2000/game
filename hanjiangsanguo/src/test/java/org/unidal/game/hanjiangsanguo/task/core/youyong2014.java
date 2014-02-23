@@ -12,7 +12,11 @@ public class youyong2014 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, LoginTask.ID);
 
-		driver.setup("youyong2014", "forever123", "107", "practice/gid", "67302", "general/gid", "67302", "general/id", "86");
+		driver.setup("youyong2014", "forever123", "107", //
+		      "practice/gid", "67302", //
+		      "general/gid", "67302", "general/id", "86", //
+		      "worldboss/list", "65914,-1,70058,-1,68660,-1,68659,-1,67302", "worldboss/mid", "4" //
+		);
 		driver.execute(task);
 	}
 
@@ -22,10 +26,20 @@ public class youyong2014 extends ComponentTestCase {
 		lottery();
 		drink();
 		general();
+		business();
+		workshop();
 	}
 
 	@Test
 	public void nop() {
+	}
+
+	@Test
+	public void worldboss() throws Exception {
+		TaskDriver driver = lookup(TaskDriver.class);
+		Task task = lookup(Task.class, WorldbossTask.ID);
+
+		driver.execute(task);
 	}
 
 	@Test
@@ -105,12 +119,12 @@ public class youyong2014 extends ComponentTestCase {
 			driver.execute(task, "practice/action", "go_leap");
 		}
 	}
-	
+
 	@Test
 	public void general() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, GeneralTask.ID);
-		
+
 		driver.execute(task);
 	}
 
