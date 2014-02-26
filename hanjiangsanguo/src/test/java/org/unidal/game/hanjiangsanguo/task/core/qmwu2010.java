@@ -137,13 +137,23 @@ public class qmwu2010 extends ComponentTestCase {
 			driver.execute(task, "map/action", "reputation");
 		}
 	}
+	
+	@Test
+	public void mapGeneral() throws Exception {
+		TaskDriver driver = lookup(TaskDriver.class);
+		Task task = lookup(Task.class, MapTask.ID);
+		
+		for (int i = 0; i < 2; i++) {
+			driver.execute(task, "map/action", "general");
+		}
+	}
 
 	@Test
 	public void mapScroll() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
 
-		driver.execute(task, "map/action", "scroll", "map/scroll.color", "green", "map/scroll.type", "6");
+		driver.execute(task, "map/action", "scroll", "map/scroll.color", "blue", "map/scroll.type", "9");
 	}
 
 	@Test

@@ -24,6 +24,8 @@ public class MapTask implements Task, Initializable {
 
 	private List<Triple<Integer, Integer, Integer>> m_map = new ArrayList<Triple<Integer, Integer, Integer>>();
 
+	private List<Triple<Integer, Integer, Integer>> m_generals = new ArrayList<Triple<Integer, Integer, Integer>>();
+
 	@Override
 	public void execute(TaskContext ctx) throws Exception {
 		ctx.setDefaultCategory(ID);
@@ -33,10 +35,12 @@ public class MapTask implements Task, Initializable {
 
 		if ("reputation".equals(action)) {
 			doMapAction(ctx, 12, maxTimes);
+		} else if ("general".equals(action)) {
+			doGeneralAction(ctx);
 		} else if ("scroll".equals(action)) {
-			doMapAction(ctx, 7, maxTimes);
-		} else {
 			handleScroll(ctx);
+		} else {
+			doMapAction(ctx, 7, maxTimes);
 		}
 	}
 
@@ -58,9 +62,30 @@ public class MapTask implements Task, Initializable {
 		}
 	}
 
+	private void doGeneralAction(TaskContext ctx) throws Exception {
+		for (Triple<Integer, Integer, Integer> e : m_generals) {
+			ctx.setAttribute("info.missionlevel", String.valueOf(e.getFirst()));
+			ctx.setAttribute("info.missionstage", String.valueOf(e.getMiddle()));
+			ctx.setAttribute("info.missionid", String.valueOf(e.getLast()));
+
+			while (true) {
+				handleMission(ctx);
+
+				int times = ctx.getIntAttribute("info.nowmaxtimes", 0);
+				int recruitrate = ctx.getIntAttribute("info.recruitrate", 0);
+
+				if (recruitrate > 0 && times > 0) {
+					handleAction(ctx);
+				} else {
+					break;
+				}
+			}
+		}
+	}
+
 	private void handleScroll(TaskContext ctx) throws Exception {
-		String color = ctx.getAttribute("payload", "scroll.color");
-		String type = ctx.getAttribute("payload", "scroll.type");
+		String color = ctx.getAttribute("scroll.color");
+		String type = ctx.getAttribute("scroll.type");
 		Pair<Integer, Integer> scroll = m_scrolls.get(color);
 
 		if (scroll != null && type != null) {
@@ -95,7 +120,7 @@ public class MapTask implements Task, Initializable {
 		String url = m_helper.buildUrl2(ctx, "map", "mission", "&l=%s&s=%s&id=%s", "info.missionlevel",
 		      "info.missionstage", "info.missionid");
 
-		m_helper.doGet(ctx, url, "info.nowmaxtimes");
+		m_helper.doGet(ctx, url, "info.nowmaxtimes", "info.recruitrate");
 	}
 
 	@Override
@@ -106,14 +131,20 @@ public class MapTask implements Task, Initializable {
 		m_scrolls.put("yellow", new Pair<Integer, Integer>(9, 7));
 		m_scrolls.put("purple", new Pair<Integer, Integer>(10, 7));
 
-		for (int i = 6; i <= 10; i++) {
-			m_map.add(new Triple<Integer, Integer, Integer>(12, 1, i));
+		for (int level = 1; level <= 3; level++) {
+			for (int i = 6; i <= 10; i++) {
+				m_map.add(new Triple<Integer, Integer, Integer>(12, level, i));
+			}
 		}
 
-		m_map.add(new Triple<Integer, Integer, Integer>(7, 1, 6));
-		m_map.add(new Triple<Integer, Integer, Integer>(7, 2, 6));
-		m_map.add(new Triple<Integer, Integer, Integer>(7, 3, 6));
-		m_map.add(new Triple<Integer, Integer, Integer>(7, 4, 6));
+		m_generals.add(new Triple<Integer, Integer, Integer>(5, 2, 10));
+		m_generals.add(new Triple<Integer, Integer, Integer>(5, 4, 10));
+		m_generals.add(new Triple<Integer, Integer, Integer>(6, 1, 10));
+		m_generals.add(new Triple<Integer, Integer, Integer>(6, 2, 10));
+		m_generals.add(new Triple<Integer, Integer, Integer>(6, 4, 10));
+		m_generals.add(new Triple<Integer, Integer, Integer>(7, 2, 10));
+		m_generals.add(new Triple<Integer, Integer, Integer>(7, 4, 10));
+		m_generals.add(new Triple<Integer, Integer, Integer>(8, 2, 10));
 	}
 
 	static class Mission {

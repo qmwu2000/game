@@ -137,6 +137,16 @@ public class youyong2014 extends ComponentTestCase {
 			driver.execute(task, "map/action", "reputation");
 		}
 	}
+	
+	@Test
+	public void mapGeneral() throws Exception {
+		TaskDriver driver = lookup(TaskDriver.class);
+		Task task = lookup(Task.class, MapTask.ID);
+		
+		for (int i = 0; i < 2; i++) {
+			driver.execute(task, "map/action", "general");
+		}
+	}
 
 	@Test
 	public void arena() throws Exception {
