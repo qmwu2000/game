@@ -14,7 +14,7 @@ public class qmwu2010 extends ComponentTestCase {
 
 		driver.setup("qmwu2010", "forever123", "99", //
 		      "practice/gid", "138179", //
-		      "general/gid", "138179", "general/id", "86", //
+		      "general/gid", "138179", "general/id", "101", //
 		      "worldboss/list", "145262,-1,147040,-1,150467,-1,136810,-1,138179", "worldboss/mid", "4" //
 		);
 		driver.execute(task);
@@ -123,9 +123,7 @@ public class qmwu2010 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, PracticeTask.ID);
 
-		for (int i = 0; i < 70; i++) {
-			driver.execute(task, "practice/action", "go_leap");
-		}
+		driver.execute(task, "practice/action", "go_leap", "practice/maxtimes", "70");
 	}
 
 	@Test
@@ -137,12 +135,12 @@ public class qmwu2010 extends ComponentTestCase {
 			driver.execute(task, "map/action", "reputation");
 		}
 	}
-	
+
 	@Test
 	public void mapGeneral() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
-		
+
 		for (int i = 0; i < 2; i++) {
 			driver.execute(task, "map/action", "general");
 		}
@@ -153,7 +151,9 @@ public class qmwu2010 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
 
-		driver.execute(task, "map/action", "scroll", "map/scroll.color", "blue", "map/scroll.type", "9");
+		for (int i = 6; i <= 9; i++) {
+			driver.execute(task, "map/action", "scroll", "map/scroll.color", "blue", "map/scroll.type", "" + i);
+		}
 	}
 
 	@Test

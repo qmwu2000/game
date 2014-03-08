@@ -13,9 +13,9 @@ public class youyong2014 extends ComponentTestCase {
 		Task task = lookup(Task.class, LoginTask.ID);
 
 		driver.setup("youyong2014", "forever123", "107", //
-		      "practice/gid", "67302", //
-		      "general/gid", "67302", "general/id", "86", //
-		      "worldboss/list", "65914,-1,70058,-1,68660,-1,68659,-1,67302", "worldboss/mid", "4" //
+		      "practice/gid", "81151", //
+		      "general/gid", "81151", "general/id", "106", //
+		      "worldboss/list", "65914,-1,70058,-1,68660,-1,68659,-1,81151", "worldboss/mid", "4" //
 		);
 		driver.execute(task);
 	}
@@ -115,7 +115,7 @@ public class youyong2014 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, PracticeTask.ID);
 
-		for (int i = 0; i < 57; i++) {
+		for (int i = 0; i < 1; i++) {
 			driver.execute(task, "practice/action", "go_leap");
 		}
 	}
@@ -137,12 +137,26 @@ public class youyong2014 extends ComponentTestCase {
 			driver.execute(task, "map/action", "reputation");
 		}
 	}
-	
+
+	@Test
+	public void mapScroll() throws Exception {
+		TaskDriver driver = lookup(TaskDriver.class);
+		Task task = lookup(Task.class, MapTask.ID);
+
+		for (int i = 8; i <= 9; i++) {
+			driver.execute(task, "map/action", "scroll", "map/scroll.color", "green", "map/scroll.type", "" + i);
+		}
+
+		for (int i = 6; i <= 7; i++) {
+			driver.execute(task, "map/action", "scroll", "map/scroll.color", "blue", "map/scroll.type", "" + i);
+		}
+	}
+
 	@Test
 	public void mapGeneral() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
-		
+
 		for (int i = 0; i < 2; i++) {
 			driver.execute(task, "map/action", "general");
 		}

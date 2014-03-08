@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.plexus.logging.LogEnabled;
+import org.codehaus.plexus.logging.Logger;
 import org.unidal.game.hanjiangsanguo.task.Task;
 import org.unidal.game.hanjiangsanguo.task.TaskContext;
 import org.unidal.game.hanjiangsanguo.task.TaskHelper;
 import org.unidal.helper.Splitters;
 import org.unidal.lookup.annotation.Inject;
 
-public class PracticeTask implements Task {
+public class PracticeTask implements Task, LogEnabled {
 	public static final String ID = "practice";
 
 	@Inject
 	private TaskHelper m_helper;
+
+	private Logger m_logger;
 
 	@Override
 	public void execute(TaskContext ctx) throws Exception {
@@ -30,13 +34,37 @@ public class PracticeTask implements Task {
 	}
 
 	private void handleGoLeap(TaskContext ctx) throws Exception {
-		String url = m_helper.buildUrl2(ctx, "practice", "go_leap", "&gid=%s", "gid");
+		handleIndex(ctx);
 
-		m_helper.doGet(ctx, url);
+		int freeTimes = ctx.getIntAttribute("freetimes", 0);
+
+		if (freeTimes <= 0) {
+			m_logger.warn("No freetimes left!");
+			return;
+		}
+
+		int maxTimes = ctx.getIntAttribute("maxtimes", 0);
+
+		for (int i = Math.min(freeTimes, maxTimes); i > 0; i--) {
+			String url = m_helper.buildUrl2(ctx, "practice", "go_leap", "&gid=%s", "gid");
+
+			m_helper.doGet(ctx, url, "status", "info.freetimes", "info.isturn");
+
+			if (ctx.getIntAttribute("status", 0) < 0) {
+				m_logger.warn("Error when practicing with go_leap!");
+				break;
+			} else if (ctx.getIntAttribute("info.freetimes", 0) <= 0) {
+				m_logger.warn("No free times left!");
+				break;
+			} else if (ctx.getIntAttribute("info.isturn", 0) > 0) {
+				m_logger.warn("The general should be turned first!");
+				break;
+			}
+		}
 	}
 
 	private void handlePracticeAll(TaskContext ctx) throws Exception {
-		handleIndex(ctx);
+		handleGeneralList(ctx);
 
 		String list = ctx.getAttribute("list");
 		int pos = list.indexOf('|');
@@ -85,12 +113,18 @@ public class PracticeTask implements Task {
 		}
 	}
 
-	private void handleIndex(TaskContext ctx) throws Exception {
+	private void handleGeneralList(TaskContext ctx) throws Exception {
 		String url = m_helper.buildUrl2(ctx, "practice", "index", null);
 
 		m_helper.doGetWithScript(ctx, url,
 		      "var gs='',ps=''; for (var i in o.list) gs+=o.list[i].id+':'+o.list[i].isturn+','; "
 		            + "for (var i in o.place) ps+=o.place[i].id+':'+o.place[i].gid+','; gs+'|'+ps;", "list");
+	}
+
+	private void handleIndex(TaskContext ctx) throws Exception {
+		String url = m_helper.buildUrl(ctx, "practice", "index", null);
+
+		m_helper.doGet(ctx, url, "freetimes");
 	}
 
 	private void handlePracticeStart(TaskContext ctx) throws Exception {
@@ -103,5 +137,10 @@ public class PracticeTask implements Task {
 		String url = m_helper.buildUrl(ctx, "practice", "turn", "&gid=%s", "gid");
 
 		m_helper.doGet(ctx, url);
+	}
+
+	@Override
+	public void enableLogging(Logger logger) {
+		m_logger = logger;
 	}
 }
