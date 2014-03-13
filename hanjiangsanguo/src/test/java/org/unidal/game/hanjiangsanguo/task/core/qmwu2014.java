@@ -6,16 +6,20 @@ import org.unidal.game.hanjiangsanguo.task.Task;
 import org.unidal.game.hanjiangsanguo.task.TaskDriver;
 import org.unidal.lookup.ComponentTestCase;
 
-public class qmwu2010 extends ComponentTestCase {
+public class qmwu2014 extends ComponentTestCase {
+	static {
+		System.setProperty("devMode", "true");
+	}
+
 	@Before
 	public void before() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, LoginTask.ID);
 
-		driver.setup("qmwu2010", "forever123", "99", //
-		      "practice/gid", "138179", //
-		      "general/gid", "138179", "general/id", "101", //
-		      "worldboss/list", "145262,-1,147040,-1,150467,-1,136810,-1,138179", "worldboss/mid", "4" //
+		driver.setup("qmwu2014", "forever123", "107", //
+		      "practice/gid", "78313", //
+		      "general/gid", "78313", "general/id", "37", //
+		      "worldboss/list", "78314,78522,78313,-1,78320,-1,-1,78519,-1", "worldboss/mid", "2" //
 		);
 		driver.execute(task);
 	}
@@ -123,7 +127,9 @@ public class qmwu2010 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, PracticeTask.ID);
 
-		driver.execute(task, "practice/action", "go_leap", "practice/maxtimes", "70");
+		for (int i = 0; i < 68; i++) {
+			driver.execute(task, "practice/action", "go_leap");
+		}
 	}
 
 	@Test
@@ -151,9 +157,9 @@ public class qmwu2010 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
 
-		for (int i = 6; i <= 9; i++) {
-			driver.execute(task, "map/action", "scroll", "map/scroll.color", "blue", "map/scroll.type", "" + i);
-		}
+		driver.execute(task, "map/action", "scroll", "map/scroll.color", "white", "map/scroll.type", "5");
+		driver.execute(task, "map/action", "scroll", "map/scroll.color", "white", "map/scroll.type", "6");
+		driver.execute(task, "map/action", "scroll", "map/scroll.color", "white", "map/scroll.type", "9");
 	}
 
 	@Test

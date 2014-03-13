@@ -33,6 +33,7 @@ import org.unidal.game.hanjiangsanguo.task.core.LoginTask;
 import org.unidal.game.hanjiangsanguo.task.core.LotteryTask;
 import org.unidal.game.hanjiangsanguo.task.core.MapTask;
 import org.unidal.game.hanjiangsanguo.task.core.PracticeTask;
+import org.unidal.game.hanjiangsanguo.task.core.RegisterTask;
 import org.unidal.game.hanjiangsanguo.task.core.TaskTask;
 import org.unidal.game.hanjiangsanguo.task.core.TavernTask;
 import org.unidal.game.hanjiangsanguo.task.core.VipwageTask;
@@ -132,6 +133,9 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 
 		all.add(C(Task.class, ActivityTask.ID, ActivityTask.class) //
 		      .req(TaskHelper.class));
+		
+		all.add(C(Task.class, RegisterTask.ID, RegisterTask.class) //
+				.req(TaskHelper.class));
 
 		return all;
 	}

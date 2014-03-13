@@ -7,6 +7,10 @@ import org.unidal.game.hanjiangsanguo.task.TaskDriver;
 import org.unidal.lookup.ComponentTestCase;
 
 public class qmwu2012 extends ComponentTestCase {
+	static {
+		System.setProperty("devMode", "true");
+	}
+
 	@Before
 	public void before() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);

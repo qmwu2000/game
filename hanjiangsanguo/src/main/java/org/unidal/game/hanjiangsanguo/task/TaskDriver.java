@@ -7,12 +7,12 @@ import org.unidal.lookup.ContainerHolder;
 public class TaskDriver extends ContainerHolder implements Initializable {
 	private TaskContext m_ctx;
 
-	public void setup(String username, String password, String server, String... params) {
+	public TaskContext setup(String username, String password, String server, String... params) {
 		m_ctx.setAttribute("user", "username", username);
 		m_ctx.setAttribute("user", "password", password);
 		m_ctx.setAttribute("user", "server", server);
 
-		setupContext(params);
+		return setupContext(params);
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class TaskDriver extends ContainerHolder implements Initializable {
 		task.execute(m_ctx);
 	}
 
-	private void setupContext(String... params) {
+	private TaskContext setupContext(String... params) {
 		int len = params.length;
 
 		if (len % 2 != 0) {
@@ -50,5 +50,7 @@ public class TaskDriver extends ContainerHolder implements Initializable {
 
 			m_ctx.setAttribute(category, name, value);
 		}
+		
+		return m_ctx;
 	}
 }

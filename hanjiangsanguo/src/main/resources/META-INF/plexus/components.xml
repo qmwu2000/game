@@ -167,6 +167,16 @@
 			</requirements>
 		</component>
 		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
+			<role-hint>register</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.core.RegisterTask</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.TaskActionManager</role>
 			<implementation>org.unidal.game.hanjiangsanguo.task.DefaultTaskActionManager</implementation>
 			<requirements>

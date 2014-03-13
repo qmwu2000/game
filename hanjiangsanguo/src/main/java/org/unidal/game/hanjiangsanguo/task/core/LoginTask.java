@@ -40,15 +40,11 @@ public class LoginTask implements Task {
 	}
 
 	private void handleLogin(TaskContext ctx) throws Exception {
-		String loginUrl = m_helper.buildUrl(ctx, "http://uc.game.hanjiangsanguo.com/index.php?&"
-		      + "c=user&m=login&&token=&channel=150&lang=zh-cn&rand=%s&u=%s&p=%s", "timestamp", "user/username",
-		      "user/password");
+		String loginUrl = m_helper.buildUrl3(ctx, "user", "login", "&u=%s&p=%s", "user/username", "user/password");
 
 		m_helper.doGet(ctx, loginUrl, "uid:user");
 
-		String tokenUrl = m_helper.buildUrl(ctx, "http://s%s.game.hanjiangsanguo.com/index.php?v=2013091306&"
-		      + "c=login&&m=user&&token=&channel=150&lang=zh-cn&rand=%s&u=%s&p=%s", "user/server", "timestamp",
-		      "user/username", "user/password");
+		String tokenUrl = m_helper.buildUrl2(ctx, "login", "user", "&u=%s&p=%s", "user/username", "user/password");
 
 		m_helper.doGet(ctx, tokenUrl, "token:user", "vip:user");
 	}

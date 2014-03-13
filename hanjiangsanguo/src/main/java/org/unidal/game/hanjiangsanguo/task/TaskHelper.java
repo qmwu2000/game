@@ -1,6 +1,7 @@
 package org.unidal.game.hanjiangsanguo.task;
 
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.List;
 
 import javax.script.ScriptEngine;
@@ -90,6 +91,35 @@ public class TaskHelper implements Initializable, LogEnabled {
 		return String.format(pattern, args);
 	}
 
+	public String buildUrl3(TaskContext ctx, String c, String m, String suffix, String... params) {
+		String pattern = "http://uc.game.hanjiangsanguo.com/index.php?&"
+		      + "c=%s&m=%s&&token=&channel=150&lang=zh-cn&rand=%s" + (suffix == null ? "" : suffix);
+		Object[] args = new Object[params.length + 6];
+		int index = 0;
+
+		args[index++] = c;
+		args[index++] = m;
+		args[index++] = System.currentTimeMillis();
+
+		for (String param : params) {
+			int pos = param.indexOf('/');
+			String category;
+			String name;
+
+			if (pos > 0) {
+				category = param.substring(0, pos);
+				name = param.substring(pos + 1);
+			} else {
+				category = ctx.getDefaultCategory();
+				name = param;
+			}
+
+			args[index++] = ctx.getAttribute(category, name);
+		}
+
+		return String.format(pattern, args);
+	}
+
 	public boolean checkStatus(TaskContext ctx, String json) throws Exception {
 		Object status = getJsonValue(json, "status");
 		int value = (status instanceof Double ? ((Double) status).intValue() : -9);
@@ -113,6 +143,10 @@ public class TaskHelper implements Initializable, LogEnabled {
 		m_logger.info("GET " + url);
 
 		String json = Files.forIO().readFrom(new URL(url).openStream(), UTF_8);
+
+		if (url.indexOf("hitegg") > 0) {
+			System.err.println(json);
+		}
 
 		if ("403".equals(json)) {
 			ctx.setAttribute("status", "403");
@@ -235,6 +269,8 @@ public class TaskHelper implements Initializable, LogEnabled {
 
 						ctx.setAttribute(category, prefix + property, val.toString());
 					}
+				} else if (value instanceof Number) {
+					ctx.setAttribute(category, name, new MessageFormat("{0,number,0.#}").format(new Object[] { value }));
 				} else {
 					ctx.setAttribute(category, name, value.toString());
 				}

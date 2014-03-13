@@ -7,6 +7,10 @@ import org.unidal.game.hanjiangsanguo.task.TaskDriver;
 import org.unidal.lookup.ComponentTestCase;
 
 public class youyong2014 extends ComponentTestCase {
+	static {
+		System.setProperty("devMode", "true");
+	}
+
 	@Before
 	public void before() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
@@ -82,6 +86,14 @@ public class youyong2014 extends ComponentTestCase {
 		for (int i = 0; i < 200; i++) {
 			driver.execute(task);
 		}
+	}
+
+	@Test
+	public void task() throws Exception {
+		TaskDriver driver = lookup(TaskDriver.class);
+		Task task = lookup(Task.class, TaskTask.ID);
+
+		driver.execute(task);
 	}
 
 	@Test
