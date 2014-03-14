@@ -122,19 +122,19 @@ public class PracticeTask implements Task, LogEnabled {
 	}
 
 	private void handleIndex(TaskContext ctx) throws Exception {
-		String url = m_helper.buildUrl(ctx, "practice", "index", null);
+		String url = m_helper.buildUrl2(ctx, "practice", "index", null);
 
 		m_helper.doGet(ctx, url, "freetimes");
 	}
 
 	private void handlePracticeStart(TaskContext ctx) throws Exception {
-		String url = m_helper.buildUrl(ctx, "practice", "practice_start", "&pid=%s&gid=%s&type=%s", "pid", "gid", "type");
+		String url = m_helper.buildUrl2(ctx, "practice", "practice_start", "&pid=%s&gid=%s&type=%s", "pid", "gid", "type");
 
 		m_helper.doGet(ctx, url);
 	}
 
 	private void handleTurn(TaskContext ctx) throws Exception {
-		String url = m_helper.buildUrl(ctx, "practice", "turn", "&gid=%s", "gid");
+		String url = m_helper.buildUrl2(ctx, "practice", "turn", "&gid=%s", "gid");
 
 		m_helper.doGet(ctx, url);
 	}

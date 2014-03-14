@@ -127,9 +127,7 @@ public class qmwu2014 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, PracticeTask.ID);
 
-		for (int i = 0; i < 68; i++) {
-			driver.execute(task, "practice/action", "go_leap");
-		}
+		driver.execute(task, "practice/action", "go_leap", "practice/maxtimes", "50");
 	}
 
 	@Test
