@@ -19,11 +19,21 @@ public class RegisterTask implements Task {
 	@Override
 	public void execute(TaskContext ctx) throws Exception {
 		ctx.setDefaultCategory("user");
+		int maxTimes = ctx.getIntAttribute("maxtimes", 100);
 
+		while (maxTimes-- > 0) {
+			if (tryOnce(ctx)) {
+				break;
+			}
+		}
+	}
+
+	private boolean tryOnce(TaskContext ctx) throws Exception, IOException {
 		handleRegisterGuest(ctx);
 		handleLoginGuest(ctx);
 		handleSelectRole(ctx);
 		handleActivationCode(ctx, 7362);
+		handleActivationCode(ctx, 5236);
 		handleActivationCode(ctx, 1025);
 
 		for (int i = 0; i < 3; i++) {
@@ -35,20 +45,21 @@ public class RegisterTask implements Task {
 				String password = ctx.getAttribute("password");
 
 				if (username == null) {
-					username = "gongxian" + (uid % 10000);
+					username = "gongxian-" + (uid % 10000);
 				}
 
 				if (password == null) {
-					password = "gongxian" + (uid % 10000);
+					password = "gongxian-" + (uid % 10000);
 				}
 
 				handleRegisterBinding(ctx, username, password);
 
 				record(username, password);
-				ctx.setAttribute("hired", "true");
-				break;
+				return true;
 			}
 		}
+
+		return false;
 	}
 
 	private void record(String username, String password) throws IOException {
@@ -64,8 +75,11 @@ public class RegisterTask implements Task {
 	}
 
 	private void handleRegisterBinding(TaskContext ctx, String username, String password) throws Exception {
-		//http://uc.game.hanjiangsanguo.com/index.php?&c=register&m=binding&&channel=150&lang=zh-cn&rand=139459269640612&uid=6497024&u=1xiaohao24&p=1xiaohao24&mobile=&v=0&mac=00%3A00%3A00%3A00%3A00%3A00&adid=&devicetoken=000000&channel=150&token=dB6X8fXjk_wDYmBw-JitwQ
-		String url = m_helper.buildUrl3(ctx, "register", "binding", "&u=" + username + "&p=" + password+"&mobile=&v=0&mac=00:00:00:00:00:00&adid=&devicetoken=000000&channel=150&uid=%s&token=%s", "uid", "token");
+		// http://uc.game.hanjiangsanguo.com/index.php?&c=register&m=binding&&channel=150&lang=zh-cn&rand=139459269640612&uid=6497024&u=1xiaohao24&p=1xiaohao24&mobile=&v=0&mac=00%3A00%3A00%3A00%3A00%3A00&adid=&devicetoken=000000&channel=150&token=dB6X8fXjk_wDYmBw-JitwQ
+		String url = m_helper
+		      .buildUrl3(ctx, "register", "binding", "&u=" + username + "&p=" + password
+		            + "&mobile=&v=0&mac=00:00:00:00:00:00&adid=&devicetoken=000000&channel=150&uid=%s&token=%s", "uid",
+		            "token");
 
 		m_helper.doGet(ctx, url);
 	}
@@ -95,8 +109,13 @@ public class RegisterTask implements Task {
 	}
 
 	private void handleSelectRole(TaskContext ctx) throws Exception {
-		int uid = ctx.getIntAttribute("uid", 0);
-		String name = "obama" + (uid % 10000);
+		String name = ctx.getAttribute("name");
+
+		if (name == null) {
+			int uid = ctx.getIntAttribute("uid", 0);
+			name = "xiaoke-" + (uid % 10000);
+		}
+
 		String url = m_helper.buildUrl2(ctx, "member", "select_role", "&sex=1&name=" + name + "&token=%s", "token");
 
 		m_helper.doGet(ctx, url);

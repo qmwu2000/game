@@ -2,6 +2,7 @@ package org.unidal.game.hanjiangsanguo.task;
 
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
+import org.unidal.game.hanjiangsanguo.task.activity.TaskActivity;
 import org.unidal.lookup.ContainerHolder;
 
 public class TaskDriver extends ContainerHolder implements Initializable {
@@ -50,7 +51,16 @@ public class TaskDriver extends ContainerHolder implements Initializable {
 
 			m_ctx.setAttribute(category, name, value);
 		}
-		
+
 		return m_ctx;
+	}
+
+	public void go(String name, String... args) throws Exception {
+		TaskActivity activity = lookup(TaskActivity.class, name);
+		TaskArguments arguments = new TaskArguments(args);
+
+		if (!activity.execute(m_ctx, arguments)) {
+			throw new RuntimeException("Failed to do activity: " + name);
+		}
 	}
 }

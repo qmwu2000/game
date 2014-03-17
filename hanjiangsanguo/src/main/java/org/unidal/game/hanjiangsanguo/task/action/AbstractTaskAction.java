@@ -2,24 +2,17 @@ package org.unidal.game.hanjiangsanguo.task.action;
 
 import org.codehaus.plexus.logging.LogEnabled;
 import org.codehaus.plexus.logging.Logger;
+import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
+import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.unidal.game.hanjiangsanguo.task.TaskAction;
 import org.unidal.game.hanjiangsanguo.task.TaskContext;
 import org.unidal.game.hanjiangsanguo.task.TaskHelper;
+import org.unidal.lookup.ContainerHolder;
 
-public abstract class AbstractTaskAction implements TaskAction, LogEnabled {
+public abstract class AbstractTaskAction extends ContainerHolder implements TaskAction, Initializable, LogEnabled {
 	protected TaskHelper m_helper;
 
 	protected Logger m_logger;
-
-	@Override
-	public void enableLogging(Logger logger) {
-		m_logger = logger;
-	}
-
-	@Override
-	public int getPriority() {
-		return 10;
-	}
 
 	protected void assertContext(TaskContext ctx, String... attributes) {
 		for (String attribute : attributes) {
@@ -41,6 +34,11 @@ public abstract class AbstractTaskAction implements TaskAction, LogEnabled {
 		}
 	}
 
+	@Override
+	public void enableLogging(Logger logger) {
+		m_logger = logger;
+	}
+
 	protected int getAct(TaskContext ctx) throws Exception {
 		String url = m_helper.buildUrl2(ctx, "member", "index", null);
 
@@ -51,6 +49,11 @@ public abstract class AbstractTaskAction implements TaskAction, LogEnabled {
 		} else {
 			return -1;
 		}
+	}
+
+	@Override
+	public int getPriority() {
+		return 10;
 	}
 
 	protected int getSilver(TaskContext ctx) throws Exception {
@@ -65,7 +68,8 @@ public abstract class AbstractTaskAction implements TaskAction, LogEnabled {
 		}
 	}
 
-	public void setTaskHelper(TaskHelper helper) {
-		m_helper = helper;
+	@Override
+	public void initialize() throws InitializationException {
+		m_helper = lookup(TaskHelper.class);
 	}
 }

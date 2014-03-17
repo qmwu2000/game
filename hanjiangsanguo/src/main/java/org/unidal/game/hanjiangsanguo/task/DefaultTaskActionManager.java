@@ -8,7 +8,6 @@ import org.codehaus.plexus.logging.LogEnabled;
 import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
-import org.unidal.game.hanjiangsanguo.task.action.AbstractTaskAction;
 import org.unidal.lookup.ContainerHolder;
 import org.unidal.lookup.annotation.Inject;
 
@@ -66,10 +65,6 @@ public class DefaultTaskActionManager extends ContainerHolder implements TaskAct
 		List<TaskAction> list = lookupList(TaskAction.class);
 
 		for (TaskAction action : list) {
-			if (action instanceof AbstractTaskAction) {
-				((AbstractTaskAction) action).setTaskHelper(m_helper);
-			}
-
 			TaskAction oldAction = m_actions.put(action.getType(), action);
 
 			if (oldAction != null) {

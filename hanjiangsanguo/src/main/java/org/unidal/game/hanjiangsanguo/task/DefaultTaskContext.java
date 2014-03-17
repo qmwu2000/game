@@ -67,6 +67,26 @@ public class DefaultTaskContext implements TaskContext, LogEnabled {
 	}
 
 	@Override
+	public boolean getBooleanAttribute(String name, boolean defaultValue) {
+		return getBooleanAttribute(m_defaultCategory, name, defaultValue);
+	}
+
+	@Override
+	public boolean getBooleanAttribute(String category, String name, boolean defaultValue) {
+		String value = getAttribute(category, name);
+
+		try {
+			if (value != null) {
+				return "1".equals(value);
+			}
+		} catch (Exception e) {
+			// ignore it
+		}
+
+		return defaultValue;
+	}
+
+	@Override
 	public void setAttribute(String name, String value) {
 		setAttribute(m_defaultCategory, name, value);
 	}

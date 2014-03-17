@@ -59,7 +59,7 @@ public class TaskHelper implements Initializable, LogEnabled {
 		return String.format(pattern, args);
 	}
 
-	public String buildUrl2(TaskContext ctx, String c, String m, String suffix, String... params) {
+	public String buildUrl2(TaskContext ctx, String c, String m, String suffix, Object... params) {
 		String pattern = "http://s%s.game.hanjiangsanguo.com/index.php?v=2013091306&"
 		      + "c=%s&&m=%s&&token_uid=%s&token=%s&channel=150&lang=zh-cn&rand=%s" + (suffix == null ? "" : suffix);
 		Object[] args = new Object[params.length + 6];
@@ -72,17 +72,18 @@ public class TaskHelper implements Initializable, LogEnabled {
 		args[index++] = ctx.getAttribute("user", "token");
 		args[index++] = System.currentTimeMillis();
 
-		for (String param : params) {
-			int pos = param.indexOf('/');
+		for (Object param : params) {
+			String value = param.toString();
+			int pos = value.indexOf('/');
 			String category;
 			String name;
 
 			if (pos > 0) {
-				category = param.substring(0, pos);
-				name = param.substring(pos + 1);
+				category = value.substring(0, pos);
+				name = value.substring(pos + 1);
 			} else {
 				category = ctx.getDefaultCategory();
-				name = param;
+				name = value;
 			}
 
 			args[index++] = ctx.getAttribute(category, name);
@@ -124,7 +125,7 @@ public class TaskHelper implements Initializable, LogEnabled {
 		Object status = getJsonValue(json, "status");
 		int value = (status instanceof Double ? ((Double) status).intValue() : -9);
 
-		ctx.setAttribute("status", String.valueOf(status));
+		ctx.setAttribute("status", String.valueOf(value));
 
 		if (value == 1 || value == 2) {
 			return true;

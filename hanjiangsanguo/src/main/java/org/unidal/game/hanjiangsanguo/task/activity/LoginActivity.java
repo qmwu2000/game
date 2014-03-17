@@ -1,4 +1,4 @@
-package org.unidal.game.hanjiangsanguo.task.core;
+package org.unidal.game.hanjiangsanguo.task.activity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,21 +8,24 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 
-import org.unidal.game.hanjiangsanguo.task.Task;
+import org.unidal.game.hanjiangsanguo.task.TaskArguments;
 import org.unidal.game.hanjiangsanguo.task.TaskContext;
-import org.unidal.game.hanjiangsanguo.task.TaskHelper;
-import org.unidal.lookup.annotation.Inject;
 
-public class LoginTask implements Task {
+public class LoginActivity extends AbstractTaskActivity {
 	public static final String ID = "login";
 
-	@Inject
-	private TaskHelper m_helper;
-
 	@Override
-	public void execute(TaskContext ctx) throws Exception {
-		String username = ctx.getAttribute("user", "username");
-		String server = ctx.getAttribute("user", "server");
+	public boolean execute(TaskContext ctx, TaskArguments args) throws Exception {
+		String server = args.nextString(null);
+		String username = args.nextString(null);
+		String password = args.nextString(null);
+
+		ensure(server != null, username != null, server != null);
+
+		ctx.setAttribute("user", "server", server);
+		ctx.setAttribute("user", "username", username);
+		ctx.setAttribute("user", "password", password);
+
 		File file = new File("target/" + username + "." + server);
 		boolean logined = false;
 
@@ -34,9 +37,11 @@ public class LoginTask implements Task {
 
 		if (!logined) {
 			handleLogin(ctx);
-			handleMemeber(ctx);
+			logined = handleMemeber(ctx);
 			saveToFile(ctx, file);
 		}
+
+		return logined;
 	}
 
 	private void handleLogin(TaskContext ctx) throws Exception {

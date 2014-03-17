@@ -23,6 +23,16 @@ import org.unidal.game.hanjiangsanguo.task.action.PracticeLeap;
 import org.unidal.game.hanjiangsanguo.task.action.StrengthenUpgrade;
 import org.unidal.game.hanjiangsanguo.task.action.TavernTrade;
 import org.unidal.game.hanjiangsanguo.task.action.WorldbossBattle;
+import org.unidal.game.hanjiangsanguo.task.activity.CultivateActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.GeneralActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.GiftActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.LoginActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.MapActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.MatrixActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.MusterActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.PracticeActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.StrengthenActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.TaskActivity;
 import org.unidal.game.hanjiangsanguo.task.core.ActivityTask;
 import org.unidal.game.hanjiangsanguo.task.core.ArenaTask;
 import org.unidal.game.hanjiangsanguo.task.core.BusinessTask;
@@ -31,6 +41,7 @@ import org.unidal.game.hanjiangsanguo.task.core.DrinkTask;
 import org.unidal.game.hanjiangsanguo.task.core.GeneralTask;
 import org.unidal.game.hanjiangsanguo.task.core.LoginTask;
 import org.unidal.game.hanjiangsanguo.task.core.LotteryTask;
+import org.unidal.game.hanjiangsanguo.task.core.MapActionTask;
 import org.unidal.game.hanjiangsanguo.task.core.MapTask;
 import org.unidal.game.hanjiangsanguo.task.core.PracticeTask;
 import org.unidal.game.hanjiangsanguo.task.core.RegisterTask;
@@ -57,6 +68,7 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 
 		all.addAll(defineTaskComponents());
 		all.addAll(defineTaskActionComponents());
+		all.addAll(defineTaskActivityComponents());
 
 		// Please keep it as last
 		all.addAll(new WebComponentConfigurator().defineComponents());
@@ -68,7 +80,7 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		List<Component> all = new ArrayList<Component>();
 
 		all.add(C(TaskActionManager.class, DefaultTaskActionManager.class) //
-				.req(TaskHelper.class));
+		      .req(TaskHelper.class));
 
 		all.add(C(TaskAction.class, PracticeLeap.ID, PracticeLeap.class));
 		all.add(C(TaskAction.class, CityImpose.ID, CityImpose.class));
@@ -82,6 +94,22 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskAction.class, ArenaAction.ID, ArenaAction.class));
 		all.add(C(TaskAction.class, TavernTrade.ID, TavernTrade.class));
 		all.add(C(TaskAction.class, WorldbossBattle.ID, WorldbossBattle.class));
+
+		return all;
+	}
+
+	private List<Component> defineTaskActivityComponents() {
+		List<Component> all = new ArrayList<Component>();
+
+		all.add(C(TaskActivity.class, LoginActivity.ID, LoginActivity.class));
+		all.add(C(TaskActivity.class, MusterActivity.ID, MusterActivity.class));
+		all.add(C(TaskActivity.class, MatrixActivity.ID, MatrixActivity.class));
+		all.add(C(TaskActivity.class, MapActivity.ID, MapActivity.class));
+		all.add(C(TaskActivity.class, PracticeActivity.ID, PracticeActivity.class));
+		all.add(C(TaskActivity.class, CultivateActivity.ID, CultivateActivity.class));
+		all.add(C(TaskActivity.class, GeneralActivity.ID, GeneralActivity.class));
+		all.add(C(TaskActivity.class, GiftActivity.ID, GiftActivity.class));
+		all.add(C(TaskActivity.class, StrengthenActivity.ID, StrengthenActivity.class));
 
 		return all;
 	}
@@ -116,6 +144,9 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(Task.class, MapTask.ID, MapTask.class) //
 		      .req(TaskHelper.class));
 
+		all.add(C(Task.class, MapActionTask.ID, MapActionTask.class) //
+		      .req(TaskHelper.class));
+
 		all.add(C(Task.class, WorkshopTask.ID, WorkshopTask.class) //
 		      .req(TaskHelper.class));
 
@@ -133,9 +164,9 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 
 		all.add(C(Task.class, ActivityTask.ID, ActivityTask.class) //
 		      .req(TaskHelper.class));
-		
+
 		all.add(C(Task.class, RegisterTask.ID, RegisterTask.class) //
-				.req(TaskHelper.class));
+		      .req(TaskHelper.class));
 
 		return all;
 	}
