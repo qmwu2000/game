@@ -14,7 +14,7 @@ public class CultivateActivity extends AbstractTaskActivity {
 		if (roll(ctx, gid, mode)) {
 			save(ctx, gid);
 
-			m_logger.info("Bingo!");
+			m_logger.info("======= Bingo! =======");
 		} else {
 			giveup(ctx, gid);
 		}

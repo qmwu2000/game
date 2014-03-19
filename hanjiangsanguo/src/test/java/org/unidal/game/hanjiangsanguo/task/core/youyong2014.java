@@ -152,12 +152,12 @@ public class youyong2014 extends ComponentTestCase {
 	public void mapScroll() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
-
-		for (int i = 8; i <= 9; i++) {
+		
+		for (int i = 9; i <= 9; i++) {
 			driver.execute(task, "map/action", "scroll", "map/scroll.color", "green", "map/scroll.type", "" + i);
 		}
 
-		for (int i = 6; i <= 7; i++) {
+		for (int i = 6; i <= 9; i++) {
 			driver.execute(task, "map/action", "scroll", "map/scroll.color", "blue", "map/scroll.type", "" + i);
 		}
 	}

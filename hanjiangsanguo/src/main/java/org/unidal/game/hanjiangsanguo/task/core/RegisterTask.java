@@ -32,11 +32,13 @@ public class RegisterTask implements Task {
 		handleRegisterGuest(ctx);
 		handleLoginGuest(ctx);
 		handleSelectRole(ctx);
+		handleActivationCode(ctx, 9320);
+		handleActivationCode(ctx, 7482);
 		handleActivationCode(ctx, 7362);
 		handleActivationCode(ctx, 5236);
 		handleActivationCode(ctx, 1025);
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 5; i++) {
 			if (handleHitEgg(ctx)) {
 				handleActivationCode(ctx, 1781);
 

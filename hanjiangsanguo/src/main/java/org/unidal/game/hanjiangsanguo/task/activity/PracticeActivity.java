@@ -21,7 +21,19 @@ public class PracticeActivity extends AbstractTaskActivity {
 		String url = m_helper.buildUrl2(ctx, "practice", "practice_start",
 		      String.format("&pid=%s&gid=%s&type=2", pid, gid));
 
-		return m_helper.doGet(ctx, url);
+		m_helper.doGet(ctx, url, "info.freetimes", "info.isturn");
+
+		if (ctx.getIntAttribute("status", 0) < 0) {
+			m_logger.warn("Error when practicing with go_leap!");
+			return false;
+		} else if (ctx.getIntAttribute("info.freetimes", 0) <= 0) {
+			m_logger.warn("No free times left!");
+		} else if (ctx.getIntAttribute("info.isturn", 0) > 0) {
+			m_logger.warn("The general should be turned first!");
+			return false;
+		}
+
+		return true;
 	}
 
 	public boolean execute(TaskContext ctx, TaskArguments args) throws Exception {
