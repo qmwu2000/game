@@ -33,28 +33,21 @@ public class RegisterTask implements Task {
 		handleLoginGuest(ctx);
 		handleSelectRole(ctx);
 		handleActivationCode(ctx, 9320);
+		handleActivationCode(ctx, 8371);
 		handleActivationCode(ctx, 7482);
 		handleActivationCode(ctx, 7362);
 		handleActivationCode(ctx, 5236);
+		handleActivationCode(ctx, 4278);
 		handleActivationCode(ctx, 1025);
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 8; i++) {
 			if (handleHitEgg(ctx)) {
-				handleActivationCode(ctx, 1781);
-
-				int uid = ctx.getIntAttribute("uid", 0);
 				String username = ctx.getAttribute("username");
 				String password = ctx.getAttribute("password");
 
-				if (username == null) {
-					username = "gongxian-" + (uid % 10000);
-				}
-
-				if (password == null) {
-					password = "gongxian-" + (uid % 10000);
-				}
-
+				handleActivationCode(ctx, 1781);
 				handleRegisterBinding(ctx, username, password);
+				handleRegisterReward(ctx);
 
 				record(username, password);
 				return true;
@@ -92,6 +85,12 @@ public class RegisterTask implements Task {
 		m_helper.doGet(ctx, url, "uid");
 	}
 
+	private void handleRegisterReward(TaskContext ctx) throws Exception {
+		String url = m_helper.buildUrl2(ctx, "regreward", "get_reward", null);
+
+		m_helper.doGet(ctx, url);
+	}
+
 	private void handleLoginGuest(TaskContext ctx) throws Exception {
 		TimeUnit.SECONDS.sleep(1);
 
@@ -111,12 +110,9 @@ public class RegisterTask implements Task {
 	}
 
 	private void handleSelectRole(TaskContext ctx) throws Exception {
-		String name = ctx.getAttribute("name");
-
-		if (name == null) {
-			int uid = ctx.getIntAttribute("uid", 0);
-			name = "xiaoke-" + (uid % 10000);
-		}
+		String prefix = ctx.getAttribute("name");
+		int uid = ctx.getIntAttribute("uid", 0);
+		String name = prefix + Integer.toHexString(uid);
 
 		String url = m_helper.buildUrl2(ctx, "member", "select_role", "&sex=1&name=" + name + "&token=%s", "token");
 
@@ -128,7 +124,11 @@ public class RegisterTask implements Task {
 
 		m_helper.doGet(ctx, url, "reward.value.generalid");
 
-		if (ctx.getIntAttribute("reward.value.generalid", 0) == 10) {
+		int generalId = ctx.getIntAttribute("reward.value.generalid", 0);
+
+		ctx.setAttribute("reward.value.generalid", null);
+
+		if (generalId == 10) {
 			return true;
 		} else {
 			return false;

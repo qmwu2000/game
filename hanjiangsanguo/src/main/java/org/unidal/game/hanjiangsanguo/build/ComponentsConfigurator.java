@@ -23,16 +23,19 @@ import org.unidal.game.hanjiangsanguo.task.action.PracticeLeap;
 import org.unidal.game.hanjiangsanguo.task.action.StrengthenUpgrade;
 import org.unidal.game.hanjiangsanguo.task.action.TavernTrade;
 import org.unidal.game.hanjiangsanguo.task.action.WorldbossBattle;
+import org.unidal.game.hanjiangsanguo.task.activity.CityActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CultivateActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.GeneralActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.GiftActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.LoginActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.LotteryActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.MapActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.MatrixActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.MusterActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.PracticeActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.StrengthenActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TaskActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.TowerActivity;
 import org.unidal.game.hanjiangsanguo.task.core.ActivityTask;
 import org.unidal.game.hanjiangsanguo.task.core.ArenaTask;
 import org.unidal.game.hanjiangsanguo.task.core.BusinessTask;
@@ -110,6 +113,9 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskActivity.class, GeneralActivity.ID, GeneralActivity.class));
 		all.add(C(TaskActivity.class, GiftActivity.ID, GiftActivity.class));
 		all.add(C(TaskActivity.class, StrengthenActivity.ID, StrengthenActivity.class));
+		all.add(C(TaskActivity.class, CityActivity.ID, CityActivity.class));
+		all.add(C(TaskActivity.class, LotteryActivity.ID, LotteryActivity.class));
+		all.add(C(TaskActivity.class, TowerActivity.ID, TowerActivity.class));
 
 		return all;
 	}

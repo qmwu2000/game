@@ -301,6 +301,21 @@
 			<implementation>org.unidal.game.hanjiangsanguo.task.activity.StrengthenActivity</implementation>
 		</component>
 		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>city</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.CityActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>lottery</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.LotteryActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>tower</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.TowerActivity</implementation>
+		</component>
+		<component>
 			<role>org.unidal.web.mvc.model.ModuleRegistry</role>
 			<implementation>org.unidal.web.mvc.model.ModuleRegistry</implementation>
 			<configuration>

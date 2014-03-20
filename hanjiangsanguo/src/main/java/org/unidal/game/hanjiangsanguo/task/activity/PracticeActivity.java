@@ -81,7 +81,7 @@ public class PracticeActivity extends AbstractTaskActivity {
 		String url = m_helper.buildUrl2(ctx, "practice", "index", null);
 
 		m_helper.doGetWithScript(ctx, url,
-		      "var gs='',ps=''; for (var i in o.list) gs+=o.list[i].name+':'+o.list[i].id+','; gs;", "list");
+		      "var gs=''; for (var i in o.list) gs+=o.list[i].name+':'+o.list[i].id+','; gs;", "list");
 
 		String list = ctx.getAttribute("list");
 		Map<String, String> gs = Splitters.by(',', ':').split(list);

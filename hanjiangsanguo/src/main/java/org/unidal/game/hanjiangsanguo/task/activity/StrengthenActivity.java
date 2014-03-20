@@ -9,14 +9,10 @@ import org.unidal.helper.Splitters;
 public class StrengthenActivity extends AbstractTaskActivity {
 	public static final String ID = "strengthen";
 
-	private boolean doUpgrade(TaskContext ctx, String eid) throws Exception {
+	private void doUpgrade(TaskContext ctx, String eid) throws Exception {
 		String url = m_helper.buildUrl2(ctx, "strengthen", "strengthen_start", String.format("&id=%s&ratetype=0", eid));
 
 		m_helper.doGet(ctx, url);
-
-		int status = ctx.getIntAttribute("status", 0);
-
-		return status > 0 || status == -6 || status == -3;
 	}
 
 	public boolean execute(TaskContext ctx, TaskArguments args) throws Exception {
@@ -33,7 +29,18 @@ public class StrengthenActivity extends AbstractTaskActivity {
 			String eid = mapEid(ctx, gid, type);
 
 			for (int i = 0; i < times; i++) {
-				if (!doUpgrade(ctx, eid)) {
+				doUpgrade(ctx, eid);
+
+				int status = ctx.getIntAttribute("status", 0);
+
+				if (status == -4) { // full
+					break;
+				} else if (status == -3) { // lack of money
+					break;
+				} else if (status == -6) { // failed, retry
+					i--;
+					continue;
+				} else if (status < 0) {
 					throw new RuntimeException("Unable to strengthen: " + name + "," + type);
 				}
 			}

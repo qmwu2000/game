@@ -21,13 +21,13 @@ public class guest extends ComponentTestCase {
 		);
 		driver.execute(task);
 	}
-	
+
 	@Test
 	public void mapTo10() throws Exception {
 		TaskDriver driver = map();
-		
+
 		Task task = lookup(Task.class, MapActionTask.ID);
-		
+
 		for (int i = 1; i <= 10; i++) {
 			driver.execute(task, "map/params", "l=1&s=1&id=" + i);
 		}
@@ -38,75 +38,75 @@ public class guest extends ComponentTestCase {
 		TaskDriver driver = map();
 
 		Task task = lookup(Task.class, MapActionTask.ID);
-		
+
 		for (int i = 1; i <= 10; i++) {
 			driver.execute(task, "map/params", "l=1&s=2&id=" + i);
 		}
 	}
-	
+
 	@Test
 	public void mapTo30() throws Exception {
 		TaskDriver driver = map();
-		
+
 		Task task = lookup(Task.class, MapActionTask.ID);
-		
+
 		for (int i = 1; i <= 10; i++) {
 			driver.execute(task, "map/params", "l=1&s=3&id=" + i);
 		}
 	}
-	
+
 	@Test
 	public void mapTo40() throws Exception {
 		TaskDriver driver = map();
-		
+
 		Task task = lookup(Task.class, MapActionTask.ID);
-		
+
 		for (int i = 1; i <= 10; i++) {
 			driver.execute(task, "map/params", "l=1&s=4&id=" + i);
 		}
 	}
-	
+
 	@Test
 	public void mapTo50() throws Exception {
 		TaskDriver driver = map();
-		
+
 		Task task = lookup(Task.class, MapActionTask.ID);
-		
+
 		for (int i = 1; i <= 10; i++) {
 			driver.execute(task, "map/params", "l=2&s=2&id=" + i);
 		}
 	}
-	
+
 	@Test
 	public void mapTo60() throws Exception {
 		TaskDriver driver = map();
-		
+
 		Task task = lookup(Task.class, MapActionTask.ID);
-		
+
 		for (int i = 1; i <= 10; i++) {
 			driver.execute(task, "map/params", "l=2&s=3&id=" + i);
 		}
 	}
-	
+
 	@Test
 	public void mapTo70() throws Exception {
 		TaskDriver driver = map();
-		
+
 		Task task = lookup(Task.class, MapActionTask.ID);
-		
+
 		for (int i = 4; i <= 10; i++) {
 			driver.execute(task, "map/params", "l=2&s=4&id=" + i);
 		}
 	}
 
 	private TaskDriver map() throws Exception {
-	   TaskDriver driver = lookup(TaskDriver.class);
+		TaskDriver driver = lookup(TaskDriver.class);
 		Task login = lookup(Task.class, LoginTask.ID);
-		
+
 		driver.setup("qmwu2016", "qmwu2016", "107");
 		driver.execute(login);
-	   return driver;
-   }
+		return driver;
+	}
 
 	@Test
 	public void practiceGoLeap() throws Exception {
@@ -131,8 +131,9 @@ public class guest extends ComponentTestCase {
 	public void registerOne() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, RegisterTask.ID);
+		String index = "04";
 
 		driver.setup(null, null, "107", "user/token", "");
-		driver.execute(task, "user/username", "qmwu2016", "user/password", "qmwu2016", "user/name", "小柯001");
+		driver.execute(task, "user/username", "xiaoke" + index, "user/password", "xiaoke" + index, "user/name", "小柯");
 	}
 }
