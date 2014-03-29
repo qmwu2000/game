@@ -60,8 +60,8 @@ public class LoginActivity extends AbstractTaskActivity {
 		ctx.setDefaultCategory("member");
 
 		String url = m_helper.buildUrl2(ctx, "member", "index", null);
-		String[] keys = { "nickname", "level", "act", "act_limit", "silver", "gold", "rank", "soul", "gem", "jade",
-		      "reputation", "missionlevel", "missionstage", "missionid" };
+		String[] keys = { "nickname", "level", "country", "exercise", "act", "act_limit", "silver", "gold", "rank",
+		      "soul", "gem", "jade", "reputation", "missionlevel", "missionstage", "missionid" };
 
 		boolean showAll = false;
 

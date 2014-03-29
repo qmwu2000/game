@@ -131,7 +131,7 @@ public class guest extends ComponentTestCase {
 	public void registerOne() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, RegisterTask.ID);
-		String index = "04";
+		String index = "09";
 
 		driver.setup(null, null, "107", "user/token", "");
 		driver.execute(task, "user/username", "xiaoke" + index, "user/password", "xiaoke" + index, "user/name", "小柯");

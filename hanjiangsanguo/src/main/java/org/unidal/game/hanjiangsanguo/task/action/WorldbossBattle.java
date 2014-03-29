@@ -3,11 +3,11 @@ package org.unidal.game.hanjiangsanguo.task.action;
 import org.unidal.game.hanjiangsanguo.task.TaskContext;
 
 public class WorldbossBattle extends AbstractTaskAction {
-	public static final String ID = "tavern.trade";
+	public static final String ID = "worldboss";
 
 	@Override
 	public int getAvailableTimes(TaskContext ctx) throws Exception {
-		return 1;
+		return 0;
 	}
 
 	@Override

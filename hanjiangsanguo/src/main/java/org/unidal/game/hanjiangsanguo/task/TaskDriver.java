@@ -27,6 +27,10 @@ public class TaskDriver extends ContainerHolder implements Initializable {
 		task.execute(m_ctx);
 	}
 
+	public TaskContext getContext() {
+		return m_ctx;
+	}
+
 	private TaskContext setupContext(String... params) {
 		int len = params.length;
 

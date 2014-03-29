@@ -24,6 +24,7 @@ import org.unidal.game.hanjiangsanguo.task.action.StrengthenUpgrade;
 import org.unidal.game.hanjiangsanguo.task.action.TavernTrade;
 import org.unidal.game.hanjiangsanguo.task.action.WorldbossBattle;
 import org.unidal.game.hanjiangsanguo.task.activity.CityActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.CountryActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CultivateActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.GeneralActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.GiftActivity;
@@ -36,6 +37,7 @@ import org.unidal.game.hanjiangsanguo.task.activity.PracticeActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.StrengthenActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TaskActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TowerActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.TradeActivity;
 import org.unidal.game.hanjiangsanguo.task.core.ActivityTask;
 import org.unidal.game.hanjiangsanguo.task.core.ArenaTask;
 import org.unidal.game.hanjiangsanguo.task.core.BusinessTask;
@@ -66,7 +68,7 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		List<Component> all = new ArrayList<Component>();
 
 		all.add(C(TaskHelper.class));
-		all.add(C(TaskDriver.class));
+		all.add(C(TaskDriver.class).is(PER_LOOKUP));
 		all.add(C(TaskContext.class, DefaultTaskContext.class).is(PER_LOOKUP));
 
 		all.addAll(defineTaskComponents());
@@ -116,6 +118,8 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskActivity.class, CityActivity.ID, CityActivity.class));
 		all.add(C(TaskActivity.class, LotteryActivity.ID, LotteryActivity.class));
 		all.add(C(TaskActivity.class, TowerActivity.ID, TowerActivity.class));
+		all.add(C(TaskActivity.class, TradeActivity.ID, TradeActivity.class));
+		all.add(C(TaskActivity.class, CountryActivity.ID, CountryActivity.class));
 
 		return all;
 	}

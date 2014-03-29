@@ -34,6 +34,12 @@ public class LotteryActivity extends AbstractTaskActivity {
 					doDraw(ctx);
 				}
 			}
+		} else if ("lave".equals(op)) {
+			int count = getLaveNumber(ctx);
+
+			for (int i = 0; i < count; i++) {
+				doDraw(ctx);
+			}
 		}
 
 		return true;
@@ -57,5 +63,13 @@ public class LotteryActivity extends AbstractTaskActivity {
 				return false;
 			}
 		}
+	}
+
+	private int getLaveNumber(TaskContext ctx) throws Exception {
+		String indexUrl = m_helper.buildUrl2(ctx, "lottery", "index", null);
+
+		m_helper.doGet(ctx, indexUrl, "log.info.lavenumber");
+
+		return ctx.getIntAttribute("log.info.lavenumber", 0);
 	}
 }

@@ -16,7 +16,7 @@ public class SpeedPlan extends ComponentTestCase {
 		driver.go("login", "107", "xiaoke04", "xiaoke04");
 		driver.go("muster", "on", "甘宁");
 		driver.go("matrix", "update", "1", "甘宁", "廖化");
-		driver.go("gift", "login", "1");
+		driver.go("gift", "login");
 		driver.go("gift", "task");
 
 		driver.go("map", "action", "1", "1", "1", "10");

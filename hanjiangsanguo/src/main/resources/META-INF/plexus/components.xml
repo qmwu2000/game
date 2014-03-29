@@ -7,6 +7,7 @@
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
 			<implementation>org.unidal.game.hanjiangsanguo.task.TaskDriver</implementation>
+			<instantiation-strategy>per-lookup</instantiation-strategy>
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.TaskContext</role>
@@ -252,7 +253,7 @@
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
-			<role-hint>tavern.trade</role-hint>
+			<role-hint>worldboss</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.action.WorldbossBattle</implementation>
 		</component>
 		<component>
@@ -314,6 +315,16 @@
 			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
 			<role-hint>tower</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.activity.TowerActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>trade</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.TradeActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>country</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.CountryActivity</implementation>
 		</component>
 		<component>
 			<role>org.unidal.web.mvc.model.ModuleRegistry</role>
