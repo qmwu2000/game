@@ -29,7 +29,7 @@ public class Xiaohao extends ComponentTestCase {
 			driver.go("trade", "business"); // 每日通商
 			driver.go("map", "island", "5"); // 金银洞
 			driver.go("city", "exercise"); // 征收
-			driver.go("gift", "exercise"); // 征收
+			driver.go("gift", "exercise"); // 整军
 			
 			if (driver.getContext().getIntAttribute("member", "country", 0) > 0) {
 				driver.go("gift", "country"); // 国库
