@@ -38,6 +38,8 @@ public class RegisterTask implements Task {
 		handleActivationCode(ctx, 7362);
 		handleActivationCode(ctx, 5236);
 		handleActivationCode(ctx, 4278);
+		handleActivationCode(ctx, 3381);
+		handleActivationCode(ctx, 3029);
 		handleActivationCode(ctx, 1025);
 
 		for (int i = 0; i < 8; i++) {

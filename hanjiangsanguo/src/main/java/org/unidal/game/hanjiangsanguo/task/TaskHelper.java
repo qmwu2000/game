@@ -147,6 +147,8 @@ public class TaskHelper implements Initializable, LogEnabled {
 
 		if (url.indexOf("hitegg") > 0) {
 			System.err.println(json);
+		} else if (url.endsWith("#")) {
+			System.err.println(json);
 		}
 
 		if ("403".equals(json)) {
@@ -270,10 +272,12 @@ public class TaskHelper implements Initializable, LogEnabled {
 
 						ctx.setAttribute(category, prefix + property, val.toString());
 					}
-				} else if (value instanceof Number) {
-					ctx.setAttribute(category, name, new MessageFormat("{0,number,0.#}").format(new Object[] { value }));
 				} else {
-					ctx.setAttribute(category, name, value.toString());
+					if (value instanceof Number) {
+						ctx.setAttribute(category, name, new MessageFormat("{0,number,0.#}").format(new Object[] { value }));
+					} else {
+						ctx.setAttribute(category, name, value.toString());
+					}
 				}
 			}
 		}

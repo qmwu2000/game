@@ -7,7 +7,6 @@
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
 			<implementation>org.unidal.game.hanjiangsanguo.task.TaskDriver</implementation>
-			<instantiation-strategy>per-lookup</instantiation-strategy>
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.TaskContext</role>
@@ -325,6 +324,16 @@
 			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
 			<role-hint>country</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.activity.CountryActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>activity</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.ActivityActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>register</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.RegisterActivity</implementation>
 		</component>
 		<component>
 			<role>org.unidal.web.mvc.model.ModuleRegistry</role>

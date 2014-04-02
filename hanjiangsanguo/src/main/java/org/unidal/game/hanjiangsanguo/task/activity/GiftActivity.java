@@ -25,6 +25,16 @@ public class GiftActivity extends AbstractTaskActivity {
 		return m_helper.doGet(ctx, url);
 	}
 
+	private boolean doDice(TaskContext ctx) throws Exception {
+		String url1 = m_helper.buildUrl2(ctx, "dice", "get_reward", "&id=2");
+
+		m_helper.doGet(ctx, url1);
+
+		String url2 = m_helper.buildUrl2(ctx, "dice", "get_last_week_reward", null);
+
+		return m_helper.doGet(ctx, url2);
+	}
+
 	private void doExercise(TaskContext ctx) throws Exception {
 		String indexUrl = m_helper.buildUrl2(ctx, "exercise", "index", null);
 
@@ -49,7 +59,7 @@ public class GiftActivity extends AbstractTaskActivity {
 		List<String> ids = Splitters.by(',').noEmptyItem().split(list);
 
 		for (String id : ids) {
-			String url = m_helper.buildUrl2(ctx, "hitegg", "hit_egg", String.format("&id=%s", id));
+			String url = m_helper.buildUrl2(ctx, "hitegg", "hit_egg", String.format("&id=%s#", id));
 
 			m_helper.doGet(ctx, url);
 		}
@@ -157,6 +167,8 @@ public class GiftActivity extends AbstractTaskActivity {
 			doCountrySalary(ctx);
 		} else if ("exercise".equals(op)) {
 			doExercise(ctx);
+		} else if ("dice".equals(op)) {
+			doDice(ctx);
 		}
 
 		return true;

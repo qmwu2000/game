@@ -15,6 +15,10 @@ public class TaskDriver extends ContainerHolder implements Initializable {
 
 		return setupContext(params);
 	}
+	
+	public void reset() {
+		m_ctx = lookup(TaskContext.class);
+	}
 
 	@Override
 	public void initialize() throws InitializationException {
