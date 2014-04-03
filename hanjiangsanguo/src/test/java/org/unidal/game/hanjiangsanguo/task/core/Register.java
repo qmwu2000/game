@@ -12,15 +12,14 @@ public class Register extends ComponentTestCase {
 	@Test
 	public void register() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
-		int index = 1;
+		int index = 2;
 
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 10000; i++) {
 			String name = "xiaoyou" + Integer.toString(100 + index).substring(1);
 
 			driver.go("register", "lottery", "107", name);
 
 			if (driver.getContext().getIntAttribute("lucky", 0) == 1) {
-				System.err.println(name);
 				index++;
 			}
 			

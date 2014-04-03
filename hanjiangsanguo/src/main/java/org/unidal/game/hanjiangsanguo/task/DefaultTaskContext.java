@@ -13,6 +13,8 @@ public class DefaultTaskContext implements TaskContext, LogEnabled {
 
 	private String m_defaultCategory;
 
+	private TaskDriver m_driver;
+
 	@Override
 	public void enableLogging(Logger logger) {
 		m_logger = logger;
@@ -84,6 +86,16 @@ public class DefaultTaskContext implements TaskContext, LogEnabled {
 		}
 
 		return defaultValue;
+	}
+
+	@Override
+   public TaskDriver getDriver() {
+		return m_driver;
+	}
+
+	@Override
+   public void setDriver(TaskDriver driver) {
+		m_driver = driver;
 	}
 
 	@Override

@@ -19,7 +19,7 @@ public class youyong2014 extends ComponentTestCase {
 		driver.setup("youyong2014", "forever123", "107", //
 		      "practice/gid", "81151", //
 		      "general/gid", "81151", "general/id", "106", //
-		      "worldboss/list", "65914,-1,70058,-1,68660,-1,68659,-1,81151", "worldboss/mid", "4" //
+		      "worldboss/list", "65914,-1,70058,-1,68660,-1,67302,-1,81151", "worldboss/mid", "4" //
 		);
 		driver.execute(task);
 	}
