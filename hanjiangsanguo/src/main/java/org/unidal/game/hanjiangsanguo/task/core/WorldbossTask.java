@@ -39,7 +39,7 @@ public class WorldbossTask implements Task {
 					maxDelay = delay;
 				}
 
-				TimeUnit.MILLISECONDS.sleep(60 * 1000L - delay);
+				TimeUnit.MILLISECONDS.sleep(60 * 1000L);
 				countdown -= 60;
 
 				if (countdown > 0 && countdown < 60) {
@@ -102,8 +102,8 @@ public class WorldbossTask implements Task {
 	}
 
 	private void handleReward(TaskContext ctx) throws Exception {
-		String url = m_helper.buildUrl2(ctx, "worldboss", "reward", null);
+		String url = m_helper.buildUrl2(ctx, "worldboss", "reward", "#");
 
-		m_helper.doGet(ctx, url, "reward.silver");
+		m_helper.doGet(ctx, url, "reward.silver", "reward.get3", "reward.get2");
 	}
 }

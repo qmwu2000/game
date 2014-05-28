@@ -336,6 +336,16 @@
 			<implementation>org.unidal.game.hanjiangsanguo.task.activity.RegisterActivity</implementation>
 		</component>
 		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>banquet</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.BanquetActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>arena</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.ArenaActivity</implementation>
+		</component>
+		<component>
 			<role>org.unidal.web.mvc.model.ModuleRegistry</role>
 			<implementation>org.unidal.web.mvc.model.ModuleRegistry</implementation>
 			<configuration>

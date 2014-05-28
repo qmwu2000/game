@@ -10,8 +10,8 @@ import org.unidal.helper.Splitters;
 public class CultivateActivity extends AbstractTaskActivity {
 	public static final String ID = "cultivate";
 
-	private boolean doCultivate(TaskContext ctx, String gid, int mode) throws Exception {
-		if (roll(ctx, gid, mode)) {
+	private boolean doCultivate(TaskContext ctx, String gid, int mode, int type) throws Exception {
+		if (roll(ctx, gid, mode, type)) {
 			save(ctx, gid);
 
 			m_logger.info("======= Bingo! =======");
@@ -22,7 +22,7 @@ public class CultivateActivity extends AbstractTaskActivity {
 		return true;
 	}
 
-	private boolean roll(TaskContext ctx, String gid, int mode) throws Exception {
+	private boolean roll(TaskContext ctx, String gid, int mode, int type) throws Exception {
 		int wuliup = ctx.getIntAttribute("info.wuliup", 0);
 		int zhiliup = ctx.getIntAttribute("info.zhiliup", 0);
 		int tiliup = ctx.getIntAttribute("info.tiliup", 0);
@@ -42,8 +42,14 @@ public class CultivateActivity extends AbstractTaskActivity {
 			return true;
 		} else if (sum2 == sum && delta < 0) {
 			return true;
-		} else if (sum2 == sum - 1 && delta < 0 && wuliup2 - wuliup > 0) {
-			return true;
+		} else if (sum2 == sum - 1 && delta < 0) {
+			if (type == 1 && wuliup2 - wuliup > 0) {
+				return true;
+			} else if (type == 2 && zhiliup2 - zhiliup > 0) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			// restore
 			ctx.setAttribute("info.wuliup", String.valueOf(wuliup));
@@ -71,13 +77,15 @@ public class CultivateActivity extends AbstractTaskActivity {
 		ensure(op != null);
 		ctx.setDefaultCategory(ID);
 
+		int type = args.nextInt(2); // 1: wuli, 2: zhili
+
 		if ("money".equals(op)) {
 			String name = args.nextString(null);
 			int times = args.nextInt(1);
 			String gid = mapId(ctx, name);
 
 			for (int i = 0; i < times; i++) {
-				doCultivate(ctx, gid, 1);
+				doCultivate(ctx, gid, 1, type);
 			}
 		} else if ("gold".equals(op)) {
 			String name = args.nextString(null);
@@ -85,7 +93,7 @@ public class CultivateActivity extends AbstractTaskActivity {
 			String gid = mapId(ctx, name);
 
 			for (int i = 0; i < times; i++) {
-				doCultivate(ctx, gid, 2);
+				doCultivate(ctx, gid, 2, type);
 			}
 		}
 

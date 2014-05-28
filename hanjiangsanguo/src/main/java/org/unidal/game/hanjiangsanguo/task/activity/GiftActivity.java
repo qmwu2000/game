@@ -139,6 +139,20 @@ public class GiftActivity extends AbstractTaskActivity {
 		return true;
 	}
 
+	private void doCode(TaskContext ctx) throws Exception {
+		int[] codes = { 9732, 9320, 8763, 8371, 7482, 7362, 7293, 5236, 5231, 4278, 3381, 3029, 3421, 1025 };
+
+		for (int code : codes) {
+			handleActivationCode(ctx, code);
+		}
+	}
+
+	private void handleActivationCode(TaskContext ctx, int code) throws Exception {
+		String url = m_helper.buildUrl2(ctx, "activationcode", "get_reward", "&code=" + code);
+
+		m_helper.doGet(ctx, url);
+	}
+
 	public boolean execute(TaskContext ctx, TaskArguments args) throws Exception {
 		String op = args.nextString(null);
 
@@ -169,6 +183,8 @@ public class GiftActivity extends AbstractTaskActivity {
 			doExercise(ctx);
 		} else if ("dice".equals(op)) {
 			doDice(ctx);
+		} else if ("code".equals(op)) {
+			doCode(ctx);
 		}
 
 		return true;

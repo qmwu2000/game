@@ -71,6 +71,7 @@ public class MatrixActivity extends AbstractTaskActivity {
 
 		m_matrixs.put(1, "2,4,6,7,9");
 		m_matrixs.put(2, "1,2,3,5,8");
+		m_matrixs.put(3, "1,4,5,6,9");
 	}
 
 	private String makeList(int mid, String[] ids) {

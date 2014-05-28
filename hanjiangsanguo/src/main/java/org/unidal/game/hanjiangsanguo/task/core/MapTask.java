@@ -131,8 +131,8 @@ public class MapTask implements Task, Initializable {
 		m_scrolls.put("yellow", new Pair<Integer, Integer>(9, 7));
 		m_scrolls.put("purple", new Pair<Integer, Integer>(10, 7));
 
-		for (int level = 3; level <= 3; level++) {
-			for (int i = 6; i <= 10; i++) {
+		for (int level = 6; level <= 6; level++) {
+			for (int i = 10; i <= 10; i++) {
 				m_map.add(new Triple<Integer, Integer, Integer>(12, level, i));
 			}
 		}

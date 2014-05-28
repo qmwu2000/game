@@ -24,6 +24,8 @@ import org.unidal.game.hanjiangsanguo.task.action.StrengthenUpgrade;
 import org.unidal.game.hanjiangsanguo.task.action.TavernTrade;
 import org.unidal.game.hanjiangsanguo.task.action.WorldbossBattle;
 import org.unidal.game.hanjiangsanguo.task.activity.ActivityActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.ArenaActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.BanquetActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CityActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CountryActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CultivateActivity;
@@ -124,6 +126,8 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskActivity.class, CountryActivity.ID, CountryActivity.class));
 		all.add(C(TaskActivity.class, ActivityActivity.ID, ActivityActivity.class));
 		all.add(C(TaskActivity.class, RegisterActivity.ID, RegisterActivity.class));
+		all.add(C(TaskActivity.class, BanquetActivity.ID, BanquetActivity.class));
+		all.add(C(TaskActivity.class, ArenaActivity.ID, ArenaActivity.class));
 
 		return all;
 	}

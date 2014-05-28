@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.unidal.game.hanjiangsanguo.task.TaskArguments;
 import org.unidal.game.hanjiangsanguo.task.TaskContext;
-import org.unidal.game.hanjiangsanguo.task.TaskDriver;
 import org.unidal.helper.Files;
 
 public class RegisterActivity extends AbstractTaskActivity {
@@ -26,11 +25,21 @@ public class RegisterActivity extends AbstractTaskActivity {
 			ctx.setAttribute("user", "server", server);
 
 			register(ctx);
-			goMap(ctx);
+
 			lottery(ctx, name);
 		} else if ("hitegg".equals(op)) {
 			register(ctx);
 			hitegg(ctx);
+		} else {
+			String server = args.nextString(null);
+			String name = args.nextString(null);
+
+			ctx.setAttribute("user", "server", server);
+
+			register(ctx);
+
+			simple(ctx, name);
+			return true;
 		}
 
 		return true;
@@ -59,11 +68,14 @@ public class RegisterActivity extends AbstractTaskActivity {
 	}
 
 	private void handleLoginGuest(TaskContext ctx) throws Exception {
-		TimeUnit.SECONDS.sleep(1);
+		TimeUnit.MILLISECONDS.sleep(200);
 
-		String url = m_helper.buildUrl(ctx, "http://s%s.game.hanjiangsanguo.com/index.php?v=0&c=login&&m=guest"
-		      + "&&token=&channel=150&lang=zh-cn&rand=%s&devicetoken=000000&adid=&uid=%s&mac=00:00:00:00:00:00",
-		      "user/server", "timestamp", "user/uid");
+		String url = m_helper
+		      .buildUrl(
+		            ctx,
+		            "http://s%s.game.hanjiangsanguo.com/index.php?v=0&c=login&&m=guest&&token=&channel=150&lang=zh-cn&rand=%s&devicetoken=000000&adid=&uid=%s&mac=00:00:00:00:00:00",
+		            "user/server", "timestamp", "user/uid");
+
 		m_helper.doGet(ctx, url, "token");
 	}
 
@@ -115,8 +127,10 @@ public class RegisterActivity extends AbstractTaskActivity {
 	}
 
 	private void handleSelectRole(TaskContext ctx) throws Exception {
+		TimeUnit.MILLISECONDS.sleep(500);
+		String prefix = "小柯";
 		int uid = ctx.getIntAttribute("uid", 0);
-		String name = "小柯" + Integer.toHexString(uid);
+		String name = prefix + Integer.toHexString(uid);
 
 		String url = m_helper.buildUrl2(ctx, "member", "select_role", "&sex=1&name=" + name + "&token=%s", "token");
 
@@ -162,6 +176,17 @@ public class RegisterActivity extends AbstractTaskActivity {
 		return found;
 	}
 
+	private boolean simple(TaskContext ctx, String name) throws Exception, IOException {
+		handleActivationCode(ctx, 1781);
+		handleRegisterBinding(ctx, name, name);
+		handleRegisterReward(ctx);
+
+		record(name, name);
+		ctx.setAttribute("lucky", "1");
+
+		return true;
+	}
+
 	private void record(String username, String password) throws IOException {
 		File file = new File("target/accounts.properties");
 		String value = "";
@@ -174,39 +199,15 @@ public class RegisterActivity extends AbstractTaskActivity {
 		Files.forIO().writeTo(file, value + "\r\n" + username + ": " + password);
 	}
 
-	private void goMap(TaskContext ctx) throws Exception {
-		TaskDriver driver = ctx.getDriver();
-
-		driver.go("matrix", "update", "1", "廖化");
-		driver.go("gift", "login");
-
-		driver.go("map", "action", "1", "1", "1", "10");
-		driver.go("practice", "train", "廖化");
-		driver.go("map", "reward", "10");
-		driver.go("muster", "on", "周仓");
-		driver.go("matrix", "use", "2", "廖化", "周仓");
-		driver.go("matrix", "levelup", "2", "2");
-
-		driver.go("cultivate", "money", "廖化", "10");
-		driver.go("practice", "goleap", "廖化", "2");
-		driver.go("general", "equip", "廖化", "赤铜刀", "赤铜甲");
-		driver.go("strengthen", "equip", "廖化", "1", "20");
-
-		driver.go("map", "action", "1", "2", "1", "9");
-	}
-
 	private void register(TaskContext ctx) throws Exception, IOException {
 		handleRegisterGuest(ctx);
 		handleLoginGuest(ctx);
 		handleSelectRole(ctx);
-		handleActivationCode(ctx, 9320);
-		handleActivationCode(ctx, 8371);
-		handleActivationCode(ctx, 7482);
-		handleActivationCode(ctx, 7362);
-		handleActivationCode(ctx, 5236);
-		handleActivationCode(ctx, 4278);
-		handleActivationCode(ctx, 3381);
-		handleActivationCode(ctx, 3029);
-		handleActivationCode(ctx, 1025);
+
+		int[] codes = { 9732, 9320, 8763, 8371, 7482, 7362, 7293, 5236, 5231, 4278, 3381, 3029, 3421, 1025 };
+
+		for (int code : codes) {
+			handleActivationCode(ctx, code);
+		}
 	}
 }

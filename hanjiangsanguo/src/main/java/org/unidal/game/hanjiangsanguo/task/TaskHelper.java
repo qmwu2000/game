@@ -252,7 +252,13 @@ public class TaskHelper implements Initializable, LogEnabled {
 			String key = t.getFirst();
 			String category = t.getMiddle();
 			String name = t.getLast();
-			Object value = getJsonValue(json, key);
+			Object value = null;
+
+			try {
+				value = getJsonValue(json, key);
+			} catch (Exception e) {
+				System.err.println(e);
+			}
 
 			if (value != null) {
 				if ("*".equals(key)) {

@@ -23,10 +23,22 @@ public class ActivityActivity extends AbstractTaskActivity {
 
 		m_helper.doGet(ctx, indexUrl, "lottery");
 
-		if (ctx.getIntAttribute("lottery", 0) == 1) {
+		if (ctx.getIntAttribute("lottery", 0) > 0) {
 			String url = m_helper.buildUrl2(ctx, "springlottery", "action", "#");
 
 			m_helper.doGet(ctx, url, "info.gettype", "info.getvalue");
+		}
+	}
+
+	private void doActTreasure(TaskContext ctx) throws Exception {
+		String indexUrl = m_helper.buildUrl2(ctx, "act_treasure", "index", null);
+
+		m_helper.doGet(ctx, indexUrl, "free");
+
+		if (ctx.getIntAttribute("free", 0) > 0) {
+			String url = m_helper.buildUrl2(ctx, "act_treasure", "treasure", "#");
+
+			m_helper.doGet(ctx, url, "info.msg", "info.num");
 		}
 	}
 
@@ -43,6 +55,10 @@ public class ActivityActivity extends AbstractTaskActivity {
 		} else if ("springlottery".equals(op)) {
 			if (ctx.getIntAttribute("member", "springlottery", 0) > 0) {
 				doSprintLottery(ctx);
+			}
+		} else if ("acttreasure".equals(op)) {
+			if (ctx.getIntAttribute("member", "acttreasure", 0) > 0) {
+				doActTreasure(ctx);
 			}
 		}
 

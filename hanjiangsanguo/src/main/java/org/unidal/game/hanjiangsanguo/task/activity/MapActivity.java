@@ -6,40 +6,18 @@ import org.unidal.game.hanjiangsanguo.task.TaskContext;
 public class MapActivity extends AbstractTaskActivity {
 	public static final String ID = "map";
 
-	public boolean execute(TaskContext ctx, TaskArguments args) throws Exception {
-		String op = args.nextString(null);
+	private boolean doAction(TaskContext ctx, int level, int stage, int id) throws Exception {
+		String url = m_helper.buildUrl2(ctx, "map", "action", String.format("&l=%s&s=%s&id=%s", level, stage, id));
+		int times = 2;
+		int win = -1;
 
-		ensure(op != null);
-		ctx.setDefaultCategory(ID);
-
-		if ("action".equals(op)) {
-			int level = args.nextInt(0);
-			int stage = args.nextInt(0);
-			int fromId = args.nextInt(0);
-			int toId = args.nextInt(fromId);
-
-			ensure(level > 0, stage > 0, fromId > 0);
-
-			for (int i = fromId; i <= toId; i++) {
-				if (!doAction(ctx, level, stage, i)) {
-					return false;
-				}
-			}
-		} else if ("reward".equals(op)) {
-			int id = args.nextInt(0);
-
-			doReward(ctx, id);
-		} else if ("newresult".equals(op)) {
-			int id = args.nextInt(0);
-
-			doNewResult(ctx, id);
-		} else if ("island".equals(op)) {
-			int maxAct = args.nextInt(0);
-
-			doIsland(ctx, maxAct);
+		while (times > 0 && win < 0) {
+			m_helper.doGet(ctx, url, "info.win");
+			win = ctx.getIntAttribute("info.win", 0);
+			times--;
 		}
 
-		return true;
+		return win > 0;
 	}
 
 	private void doIsland(TaskContext ctx, int maxAct) throws Exception {
@@ -86,11 +64,39 @@ public class MapActivity extends AbstractTaskActivity {
 		return m_helper.doGet(ctx, url);
 	}
 
-	private boolean doAction(TaskContext ctx, int level, int stage, int id) throws Exception {
-		String url = m_helper.buildUrl2(ctx, "map", "action", String.format("&l=%s&s=%s&id=%s", level, stage, id));
+	public boolean execute(TaskContext ctx, TaskArguments args) throws Exception {
+		String op = args.nextString(null);
 
-		m_helper.doGet(ctx, url, "info.win");
+		ensure(op != null);
+		ctx.setDefaultCategory(ID);
 
-		return ctx.getIntAttribute("info.win", 0) > 0;
+		if ("action".equals(op)) {
+			int level = args.nextInt(0);
+			int stage = args.nextInt(0);
+			int fromId = args.nextInt(0);
+			int toId = args.nextInt(fromId);
+
+			ensure(level > 0, stage > 0, fromId > 0);
+
+			for (int i = fromId; i <= toId; i++) {
+				if (!doAction(ctx, level, stage, i)) {
+					return false;
+				}
+			}
+		} else if ("reward".equals(op)) {
+			int id = args.nextInt(0);
+
+			doReward(ctx, id);
+		} else if ("newresult".equals(op)) {
+			int id = args.nextInt(0);
+
+			doNewResult(ctx, id);
+		} else if ("island".equals(op)) {
+			int maxAct = args.nextInt(0);
+
+			doIsland(ctx, maxAct);
+		}
+
+		return true;
 	}
 }

@@ -25,7 +25,7 @@ public class youyong2014 extends ComponentTestCase {
 	}
 
 	@Test
-	public void all() throws Exception {
+	public void others() throws Exception {
 		vipwage();
 		lottery();
 		drink();
@@ -143,7 +143,7 @@ public class youyong2014 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
 
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 1; i++) {
 			driver.execute(task, "map/action", "reputation");
 		}
 	}
@@ -152,9 +152,10 @@ public class youyong2014 extends ComponentTestCase {
 	public void mapScroll() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
-		
-		for (int i = 6; i <= 9; i++) {
-			driver.execute(task, "map/action", "scroll", "map/scroll.color", "blue", "map/scroll.type", "" + i);
+		int[] types = { 9, 8, 6 };
+
+		for (int type : types) {
+			driver.execute(task, "map/action", "scroll", "map/scroll.color", "yellow", "map/scroll.type", "" + type);
 		}
 	}
 
