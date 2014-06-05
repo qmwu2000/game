@@ -15,30 +15,39 @@ public class BanquetActivity extends AbstractTaskActivity {
 		ensure(op != null);
 		ctx.setDefaultCategory(ID);
 
-		if (op.equals("active")) {
-			handleInfo(ctx);
+		handleInfo(ctx);
 
-			int status = ctx.getIntAttribute("info.status", 0);
+		int status = ctx.getIntAttribute("info.status", 0);
+		int gold = ctx.getIntAttribute("member", "gold", 0);
+		String dahao = ctx.getAttribute("member", "dahao");
 
-			if (status == 0) {
-				int leftTimes = ctx.getIntAttribute("info.times", 0);
+		if (dahao != null) {
+			int leftTimes = ctx.getIntAttribute("info.times", 0);
 
-				if (leftTimes > 0) {
-					int currentSize = ctx.getIntAttribute("list.@count", 0);
-
-					if (currentSize < 3) {
-						prepareBanquet(ctx);
-					} else {
-						joinBanquet(ctx);
-					}
-				}
-			} else {
-				if (checkIsFull(ctx)) {
-					startBanquet(ctx);
-				}
+			if (status == 0 && leftTimes > 0) {
+				joinBanquet(ctx);
 			}
+			return true;
 		}
 
+		if (status == 0) {
+			int leftTimes = ctx.getIntAttribute("info.times", 0);
+			if (leftTimes > 0) {
+				int currentSize = ctx.getIntAttribute("list.@count", 0);
+
+				if (currentSize <= 4 && gold > 400) {
+					prepareBanquet(ctx);
+				} else {
+					joinBanquet(ctx);
+				}
+			} else {
+				return true;
+			}
+		} else {
+			if (checkIsFull(ctx)) {
+				startBanquet(ctx);
+			}
+		}
 		return true;
 	}
 
@@ -75,15 +84,17 @@ public class BanquetActivity extends AbstractTaskActivity {
 		String list = ctx.getAttribute("list");
 		List<String> items = Splitters.by(',').noEmptyItem().trim().split(list);
 		String id = "";
+		int max = 0;
 
 		for (String item : items) {
 			List<String> parts = Splitters.by(':').split(item);
 			String caption = parts.get(0);
 			String nowNumber = parts.get(1);
+			int number = Integer.parseInt(nowNumber);
 
-			if (Integer.parseInt(nowNumber) <= 10) {
+			if (number < 10 && number > max) {
+				max = number;
 				id = caption;
-				break;
 			}
 		}
 

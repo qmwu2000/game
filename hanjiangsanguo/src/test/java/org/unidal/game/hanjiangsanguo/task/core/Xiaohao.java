@@ -80,12 +80,16 @@ public class Xiaohao extends ComponentTestCase {
 				driver.go("gift", "task"); // 任务
 				driver.go("lottery", "lave"); // 每日抽奖
 				driver.go("trade", "business"); // 每日通商
-				driver.go("map", "island", "8"); // 金银洞
+				driver.go("map", "island", "10"); // 金银洞
 				driver.go("city", "exercise"); // 征收
 				driver.go("gift", "exercise"); // 整军
 				driver.go("activity", "sacredtree"); // 神树
 				driver.go("activity", "springlottery"); // 幸运大转盘
 			}
+			
+			driver.getContext().setAttribute("dahao", "dahao");
+			driver.getContext().setAttribute("maxMineGold", "0");
+			driver.go("mine", "");
 
 			if (driver.getContext().getIntAttribute("member", "country", 0) > 0) {
 				if (first) {
@@ -97,7 +101,7 @@ public class Xiaohao extends ComponentTestCase {
 					driver.go("gift", "dice"); // 骰子
 				}
 				driver.go("trade", "oversea"); // 海外贸易
-				driver.go("banquet", "banquet"); // 国宴
+				driver.go("banquet", "active"); // 国宴
 			}
 
 			driver.reset();

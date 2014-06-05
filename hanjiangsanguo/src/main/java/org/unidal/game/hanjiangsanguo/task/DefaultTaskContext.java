@@ -13,8 +13,6 @@ public class DefaultTaskContext implements TaskContext, LogEnabled {
 
 	private String m_defaultCategory;
 
-	private TaskDriver m_driver;
-
 	@Override
 	public void enableLogging(Logger logger) {
 		m_logger = logger;
@@ -89,16 +87,6 @@ public class DefaultTaskContext implements TaskContext, LogEnabled {
 	}
 
 	@Override
-   public TaskDriver getDriver() {
-		return m_driver;
-	}
-
-	@Override
-   public void setDriver(TaskDriver driver) {
-		m_driver = driver;
-	}
-
-	@Override
 	public void setAttribute(String name, String value) {
 		setAttribute(m_defaultCategory, name, value);
 	}
@@ -112,7 +100,7 @@ public class DefaultTaskContext implements TaskContext, LogEnabled {
 			m_attributes.put(category, map);
 		}
 
-		m_logger.info("setAttribute: " + category + "/" + name + " = " + value);
+		// m_logger.info("setAttribute: " + category + "/" + name + " = " + value);
 		map.put(name, value);
 	}
 

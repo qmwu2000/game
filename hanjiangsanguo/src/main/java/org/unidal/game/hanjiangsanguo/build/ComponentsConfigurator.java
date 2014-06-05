@@ -3,6 +3,7 @@ package org.unidal.game.hanjiangsanguo.build;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.unidal.game.hanjiangsanguo.XiaoHaoManager;
 import org.unidal.game.hanjiangsanguo.task.DefaultTaskActionManager;
 import org.unidal.game.hanjiangsanguo.task.DefaultTaskContext;
 import org.unidal.game.hanjiangsanguo.task.Task;
@@ -28,6 +29,7 @@ import org.unidal.game.hanjiangsanguo.task.activity.ArenaActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.BanquetActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CityActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CountryActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.CountryMineActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CultivateActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.GeneralActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.GiftActivity;
@@ -35,6 +37,7 @@ import org.unidal.game.hanjiangsanguo.task.activity.LoginActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.LotteryActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.MapActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.MatrixActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.MineActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.MusterActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.PracticeActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.RegisterActivity;
@@ -76,6 +79,7 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskDriver.class));
 		all.add(C(TaskContext.class, DefaultTaskContext.class).is(PER_LOOKUP));
 
+		all.add(C(XiaoHaoManager.class).req(TaskDriver.class));
 		all.addAll(defineTaskComponents());
 		all.addAll(defineTaskActionComponents());
 		all.addAll(defineTaskActivityComponents());
@@ -128,6 +132,8 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskActivity.class, ActivityActivity.ID, ActivityActivity.class));
 		all.add(C(TaskActivity.class, RegisterActivity.ID, RegisterActivity.class));
 		all.add(C(TaskActivity.class, BanquetActivity.ID, BanquetActivity.class));
+		all.add(C(TaskActivity.class, MineActivity.ID, MineActivity.class));
+		all.add(C(TaskActivity.class, CountryMineActivity.ID, CountryMineActivity.class));
 		all.add(C(TaskActivity.class, ArenaActivity.ID, ArenaActivity.class));
 
 		return all;

@@ -14,6 +14,15 @@
 			<instantiation-strategy>per-lookup</instantiation-strategy>
 		</component>
 		<component>
+			<role>org.unidal.game.hanjiangsanguo.XiaoHaoManager</role>
+			<implementation>org.unidal.game.hanjiangsanguo.XiaoHaoManager</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
 			<role-hint>login</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.core.LoginTask</implementation>
@@ -352,6 +361,16 @@
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>mine</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.MineActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>countrymine</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.CountryMineActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
 			<role-hint>arena</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.activity.ArenaActivity</implementation>
 		</component>
@@ -375,6 +394,9 @@
 				<requirement>
 					<role>org.unidal.game.hanjiangsanguo.spider.page.home.JspViewer</role>
 				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.XiaoHaoManager</role>
+				</requirement>
 			</requirements>
 		</component>
 		<component>
@@ -385,6 +407,19 @@
 					<role>org.unidal.web.mvc.view.model.ModelHandler</role>
 				</requirement>
 			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.XiaoHaoManager</role>
+			<implementation>org.unidal.game.hanjiangsanguo.XiaoHaoManager</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
+			<implementation>org.unidal.game.hanjiangsanguo.task.TaskDriver</implementation>
 		</component>
 	</components>
 </plexus>

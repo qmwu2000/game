@@ -6,7 +6,7 @@ import org.unidal.game.hanjiangsanguo.task.Task;
 import org.unidal.game.hanjiangsanguo.task.TaskDriver;
 import org.unidal.lookup.ComponentTestCase;
 
-public class youyong2015 extends ComponentTestCase {
+public class XiaoHaoTest extends ComponentTestCase {
 	static {
 		System.setProperty("devMode", "true");
 	}
@@ -16,16 +16,16 @@ public class youyong2015 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, LoginTask.ID);
 
-		driver.setup("138760", "forever123F", "3023", //
+		driver.setup("2xiaohao996", "2xiaohao996", "107", //
 		      "practice/gid", "81151", //
 		      "general/gid", "81151", "general/id", "106", //
-		      "worldboss/list", "65914,-1,70058,-1,68660,-1,68659,-1,81151", "worldboss/mid", "4" //
+		      "worldboss/list", "65914,-1,70058,-1,68660,-1,67302,-1,81151", "worldboss/mid", "4" //
 		);
 		driver.execute(task);
 	}
 
 	@Test
-	public void all() throws Exception {
+	public void others() throws Exception {
 		vipwage();
 		lottery();
 		drink();
@@ -37,19 +37,21 @@ public class youyong2015 extends ComponentTestCase {
 	@Test
 	public void nop() {
 	}
+	
+	@Test
+	public void mine() throws Exception{
+		TaskDriver driver = lookup(TaskDriver.class);
+		
+		driver.getContext().setAttribute("dahao", "dahao");
+		driver.getContext().setAttribute("maxMineGold", "10000");
+		driver.go("mine", "mine"); 
+
+	}
 
 	@Test
 	public void worldboss() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, WorldbossTask.ID);
-
-		driver.execute(task);
-	}
-
-	@Test
-	public void worldbossboss() throws Exception {
-		TaskDriver driver = lookup(TaskDriver.class);
-		Task task = lookup(Task.class, NewYearBossTask.ID);
 
 		driver.execute(task);
 	}
@@ -151,7 +153,7 @@ public class youyong2015 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
 
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 1; i++) {
 			driver.execute(task, "map/action", "reputation");
 		}
 	}
@@ -160,17 +162,11 @@ public class youyong2015 extends ComponentTestCase {
 	public void mapScroll() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
+		int[] types = { 9, 8, 6 };
 
-		for (int i = 5; i <= 9; i++) {
-			if (i == 5 || i == 9 || i == 6 || i == 8) {
-				driver.execute(task, "map/action", "scroll", "map/scroll.color", "yellow", "map/scroll.type", "" + i);
-			}
+		for (int type : types) {
+			driver.execute(task, "map/action", "scroll", "map/scroll.color", "yellow", "map/scroll.type", "" + type);
 		}
-//		for (int i = 5; i <= 9; i++) {
-//			if (i == 6) {
-//				driver.execute(task, "map/action", "scroll", "map/scroll.color", "blue", "map/scroll.type", "" + i);
-//			}
-//		}
 	}
 
 	@Test

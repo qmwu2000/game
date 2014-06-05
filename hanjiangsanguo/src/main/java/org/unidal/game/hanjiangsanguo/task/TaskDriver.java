@@ -6,35 +6,40 @@ import org.unidal.game.hanjiangsanguo.task.activity.TaskActivity;
 import org.unidal.lookup.ContainerHolder;
 
 public class TaskDriver extends ContainerHolder implements Initializable {
-	private TaskContext m_ctx;
+
+	private ThreadLocal<TaskContext> m_context = new ThreadLocal<TaskContext>() {
+		@Override
+		protected TaskContext initialValue() {
+			return lookup(TaskContext.class);
+		}
+	};
+
+	public TaskContext getContext() {
+		return m_context.get();
+	}
 
 	public TaskContext setup(String username, String password, String server, String... params) {
-		m_ctx.setAttribute("user", "username", username);
-		m_ctx.setAttribute("user", "password", password);
-		m_ctx.setAttribute("user", "server", server);
+		getContext().setAttribute("user", "username", username);
+		getContext().setAttribute("user", "password", password);
+		getContext().setAttribute("user", "server", server);
 
 		return setupContext(params);
 	}
 
 	public void reset() {
-		m_ctx = lookup(TaskContext.class);
-		m_ctx.setDriver(this);
+		m_context.remove();
+
+		m_context.set(lookup(TaskContext.class));
 	}
 
 	@Override
 	public void initialize() throws InitializationException {
-		m_ctx = lookup(TaskContext.class);
-		m_ctx.setDriver(this);
 	}
 
 	public void execute(Task task, String... params) throws Exception {
 		setupContext(params);
 
-		task.execute(m_ctx);
-	}
-
-	public TaskContext getContext() {
-		return m_ctx;
+		task.execute(getContext());
 	}
 
 	private TaskContext setupContext(String... params) {
@@ -59,17 +64,17 @@ public class TaskDriver extends ContainerHolder implements Initializable {
 				name = key;
 			}
 
-			m_ctx.setAttribute(category, name, value);
+			getContext().setAttribute(category, name, value);
 		}
 
-		return m_ctx;
+		return getContext();
 	}
 
 	public void go(String name, String... args) throws Exception {
 		TaskActivity activity = lookup(TaskActivity.class, name);
 		TaskArguments arguments = new TaskArguments(args);
 
-		if (!activity.execute(m_ctx, arguments)) {
+		if (!activity.execute(getContext(), arguments)) {
 			throw new RuntimeException("Failed to do activity: " + name);
 		}
 	}
