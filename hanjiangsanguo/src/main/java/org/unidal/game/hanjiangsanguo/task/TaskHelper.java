@@ -130,7 +130,6 @@ public class TaskHelper implements Initializable, LogEnabled {
 		if (value == 1 || value == 2) {
 			return true;
 		} else if (value == -2) {
-			m_logger.warn("Done already");
 			return false;
 		} else if ("0".equals(status) || "1".equals(status)) {
 			return true;
@@ -141,8 +140,6 @@ public class TaskHelper implements Initializable, LogEnabled {
 	}
 
 	public boolean doGet(TaskContext ctx, String url, String... mappings) throws Exception {
-		m_logger.info("GET " + url);
-
 		String json = Files.forIO().readFrom(new URL(url).openStream(), UTF_8);
 
 		if (url.indexOf("hitegg") > 0) {
@@ -154,28 +151,31 @@ public class TaskHelper implements Initializable, LogEnabled {
 		if ("403".equals(json)) {
 			ctx.setAttribute("status", "403");
 
+			m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
 			return false;
 		} else if (!checkStatus(ctx, json)) {
+			m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
 			return false;
 		}
 
 		setOutputAttributes(ctx, json, mappings);
+		m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
 		return true;
 	}
 
 	public void doGetWithScript(TaskContext ctx, String url, String script, String mapping) throws Exception {
-		m_logger.info("GET " + url);
-
 		String json = Files.forIO().readFrom(new URL(url).openStream(), UTF_8);
 
 		try {
 			new Gson().fromJson(json, JsonObject.class);
 		} catch (Exception e) {
 			m_logger.warn(json, e);
+			m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
 			return;
 		}
 
 		if (!checkStatus(ctx, json)) {
+			m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
 			return;
 		}
 
@@ -186,6 +186,7 @@ public class TaskHelper implements Initializable, LogEnabled {
 		Object value = m_engine.eval("var o=" + json + ";" + script);
 
 		ctx.setAttribute(category, name, value.toString());
+		m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
 	}
 
 	@Override

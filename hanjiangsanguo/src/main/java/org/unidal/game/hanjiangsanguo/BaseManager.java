@@ -23,7 +23,6 @@ public class BaseManager {
 
 		return cal.getTime();
 	}
-	
 
 	protected boolean isArena() throws FileNotFoundException, IOException {
 		File file = new File("target/arean.position");
@@ -45,7 +44,6 @@ public class BaseManager {
 			return false;
 		}
 	}
-	
 
 	protected boolean isFirstInDay() throws FileNotFoundException, IOException {
 		File file = new File("target/index.position");
@@ -84,7 +82,7 @@ public class BaseManager {
 		Calendar cal = Calendar.getInstance();
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 
-		if (hour > 3) {
+		if (hour >= 3) {
 			return true;
 		} else {
 			return false;

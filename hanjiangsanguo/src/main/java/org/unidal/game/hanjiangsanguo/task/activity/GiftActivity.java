@@ -16,7 +16,13 @@ public class GiftActivity extends AbstractTaskActivity {
 
 		String url = m_helper.buildUrl2(ctx, "arena", "get_reward", null);
 
-		return m_helper.doGet(ctx, url);
+		m_helper.doGet(ctx, url);
+		
+		String url2 = m_helper.buildUrl2(ctx, "worldarena", "get_bet_reward", null);
+
+		m_helper.doGet(ctx, url2);
+
+		return true;
 	}
 
 	private boolean doCountrySalary(TaskContext ctx) throws Exception {

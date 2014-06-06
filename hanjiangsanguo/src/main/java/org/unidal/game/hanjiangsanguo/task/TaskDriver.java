@@ -1,11 +1,13 @@
 package org.unidal.game.hanjiangsanguo.task;
 
+import org.codehaus.plexus.logging.LogEnabled;
+import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.unidal.game.hanjiangsanguo.task.activity.TaskActivity;
 import org.unidal.lookup.ContainerHolder;
 
-public class TaskDriver extends ContainerHolder implements Initializable {
+public class TaskDriver extends ContainerHolder implements Initializable, LogEnabled {
 
 	private ThreadLocal<TaskContext> m_context = new ThreadLocal<TaskContext>() {
 		@Override
@@ -13,6 +15,8 @@ public class TaskDriver extends ContainerHolder implements Initializable {
 			return lookup(TaskContext.class);
 		}
 	};
+
+	private Logger m_logger;
 
 	public TaskContext getContext() {
 		return m_context.get();
@@ -75,7 +79,13 @@ public class TaskDriver extends ContainerHolder implements Initializable {
 		TaskArguments arguments = new TaskArguments(args);
 
 		if (!activity.execute(getContext(), arguments)) {
-			throw new RuntimeException("Failed to do activity: " + name);
+			m_logger.error("faile to do activity " + name);
 		}
 	}
+
+	@Override
+	public void enableLogging(Logger logger) {
+		m_logger = logger;
+	}
+
 }

@@ -89,11 +89,11 @@ public class BanquetActivity extends AbstractTaskActivity {
 		for (String item : items) {
 			List<String> parts = Splitters.by(':').split(item);
 			String caption = parts.get(0);
-			String nowNumber = parts.get(1);
-			int number = Integer.parseInt(nowNumber);
+			int nowNumber = Integer.parseInt(parts.get(1));
+			int maxNumber = Integer.parseInt(parts.get(2));
 
-			if (number < 10 && number > max) {
-				max = number;
+			if (maxNumber == 10 && nowNumber < 10 && nowNumber > max) {
+				max = nowNumber;
 				id = caption;
 			}
 		}
@@ -116,8 +116,12 @@ public class BanquetActivity extends AbstractTaskActivity {
 
 		m_helper.doGet(ctx, url, "info.times", "info.type", "info.status", "list.@count", "info.uid", "info.team");
 
-		m_helper.doGetWithScript(ctx, url,
-		      "var gs=''; for (var i in o.list) gs+=o.list[i].caption+':'+o.list[i].now_number+','; gs;", "list");
+		m_helper
+		      .doGetWithScript(
+		            ctx,
+		            url,
+		            "var gs=''; for (var i in o.list) gs+=o.list[i].caption+':'+o.list[i].now_number+':'+o.list[i].number+','; gs;",
+		            "list");
 
 	}
 }

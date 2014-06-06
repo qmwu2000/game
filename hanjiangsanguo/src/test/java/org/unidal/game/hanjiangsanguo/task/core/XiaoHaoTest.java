@@ -16,7 +16,7 @@ public class XiaoHaoTest extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, LoginTask.ID);
 
-		driver.setup("2xiaohao996", "2xiaohao996", "107", //
+		driver.setup("xiaohao856", "xiaohao856", "107", //
 		      "practice/gid", "81151", //
 		      "general/gid", "81151", "general/id", "106", //
 		      "worldboss/list", "65914,-1,70058,-1,68660,-1,67302,-1,81151", "worldboss/mid", "4" //
@@ -41,10 +41,14 @@ public class XiaoHaoTest extends ComponentTestCase {
 	@Test
 	public void mine() throws Exception{
 		TaskDriver driver = lookup(TaskDriver.class);
+
+
+		driver.go("banquet", "active"); // 国宴
 		
-		driver.getContext().setAttribute("dahao", "dahao");
-		driver.getContext().setAttribute("maxMineGold", "10000");
-		driver.go("mine", "mine"); 
+	//	driver.go("arena", "rank");
+	//	driver.getContext().setAttribute("dahao", "dahao");
+	//	driver.getContext().setAttribute("maxMineGold", "10000");
+	//	driver.go("mine", "mine"); 
 
 	}
 

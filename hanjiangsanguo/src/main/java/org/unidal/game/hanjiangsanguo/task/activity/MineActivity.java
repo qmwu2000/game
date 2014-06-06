@@ -87,7 +87,7 @@ public class MineActivity extends AbstractTaskActivity {
 			if (id.equals(String.valueOf(site))) {
 				int currentValue = Integer.parseInt(getSilver);
 
-				if (currentValue > maxGold) {
+				if (currentValue >= maxGold) {
 					return true;
 				}
 			}
@@ -109,8 +109,9 @@ public class MineActivity extends AbstractTaskActivity {
 	}
 
 	private void endMine(TaskContext ctx) throws Exception {
+		int index = ctx.getIntAttribute("log.site", 10);
 		String url1 = m_helper.buildUrl2(ctx, "mine", "give_up", "");
-		String url2 = m_helper.buildUrl2(ctx, "mine", "get_silver", "");
+		String url2 = m_helper.buildUrl2(ctx, "mine", "get_silver", "s=" + index);
 
 		m_helper.doGet(ctx, url1);
 		m_helper.doGet(ctx, url2);

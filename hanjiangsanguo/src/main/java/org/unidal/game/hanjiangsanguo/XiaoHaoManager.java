@@ -20,34 +20,39 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 
 	private Logger m_logger;
 
-	private String m_arenaUid;
+	private String m_arenaUid = null;
 
-	private String m_arenaServerId;
+	private String m_arenaServerId = null;
 
-	private boolean m_arena;
+	private boolean m_arena = false;
+
+	private boolean m_firstInDay = false;
 
 	public void empty() {
 	}
 
 	private void buildArenaInfo(String server, String account, String password, TaskDriver driver) throws Exception {
-		Calendar cal = Calendar.getInstance();
-		int hour = cal.get(Calendar.HOUR);
+		try {
+			Calendar cal = Calendar.getInstance();
+			int hour = cal.get(Calendar.HOUR_OF_DAY);
 
-		if (isArena() && hour > 23) {
-			try {
+			if (isArena() && hour == 23) {
+				try {
+					driver.go("login", server, account, password);
+					driver.go("arena", "rank");
 
-				driver.go("login", server, account, password);
-				driver.go("arena", "rank");
-
-				m_arenaUid = driver.getContext().getAttribute("arena", "uid");
-				m_arenaServerId = driver.getContext().getAttribute("arena", "server");
-				driver.reset();
-			} catch (Exception e) {
-				m_logger.error(e.getMessage(), e);
+					m_arenaUid = driver.getContext().getAttribute("arena", "uid");
+					m_arenaServerId = driver.getContext().getAttribute("arena", "server");
+					driver.reset();
+				} catch (Exception e) {
+					m_logger.error(e.getMessage(), e);
+				}
+				m_arena = true;
+			} else {
+				m_arena = false;
 			}
-			m_arena = true;
-		} else {
-			m_arena = false;
+		} catch (Exception e) {
+			m_logger.error(e.getMessage(), e);
 		}
 	}
 
@@ -64,13 +69,13 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 
 			while (active) {
 				try {
-
+					m_firstInDay = isFirstInDay();
 					buildArenaInfo("107", "2xiaohao362", "2xiaohao362", m_driver);
 
 					if (!isBossTime()) {
 						TaskContext context = m_driver.getContext();
 
-						context.setAttribute(MineActivity.ID, "maxMineGold", "350000");
+						context.setAttribute(MineActivity.ID, "maxMineGold", "320000");
 						daHaoAction("3023", "138760", "forever123F", m_driver);
 
 						context = m_driver.getContext();
@@ -112,7 +117,6 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 	}
 
 	private void xiaohaoAction(String[] accounts, TaskDriver driver) throws Exception {
-		boolean first = isFirstInDay();
 
 		for (String account : accounts) {
 			driver.go("login", "107", account, account);
@@ -123,11 +127,11 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 				driver.go("arena", "bet");
 			}
 
-			if (first) {
+			if (m_firstInDay) {
 				driver.go("gift", "vip"); // VIP工资
 				driver.go("gift", "login"); // 连续登录
 				driver.go("gift", "hitegg"); // 砸金蛋
-				driver.go("gift", "arena"); // 演武榜
+				driver.go("gift", "arena"); // 演武榜,押注
 				driver.go("gift", "task"); // 任务
 				driver.go("lottery", "lave"); // 每日抽奖
 				driver.go("trade", "business"); // 每日通商
@@ -139,7 +143,7 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 			}
 
 			if (driver.getContext().getIntAttribute("member", "country", 0) > 0) {
-				if (first) {
+				if (m_firstInDay) {
 					driver.go("gift", "country"); // 国库
 					driver.go("country", "sacrifice"); // 祭祀
 					driver.go("country", "expostulation"); // 谏言
@@ -158,12 +162,11 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 
 	protected void daHaoAction(String server, String account, String password, TaskDriver driver) throws Exception {
 		try {
-			boolean first = isFirstInDay();
 
 			driver.go("login", server, account, password);
 			driver.getContext().setAttribute("member", "dahao", "dahao");
 
-			if (first) {
+			if (m_firstInDay) {
 				driver.go("gift", "vip"); // VIP工资
 				driver.go("gift", "login"); // 连续登录
 				driver.go("activity", "sacredtree"); // 神树
@@ -180,7 +183,7 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 			driver.go("mine", "active"); // 银矿
 
 			if (driver.getContext().getIntAttribute("member", "country", 0) > 0) {
-				if (first) {
+				if (m_firstInDay) {
 					driver.go("gift", "country"); // 国库
 					driver.go("country", "sacrifice"); // 祭祀
 					driver.go("country", "dice"); // 国家骰子
