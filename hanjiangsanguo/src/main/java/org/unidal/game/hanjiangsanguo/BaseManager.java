@@ -71,7 +71,7 @@ public class BaseManager {
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 		int minute = cal.get(Calendar.MINUTE);
 
-		if ((hour == 12 && minute < 16) || (hour == 20 && minute < 16)) {
+		if ((hour == 12 && minute < 16) || (hour == 20 && minute < 45)) {
 			return true;
 		} else {
 			return false;
