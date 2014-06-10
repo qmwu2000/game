@@ -162,15 +162,15 @@ public class youyong2015 extends ComponentTestCase {
 		Task task = lookup(Task.class, MapTask.ID);
 
 		for (int i = 5; i <= 9; i++) {
-			if (i == 5 || i == 9 || i == 6 || i == 8) {
+			if (i == 6 || i == 8) {
 				driver.execute(task, "map/action", "scroll", "map/scroll.color", "yellow", "map/scroll.type", "" + i);
 			}
 		}
-//		for (int i = 5; i <= 9; i++) {
-//			if (i == 6) {
-//				driver.execute(task, "map/action", "scroll", "map/scroll.color", "blue", "map/scroll.type", "" + i);
-//			}
-//		}
+		// for (int i = 5; i <= 9; i++) {
+		// if (i == 6) {
+		// driver.execute(task, "map/action", "scroll", "map/scroll.color", "blue", "map/scroll.type", "" + i);
+		// }
+		// }
 	}
 
 	@Test

@@ -37,8 +37,6 @@ public class BaseManager {
 		String key = sdf.format(date);
 
 		if (pro.get(key) == null) {
-			String content = Files.forIO().readFrom(file, "utf-8");
-			Files.forIO().writeTo(file, content + "\n" + key + "=true");
 			return true;
 		} else {
 			return false;
@@ -69,9 +67,8 @@ public class BaseManager {
 	protected boolean isBossTime() {
 		Calendar cal = Calendar.getInstance();
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
-		int minute = cal.get(Calendar.MINUTE);
 
-		if ((hour == 12 && minute < 16) || (hour == 20 && minute < 45)) {
+		if ((hour == 12) || (hour == 20) || (hour == 0)) {
 			return true;
 		} else {
 			return false;
@@ -82,7 +79,7 @@ public class BaseManager {
 		Calendar cal = Calendar.getInstance();
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 
-		if (hour >= 3) {
+		if (hour >= 4) {
 			return true;
 		} else {
 			return false;

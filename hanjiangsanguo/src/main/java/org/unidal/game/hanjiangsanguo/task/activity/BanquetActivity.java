@@ -92,7 +92,7 @@ public class BanquetActivity extends AbstractTaskActivity {
 			int nowNumber = Integer.parseInt(parts.get(1));
 			int maxNumber = Integer.parseInt(parts.get(2));
 
-			if (maxNumber == 10 && nowNumber < 10 && nowNumber > max) {
+			if (maxNumber >= 5 && nowNumber < 10 && nowNumber > max) {
 				max = nowNumber;
 				id = caption;
 			}

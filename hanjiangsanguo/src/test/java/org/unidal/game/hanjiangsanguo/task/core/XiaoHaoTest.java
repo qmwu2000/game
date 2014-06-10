@@ -43,9 +43,9 @@ public class XiaoHaoTest extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 
 
-		driver.go("banquet", "active"); // 国宴
+	//	driver.go("banquet", "active"); // 国宴
 		
-	//	driver.go("arena", "rank");
+		driver.go("arena", "rank");
 	//	driver.getContext().setAttribute("dahao", "dahao");
 	//	driver.getContext().setAttribute("maxMineGold", "10000");
 	//	driver.go("mine", "mine"); 

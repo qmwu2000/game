@@ -144,6 +144,16 @@
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
+			<role-hint>ConntryBoss</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.core.CountryBossTask</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
 			<role-hint>worldbossboss</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.core.NewYearBossTask</implementation>
 			<requirements>
@@ -373,6 +383,11 @@
 			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
 			<role-hint>arena</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.activity.ArenaActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>drink</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.DrinkActivity</implementation>
 		</component>
 		<component>
 			<role>org.unidal.web.mvc.model.ModuleRegistry</role>

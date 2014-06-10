@@ -46,6 +46,16 @@ public class youyong2014 extends ComponentTestCase {
 		driver.execute(task);
 	}
 
+
+	@Test
+	public void countryBoss() throws Exception {
+		TaskDriver driver = lookup(TaskDriver.class);
+		Task task = lookup(Task.class, WorldbossTask.ID);
+
+		driver.execute(task);
+	}
+
+	
 	@Test
 	public void activity() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);

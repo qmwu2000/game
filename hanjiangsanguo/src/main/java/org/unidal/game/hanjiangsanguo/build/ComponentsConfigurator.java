@@ -31,6 +31,7 @@ import org.unidal.game.hanjiangsanguo.task.activity.CityActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CountryActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CountryMineActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CultivateActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.DrinkActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.GeneralActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.GiftActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.LoginActivity;
@@ -48,6 +49,7 @@ import org.unidal.game.hanjiangsanguo.task.activity.TradeActivity;
 import org.unidal.game.hanjiangsanguo.task.core.ActivityTask;
 import org.unidal.game.hanjiangsanguo.task.core.ArenaTask;
 import org.unidal.game.hanjiangsanguo.task.core.BusinessTask;
+import org.unidal.game.hanjiangsanguo.task.core.CountryBossTask;
 import org.unidal.game.hanjiangsanguo.task.core.DiceTask;
 import org.unidal.game.hanjiangsanguo.task.core.DrinkTask;
 import org.unidal.game.hanjiangsanguo.task.core.GeneralTask;
@@ -135,6 +137,7 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskActivity.class, MineActivity.ID, MineActivity.class));
 		all.add(C(TaskActivity.class, CountryMineActivity.ID, CountryMineActivity.class));
 		all.add(C(TaskActivity.class, ArenaActivity.ID, ArenaActivity.class));
+		all.add(C(TaskActivity.class, DrinkActivity.ID, DrinkActivity.class));
 
 		return all;
 	}
@@ -176,6 +179,9 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		      .req(TaskHelper.class));
 
 		all.add(C(Task.class, WorldbossTask.ID, WorldbossTask.class) //
+		      .req(TaskHelper.class));
+		
+		all.add(C(Task.class, CountryBossTask.ID, CountryBossTask.class) //
 		      .req(TaskHelper.class));
 		
 		all.add(C(Task.class, NewYearBossTask.ID, NewYearBossTask.class) //
