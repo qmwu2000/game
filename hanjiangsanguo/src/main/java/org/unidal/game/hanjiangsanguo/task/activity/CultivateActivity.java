@@ -44,9 +44,9 @@ public class CultivateActivity extends AbstractTaskActivity {
 			return true;
 		} else if (sum2 == sum - 1 && delta < 0) {
 			if (type == 1 && wuliup2 - wuliup > 0) {
-				return true;
+				return false;
 			} else if (type == 2 && zhiliup2 - zhiliup > 0) {
-				return true;
+				return false;
 			} else {
 				return false;
 			}
@@ -90,6 +90,7 @@ public class CultivateActivity extends AbstractTaskActivity {
 		} else if ("gold".equals(op)) {
 			String name = args.nextString(null);
 			int times = args.nextInt(1);
+			
 			String gid = mapId(ctx, name);
 
 			for (int i = 0; i < times; i++) {
@@ -107,7 +108,10 @@ public class CultivateActivity extends AbstractTaskActivity {
 		      + "'|'+o.list[i].wuliup+'|'+o.list[i].zhiliup+'|'+o.list[i].tiliup+','; gs;", "list");
 
 		String list = ctx.getAttribute("list");
+		
+		System.err.println(list + " " + name);
 		Map<String, String> map = Splitters.by(',', ':').trim().split(list);
+		
 		String str = map.get(name);
 		List<String> values = Splitters.by('|').split(str);
 

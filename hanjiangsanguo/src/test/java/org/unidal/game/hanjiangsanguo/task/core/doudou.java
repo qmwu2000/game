@@ -19,7 +19,7 @@ public class doudou extends ComponentTestCase {
 		driver.setup("SUPERWYX", "wyx1116", "107", //
 		      "practice/gid", "81151", //
 		      "general/gid", "81151", "general/id", "106", //
-		      "worldboss/list", "65914,-1,70058,-1,68660,-1,67302,-1,81151", "worldboss/mid", "4" //
+		      "worldboss/list", "-2,60009,-2,-2,43887,-2,136825,128609,66097", "worldboss/mid", "10" //
 		);
 		driver.execute(task);
 	}
@@ -46,6 +46,22 @@ public class doudou extends ComponentTestCase {
 		driver.execute(task);
 	}
 
+	@Test
+	public void countryBoss() throws Exception {
+		TaskDriver driver = lookup(TaskDriver.class);
+		Task task = lookup(Task.class, CountryBossTask.ID);
+
+		driver.execute(task);
+	}
+
+
+	@Test
+	public void worldbossboss() throws Exception {
+		TaskDriver driver = lookup(TaskDriver.class);
+		Task task = lookup(Task.class, NewYearBossTask.ID);
+
+		driver.execute(task);
+	}
 	@Test
 	public void activity() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
@@ -161,13 +177,13 @@ public class doudou extends ComponentTestCase {
 	public void mapScroll() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
-		int[] types = { 9, 8, 6 };
+//		int[] types = { 9, 8, 6 };
+//
+//		for (int type : types) {
+//			driver.execute(task, "map/action", "scroll", "map/scroll.color", "blue", "map/scroll.type", "" + type);
+//		}
 
-		for (int type : types) {
-			driver.execute(task, "map/action", "scroll", "map/scroll.color", "blue", "map/scroll.type", "" + type);
-		}
-
-		int[] types2 = { 9, 8, 7, 6 };
+		int[] types2 = { 9,7 };
 		for (int type : types2) {
 			driver.execute(task, "map/action", "scroll", "map/scroll.color", "yellow", "map/scroll.type", "" + type);
 		}

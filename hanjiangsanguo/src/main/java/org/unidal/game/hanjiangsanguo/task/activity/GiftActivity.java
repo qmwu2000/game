@@ -191,8 +191,18 @@ public class GiftActivity extends AbstractTaskActivity {
 			doDice(ctx);
 		} else if ("code".equals(op)) {
 			doCode(ctx);
+		}else if ("get_mission_reward".equals(op)) {
+			int id = args.nextInt(40);
+			doReward(ctx,id);
 		}
 
 		return true;
 	}
+
+	private void doReward(TaskContext ctx,int id) throws Exception {
+		String indexUrl = m_helper.buildUrl2(ctx, "map", "get_mission_reward", "id="+id);
+
+		m_helper.doGet(ctx, indexUrl);
+	   
+   }
 }

@@ -67,8 +67,9 @@ public class BaseManager {
 	protected boolean isBossTime() {
 		Calendar cal = Calendar.getInstance();
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
+		int minute = cal.get(Calendar.MINUTE);
 
-		if ((hour == 12) || (hour == 20) || (hour == 0)) {
+		if ((hour == 12) || (hour == 20) || (hour == 23 && minute > 30) || (hour == 0)) {
 			return true;
 		} else {
 			return false;

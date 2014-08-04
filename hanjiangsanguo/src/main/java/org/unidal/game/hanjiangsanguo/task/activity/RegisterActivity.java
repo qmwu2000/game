@@ -177,7 +177,6 @@ public class RegisterActivity extends AbstractTaskActivity {
 	}
 
 	private boolean simple(TaskContext ctx, String name) throws Exception, IOException {
-		handleActivationCode(ctx, 1781);
 		handleRegisterBinding(ctx, name, name);
 		handleRegisterReward(ctx);
 
@@ -204,10 +203,10 @@ public class RegisterActivity extends AbstractTaskActivity {
 		handleLoginGuest(ctx);
 		handleSelectRole(ctx);
 
-		int[] codes = { 9732, 9320, 8763, 8371, 7482, 7362, 7293, 5236, 5231, 4278, 3381, 3029, 3421, 1025 };
-
-		for (int code : codes) {
-			handleActivationCode(ctx, code);
-		}
+//		int[] codes = { 9732, 9320, 8763, 8371, 7482, 7362, 7293, 5236, 5231, 4278, 3381, 3029, 3421, 1025 };
+//
+//		for (int code : codes) {
+//			handleActivationCode(ctx, code);
+//		}
 	}
 }

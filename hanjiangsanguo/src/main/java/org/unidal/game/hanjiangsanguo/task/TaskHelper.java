@@ -147,7 +147,7 @@ public class TaskHelper implements Initializable, LogEnabled {
 		} else if (url.endsWith("#")) {
 			System.err.println(json);
 		}
-
+		
 		if ("403".equals(json)) {
 			ctx.setAttribute("status", "403");
 

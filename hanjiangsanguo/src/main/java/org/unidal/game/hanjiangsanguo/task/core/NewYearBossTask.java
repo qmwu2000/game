@@ -10,7 +10,7 @@ import org.unidal.game.hanjiangsanguo.task.TaskHelper;
 import org.unidal.lookup.annotation.Inject;
 
 public class NewYearBossTask implements Task {
-	public static final String ID = "worldbossboss";
+	public static final String ID = "newyearboss";
 
 	@Inject
 	private TaskHelper m_helper;

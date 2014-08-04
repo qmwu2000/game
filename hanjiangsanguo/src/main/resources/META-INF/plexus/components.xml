@@ -23,6 +23,10 @@
 			</requirements>
 		</component>
 		<component>
+			<role>org.unidal.game.hanjiangsanguo.BossManager</role>
+			<implementation>org.unidal.game.hanjiangsanguo.BossManager</implementation>
+		</component>
+		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
 			<role-hint>login</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.core.LoginTask</implementation>
@@ -144,7 +148,7 @@
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>ConntryBoss</role-hint>
+			<role-hint>country</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.core.CountryBossTask</implementation>
 			<requirements>
 				<requirement>
@@ -154,7 +158,7 @@
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>worldbossboss</role-hint>
+			<role-hint>newyearboss</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.core.NewYearBossTask</implementation>
 			<requirements>
 				<requirement>
@@ -390,6 +394,15 @@
 			<implementation>org.unidal.game.hanjiangsanguo.task.activity.DrinkActivity</implementation>
 		</component>
 		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>act_kemari</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.ZuqiuActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.router.DefaultRouter</role>
+			<implementation>org.unidal.game.hanjiangsanguo.router.DefaultRouter</implementation>
+		</component>
+		<component>
 			<role>org.unidal.web.mvc.model.ModuleRegistry</role>
 			<implementation>org.unidal.web.mvc.model.ModuleRegistry</implementation>
 			<configuration>
@@ -411,6 +424,9 @@
 				</requirement>
 				<requirement>
 					<role>org.unidal.game.hanjiangsanguo.XiaoHaoManager</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.BossManager</role>
 				</requirement>
 			</requirements>
 		</component>
@@ -435,6 +451,10 @@
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
 			<implementation>org.unidal.game.hanjiangsanguo.task.TaskDriver</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.BossManager</role>
+			<implementation>org.unidal.game.hanjiangsanguo.BossManager</implementation>
 		</component>
 	</components>
 </plexus>

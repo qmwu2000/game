@@ -3,7 +3,9 @@ package org.unidal.game.hanjiangsanguo.build;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.unidal.game.hanjiangsanguo.BossManager;
 import org.unidal.game.hanjiangsanguo.XiaoHaoManager;
+import org.unidal.game.hanjiangsanguo.router.DefaultRouter;
 import org.unidal.game.hanjiangsanguo.task.DefaultTaskActionManager;
 import org.unidal.game.hanjiangsanguo.task.DefaultTaskContext;
 import org.unidal.game.hanjiangsanguo.task.Task;
@@ -46,6 +48,7 @@ import org.unidal.game.hanjiangsanguo.task.activity.StrengthenActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TaskActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TowerActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TradeActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.ZuqiuActivity;
 import org.unidal.game.hanjiangsanguo.task.core.ActivityTask;
 import org.unidal.game.hanjiangsanguo.task.core.ArenaTask;
 import org.unidal.game.hanjiangsanguo.task.core.BusinessTask;
@@ -82,9 +85,12 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskContext.class, DefaultTaskContext.class).is(PER_LOOKUP));
 
 		all.add(C(XiaoHaoManager.class).req(TaskDriver.class));
+		all.add(C(BossManager.class));
 		all.addAll(defineTaskComponents());
 		all.addAll(defineTaskActionComponents());
 		all.addAll(defineTaskActivityComponents());
+		
+		all.add(C(DefaultRouter.class));
 
 		// Please keep it as last
 		all.addAll(new WebComponentConfigurator().defineComponents());
@@ -138,6 +144,7 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskActivity.class, CountryMineActivity.ID, CountryMineActivity.class));
 		all.add(C(TaskActivity.class, ArenaActivity.ID, ArenaActivity.class));
 		all.add(C(TaskActivity.class, DrinkActivity.ID, DrinkActivity.class));
+		all.add(C(TaskActivity.class, ZuqiuActivity.ID, ZuqiuActivity.class));
 
 		return all;
 	}

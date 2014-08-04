@@ -9,6 +9,14 @@ public class SpeedPlan extends ComponentTestCase {
 		System.setProperty("devMode", "true");
 	}
 
+
+	@Test
+	public void test2() throws Exception {
+		TaskDriver driver = lookup(TaskDriver.class);
+		driver.go("login", "107", "jackyc2", "20100924");
+		driver.go("cultivate", "gold","", "蔡文姬", "100");
+	}
+	
 	@Test
 	public void test() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);

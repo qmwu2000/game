@@ -10,21 +10,29 @@ import org.unidal.game.hanjiangsanguo.task.TaskHelper;
 import org.unidal.lookup.annotation.Inject;
 
 public class CountryBossTask implements Task {
-	public static final String ID = "ConntryBoss";
+	public static final String ID = "country";
 
 	@Inject
 	private TaskHelper m_helper;
 
+	private void handInspire(TaskContext ctx) throws Exception {
+		String url = m_helper.buildUrl2(ctx, "countryboss", "powerup", "&gold=0");
+
+		m_helper.doGet(ctx, url);
+	}
+
 	@Override
 	public void execute(TaskContext ctx) throws Exception {
 		ctx.setDefaultCategory(ID);
-
 
 		if (isReady(ctx)) {
 			int countdown = ctx.getIntAttribute("countdown", -1);
 			int times = countdown / 60;
 			long maxDelay = 0;
 
+			for (int i = 0; i < 10; i++) {
+				handInspire(ctx);
+			}
 
 			for (int i = 0; i < times; i++) {
 				long start = System.currentTimeMillis();
@@ -53,7 +61,7 @@ public class CountryBossTask implements Task {
 		int status = ctx.getIntAttribute("status", 0);
 
 		if (status == 5) {
-			System.err.println("World boss is already done!");
+			System.err.println("Country boss is already done!");
 			return false;
 		}
 
@@ -75,13 +83,13 @@ public class CountryBossTask implements Task {
 			// ready now
 			return true;
 		default:
-			System.err.println("Too early or too late for world boss!");
+			System.err.println("Too early or too late for country boss!");
 			return false;
 		}
 	}
 
 	private void handleBattle(TaskContext ctx) throws Exception {
-		String url = m_helper.buildUrl2(ctx, "worldboss", "battle", "&now=0");
+		String url = m_helper.buildUrl2(ctx, "countryboss", "battle", "&now=0");
 
 		m_helper.doGet(ctx, url);
 	}

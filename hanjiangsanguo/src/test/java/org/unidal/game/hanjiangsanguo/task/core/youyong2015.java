@@ -19,7 +19,7 @@ public class youyong2015 extends ComponentTestCase {
 		driver.setup("138760", "forever123F", "3023", //
 		      "practice/gid", "81151", //
 		      "general/gid", "81151", "general/id", "106", //
-		      "worldboss/list", "65914,-1,70058,-1,68660,-1,68659,-1,81151", "worldboss/mid", "4" //
+		      "worldboss/list", "-1,179051,-1,201942,-1,185227,190951,-1,195761", "worldboss/mid", "1" //
 		);
 		driver.execute(task);
 	}
@@ -42,6 +42,15 @@ public class youyong2015 extends ComponentTestCase {
 	public void worldboss() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, WorldbossTask.ID);
+
+		driver.execute(task);
+	}
+	
+
+	@Test
+	public void countryBoss() throws Exception {
+		TaskDriver driver = lookup(TaskDriver.class);
+		Task task = lookup(Task.class, CountryBossTask.ID);
 
 		driver.execute(task);
 	}
@@ -162,15 +171,10 @@ public class youyong2015 extends ComponentTestCase {
 		Task task = lookup(Task.class, MapTask.ID);
 
 		for (int i = 5; i <= 9; i++) {
-			if (i == 6 || i == 8) {
+			if (i == 6) {
 				driver.execute(task, "map/action", "scroll", "map/scroll.color", "yellow", "map/scroll.type", "" + i);
 			}
 		}
-		// for (int i = 5; i <= 9; i++) {
-		// if (i == 6) {
-		// driver.execute(task, "map/action", "scroll", "map/scroll.color", "blue", "map/scroll.type", "" + i);
-		// }
-		// }
 	}
 
 	@Test

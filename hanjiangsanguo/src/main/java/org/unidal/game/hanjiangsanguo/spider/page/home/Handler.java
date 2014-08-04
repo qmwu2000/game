@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
+import org.unidal.game.hanjiangsanguo.BossManager;
 import org.unidal.game.hanjiangsanguo.XiaoHaoManager;
 import org.unidal.game.hanjiangsanguo.spider.SpiderPage;
 import org.unidal.lookup.annotation.Inject;
@@ -18,6 +19,9 @@ public class Handler implements PageHandler<Context> {
 	
 	@Inject
 	private XiaoHaoManager m_xiaohaoManager;
+	
+	@Inject
+	private BossManager m_bossManager;
 	
 	@Override
 	@PayloadMeta(Payload.class)
@@ -35,6 +39,7 @@ public class Handler implements PageHandler<Context> {
 		model.setPage(SpiderPage.HOME);
 		
 		m_xiaohaoManager.empty();
+		m_bossManager.empty();
 
 		if (!ctx.isProcessStopped()) {
 		   m_jspViewer.view(ctx, model);

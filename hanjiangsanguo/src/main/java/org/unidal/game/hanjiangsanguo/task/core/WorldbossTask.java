@@ -27,6 +27,10 @@ public class WorldbossTask implements Task {
 			long maxDelay = 0;
 
 			handleMatrix(ctx);
+			
+			for(int i=0;i<10;i++){
+				handInspire(ctx);
+			}
 
 			for (int i = 0; i < times; i++) {
 				long start = System.currentTimeMillis();
@@ -49,7 +53,7 @@ public class WorldbossTask implements Task {
 			}
 		}
 
-		handleReward(ctx);
+		//handleReward(ctx);
 	}
 
 	private boolean isReady(TaskContext ctx) throws InterruptedException {
@@ -94,11 +98,26 @@ public class WorldbossTask implements Task {
 
 		m_helper.doGet(ctx, url, "countdown");
 	}
-
-	private void handleMatrix(TaskContext ctx) throws Exception {
-		String url = m_helper.buildUrl2(ctx, "matrix", "update_matrix", "&list=%s&mid=%s", "list", "mid");
+	
+	private void handInspire(TaskContext ctx) throws Exception {
+		String url = m_helper.buildUrl2(ctx, "worldboss", "powerup","&gold=0");
 
 		m_helper.doGet(ctx, url);
+	}
+
+	protected void handleMatrix(TaskContext ctx) throws Exception {
+		try {
+	      String url = m_helper.buildUrl2(ctx, "matrix", "update_matrix", "&list=%s&mid=%s", "list", "mid");
+
+	      m_helper.doGet(ctx, url);
+	      
+	      String url2 = m_helper.buildUrl2(ctx, "matrix", "use_matrix", "&list=%s&mid=%s", "list", "mid");
+
+	      m_helper.doGet(ctx, url2);
+	      
+      } catch (Exception e) {
+	      e.printStackTrace();
+      }
 	}
 
 	private void handleReward(TaskContext ctx) throws Exception {

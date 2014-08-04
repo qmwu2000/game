@@ -111,7 +111,7 @@ public class MineActivity extends AbstractTaskActivity {
 	private void endMine(TaskContext ctx) throws Exception {
 		int index = ctx.getIntAttribute("log.site", 10);
 		String url1 = m_helper.buildUrl2(ctx, "mine", "give_up", "");
-		String url2 = m_helper.buildUrl2(ctx, "mine", "get_silver", "s=" + index);
+		String url2 = m_helper.buildUrl2(ctx, "mine", "get_silver", "p=2&s=" + index);
 
 		m_helper.doGet(ctx, url1);
 		m_helper.doGet(ctx, url2);

@@ -47,11 +47,11 @@ public class LoginActivity extends AbstractTaskActivity {
 	private void handleLogin(TaskContext ctx) throws Exception {
 		ctx.setDefaultCategory("user");
 
-		String loginUrl = m_helper.buildUrl3(ctx, "user", "login", "&u=%s&p=%s", "user/username", "user/password");
+		String loginUrl = m_helper.buildUrl3(ctx, "user", "login", "&u=%s&p=%s&channel=150", "user/username", "user/password");
 
 		m_helper.doGet(ctx, loginUrl, "uid:user");
 
-		String tokenUrl = m_helper.buildUrl2(ctx, "login", "user", "&u=%s&p=%s", "user/username", "user/password");
+		String tokenUrl = m_helper.buildUrl2(ctx, "login", "user", "&u=%s&p=%s&channel=150", "user/username", "user/password");
 
 		m_helper.doGet(ctx, tokenUrl, "token:user", "vip:user");
 	}
