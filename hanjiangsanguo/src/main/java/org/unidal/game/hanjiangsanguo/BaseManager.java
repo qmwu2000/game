@@ -13,6 +13,16 @@ import org.unidal.helper.Files;
 
 public class BaseManager {
 
+	protected boolean isMineTime() {
+		Calendar cal = Calendar.getInstance();
+		int hour = cal.get(Calendar.HOUR_OF_DAY);
+
+		if (hour >= 1 && hour <= 9) {
+			return true;
+		}
+		return false;
+	}
+	
 	protected Date getCurrentDay() {
 		Calendar cal = Calendar.getInstance();
 

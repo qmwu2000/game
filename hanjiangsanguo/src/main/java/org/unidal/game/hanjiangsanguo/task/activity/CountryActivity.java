@@ -63,14 +63,14 @@ public class CountryActivity extends AbstractTaskActivity {
 		for (int i = length - 1; i >= 0; i--) {
 			int id = ids.get(i);
 
-			String indexUrl = m_helper.buildUrl2(ctx, "country", "audit", "uid=" + id + "&type=1");
+			String indexUrl = m_helper.buildUrl2(ctx, "country", "audit", "&uid=" + id + "&type=1");
 
 			m_helper.doGet(ctx, indexUrl);
 		}
 	}
 
 	private void handelAddCountry(TaskContext ctx) throws Exception {
-		String indexUrl = m_helper.buildUrl2(ctx, "country", "apply", "id=2&page=1");
+		String indexUrl = m_helper.buildUrl2(ctx, "country", "apply", "&id=2&page=1");
 
 		m_helper.doGet(ctx, indexUrl);
 	}

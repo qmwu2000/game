@@ -142,6 +142,8 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 
 		driver.reset();
 
+		Thread.sleep(300);
+
 		driver.go("login", "107", "superwyx", "wyx1116");
 		driver.go("country", "approve");
 		driver.reset();
@@ -155,7 +157,7 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 		driver.reset();
 	}
 
-	private void xiaohaoCountry(String account) throws Exception {
+	private void xiaohaoJoinAndExit(String account) throws Exception {
 		addCountry(account);
 
 		TaskDriver driver = m_driver;
@@ -163,12 +165,9 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 		driver.go("login", "107", account, account);
 
 		if (driver.getContext().getIntAttribute("member", "country", 0) > 0) {
-			if (m_firstInDay) {
-				driver.go("gift", "country"); // 国库
-				driver.go("country", "sacrifice"); // 祭祀
-				driver.go("country", "donate", "222500"); // 捐献
-			}
-			driver.go("country", "expostulation"); // 谏言
+			driver.go("gift", "country"); // 国库
+			driver.go("country", "sacrifice"); // 祭祀
+			driver.go("country", "donate", "222500"); // 捐献
 		}
 		driver.reset();
 
@@ -185,48 +184,51 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 			TaskDriver driver = m_driver;
 
 			xiaohaoAction(accounts, driver);
-			//xiaohaoAction(accounts, driver);
+			xiaohaoAction(accounts, driver);
+
+			processOtherXiaohao();
 		} catch (Exception e) {
 			m_logger.error(e.getMessage(), e);
 		}
-		
-		System.out.println("===========================");
+	}
 
-		try {
-			String firstIn = null;
-			for (Entry<String, Boolean> entry : m_countryState.entrySet()) {
-				String key = entry.getKey();
-				Boolean value = entry.getValue();
+	private void processOtherXiaohao() {
+		if (m_firstInDay) {
+			try {
+				String firstInAccount = null;
+				for (Entry<String, Boolean> entry : m_countryState.entrySet()) {
+					String key = entry.getKey();
+					Boolean value = entry.getValue();
 
-				if (value == true) {
-					firstIn = key;
-					break;
+					if (value == true) {
+						firstInAccount = key;
+						break;
+					}
 				}
-			}
-			
-			System.out.println("firstIn:"+firstIn);
-			exitCountry(firstIn);
-			
-			Thread.sleep(1000);
-			
-			for (Entry<String, Boolean> entry : m_countryState.entrySet()) {
-				String key = entry.getKey();
-				Boolean value = entry.getValue();
+				exitCountry(firstInAccount);
 
-				if (value == false) {
-					System.out.println("jiaru:"+key);
-					xiaohaoCountry(key);
-					break;
+				Thread.sleep(100);
+
+				for (Entry<String, Boolean> entry : m_countryState.entrySet()) {
+					try {
+						String key = entry.getKey();
+						Boolean value = entry.getValue();
+
+						if (value == false) {
+							xiaohaoJoinAndExit(key);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
+				addCountry(firstInAccount);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			addCountry(firstIn);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
 	private void xiaohaoAction(String[] accounts, TaskDriver driver) throws Exception {
-
 		for (String account : accounts) {
 			driver.go("login", "107", account, account);
 
@@ -244,14 +246,14 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 				driver.go("trade", "business"); // 每日通商
 				driver.go("map", "island", "10"); // 金银洞
 				driver.go("gift", "arena"); // 演武榜,押注
-			//	driver.go("city", "exercise"); // 征收
-			//	driver.go("gift", "exercise"); // 整军
 				driver.go("drink", "drink"); // 饮酒
 				driver.go("activity", "sacredtree"); // 神树
 				driver.go("activity", "springlottery"); // 幸运大转盘
 				driver.go("activity", "acttreasure"); // 寻宝
 			}
 
+			driver.go("city", "exercise"); // 征收
+			driver.go("gift", "exercise"); // 整军
 			driver.go("gift", "hitegg"); // 砸金蛋
 
 			if (driver.getContext().getIntAttribute("member", "country", 0) > 0) {
@@ -276,10 +278,9 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 		}
 	}
 
-	protected void daHaoAction(String server, String account, String password, TaskDriver driver, boolean caikuang)
+	private void daHaoAction(String server, String account, String password, TaskDriver driver, boolean caikuang)
 	      throws Exception {
 		try {
-
 			driver.go("login", server, account, password);
 			driver.getContext().setAttribute("member", "dahao", "dahao");
 
@@ -321,16 +322,6 @@ public class XiaoHaoManager extends BaseManager implements Initializable, LogEna
 		} catch (Exception e) {
 			m_logger.error(e.getMessage(), e);
 		}
-	}
-
-	protected boolean isMineTime() {
-		Calendar cal = Calendar.getInstance();
-		int hour = cal.get(Calendar.HOUR_OF_DAY);
-
-		if (hour >= 1 && hour <= 9) {
-			return true;
-		}
-		return false;
 	}
 
 	@Override
