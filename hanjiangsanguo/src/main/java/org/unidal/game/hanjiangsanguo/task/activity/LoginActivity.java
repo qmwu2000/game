@@ -19,7 +19,7 @@ public class LoginActivity extends AbstractTaskActivity {
 		String server = args.nextString(null);
 		String username = args.nextString(null);
 		String password = args.nextString(null);
-
+		
 		ensure(server != null, username != null, server != null);
 
 		ctx.setAttribute("user", "server", server);

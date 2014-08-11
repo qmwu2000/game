@@ -40,12 +40,6 @@ public class TaskDriver extends ContainerHolder implements Initializable, LogEna
 	public void initialize() throws InitializationException {
 	}
 
-	public void execute(Task task, String... params) throws Exception {
-		setupContext(params);
-
-		task.execute(getContext());
-	}
-
 	private TaskContext setupContext(String... params) {
 		int len = params.length;
 
@@ -74,13 +68,17 @@ public class TaskDriver extends ContainerHolder implements Initializable, LogEna
 		return getContext();
 	}
 
-	public void go(String name, String... args) throws Exception {
-		TaskActivity activity = lookup(TaskActivity.class, name);
-		TaskArguments arguments = new TaskArguments(args);
+	public void go(String name, String... args){
+		try {
+	      TaskActivity activity = lookup(TaskActivity.class, name);
+	      TaskArguments arguments = new TaskArguments(args);
 
-		if (!activity.execute(getContext(), arguments)) {
-			m_logger.error("faile to do activity " + name);
-		}
+	      if (!activity.execute(getContext(), arguments)) {
+	      	m_logger.error("faile to do activity " + name);
+	      }
+      } catch (Exception e) {
+	      e.printStackTrace();
+      }
 	}
 
 	@Override

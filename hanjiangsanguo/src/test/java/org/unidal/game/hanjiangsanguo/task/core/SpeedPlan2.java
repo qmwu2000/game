@@ -22,11 +22,11 @@ public class SpeedPlan2 extends ComponentTestCase {
 
 	@Test
 	public void invitation() throws Exception {
-		for (int i = 0; i < 1; i++) {
-			String name = register(60 + i);
+		for (int i = 0; i < 3; i++) {
+			String name = register(72 + i);
 			TaskDriver driver = lookup(TaskDriver.class);
 			try {
-				driver.go("login", "108", name, name);
+				driver.go("login", "107", name, name);
 				driver.go("gift", "code");
 				levelBefore30(driver);
 				levelAfter30(driver);
@@ -35,13 +35,12 @@ public class SpeedPlan2 extends ComponentTestCase {
 			} finally {
 				//driver.go("gift", "invitation", "erpqgq7");
 			}
-			break;
 		}
 	}
 	
 	@Test
 	public void speedOne() throws Exception{
-		String name ="eric09245";
+		String name ="eric09246";
 		TaskDriver driver = lookup(TaskDriver.class);
 		try {
 			driver.go("login", "107", name, "20100924");

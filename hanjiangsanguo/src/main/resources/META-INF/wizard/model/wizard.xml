@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wizard package="org.unidal.game.hanjiangsanguo">
+   <model package="org.unidal.game.hanjiangsanguo.member" name="member">
+      <sample-model>/Users/youyong/Documents/workspace/game/hanjiangsanguo/src/test/resources/member.xml</sample-model>
+   </model>
+</wizard>

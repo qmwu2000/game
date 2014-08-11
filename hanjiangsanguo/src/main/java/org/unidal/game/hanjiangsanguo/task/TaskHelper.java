@@ -1,6 +1,6 @@
 package org.unidal.game.hanjiangsanguo.task;
 
-import java.net.URL;
+import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -13,6 +13,7 @@ import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.unidal.helper.Files;
 import org.unidal.helper.Splitters;
+import org.unidal.helper.Urls;
 import org.unidal.tuple.Triple;
 
 import com.google.gson.Gson;
@@ -140,7 +141,8 @@ public class TaskHelper implements Initializable, LogEnabled {
 	}
 
 	public boolean doGet(TaskContext ctx, String url, String... mappings) throws Exception {
-		String json = Files.forIO().readFrom(new URL(url).openStream(), UTF_8);
+		InputStream in = Urls.forIO().readTimeout(2000).connectTimeout(2000).openStream(url);
+		String json = Files.forIO().readFrom(in, UTF_8);
 
 		if (url.indexOf("hitegg") > 0) {
 			System.err.println(json);
@@ -164,7 +166,8 @@ public class TaskHelper implements Initializable, LogEnabled {
 	}
 
 	public void doGetWithScript(TaskContext ctx, String url, String script, String mapping) throws Exception {
-		String json = Files.forIO().readFrom(new URL(url).openStream(), UTF_8);
+		InputStream in = Urls.forIO().readTimeout(2000).connectTimeout(2000).openStream(url);
+		String json = Files.forIO().readFrom(in, UTF_8);
 
 		try {
 			new Gson().fromJson(json, JsonObject.class);

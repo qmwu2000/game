@@ -11,7 +11,7 @@ import org.unidal.game.hanjiangsanguo.task.activity.SoulActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.WorldbossActivity;
 import org.unidal.lookup.ComponentTestCase;
 
-public class doudou extends ComponentTestCase {
+public class yilian extends ComponentTestCase {
 	static {
 		System.setProperty("devMode", "true");
 	}
@@ -20,13 +20,13 @@ public class doudou extends ComponentTestCase {
 	public void before() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
 
-		driver.setup("SUPERWYX", "wyx1116", "107", //
+		driver.setup("7434081", "7434081", "107", //
 		      "practice/gid", "81151", //
 		      "general/gid", "81151", "general/id", "106", //
 		      "worldboss/list", "-2,60009,-2,-2,43887,-2,136825,128609,66097", "worldboss/mid", "10" //
 		);
 
-		driver.go(LoginActivity.ID, "107", "SUPERWYX", "wyx1116");
+		driver.go(LoginActivity.ID, "107", "7434081", "7434081");
 	}
 
 	@Test
@@ -50,8 +50,7 @@ public class doudou extends ComponentTestCase {
 	@Test
 	public void testHero() throws Exception {
 		TaskDriver driver = lookup(TaskDriver.class);
-		driver.go(LoginActivity.ID, "107", "7434081", "7434081");
-		driver.go(HeroActivity.ID, "44");
+		driver.go(HeroActivity.ID);
 	}
 
 	@Test

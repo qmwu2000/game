@@ -6,15 +6,31 @@ import org.codehaus.plexus.logging.LogEnabled;
 import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
-import org.unidal.game.hanjiangsanguo.task.Task;
-import org.unidal.game.hanjiangsanguo.task.TaskDriver;
-import org.unidal.game.hanjiangsanguo.task.core.CountryBossTask;
-import org.unidal.game.hanjiangsanguo.task.core.LoginTask;
-import org.unidal.game.hanjiangsanguo.task.core.WorldbossTask;
+import org.unidal.game.hanjiangsanguo.account.DouDouMainAccount;
+import org.unidal.game.hanjiangsanguo.account.HanfengMainAccount;
+import org.unidal.game.hanjiangsanguo.account.HuaiyiMainAccount;
+import org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount;
+import org.unidal.game.hanjiangsanguo.account.MainAccount;
+import org.unidal.game.hanjiangsanguo.account.YilianMainAccount;
 import org.unidal.helper.Threads;
-import org.unidal.lookup.ContainerHolder;
+import org.unidal.lookup.annotation.Inject;
 
-public class BossManager extends ContainerHolder implements Initializable, Runnable, LogEnabled {
+public class BossManager implements Initializable, Runnable, LogEnabled {
+
+	@Inject
+	private DouDouMainAccount m_doudou;
+
+	@Inject
+	private KeJiYaoMainAccount m_kejiyao;
+
+	@Inject
+	private HanfengMainAccount m_hanfeng;
+
+	@Inject
+	private HuaiyiMainAccount m_huaiyi;
+
+	@Inject
+	private YilianMainAccount m_yilian;
 
 	public void empty() {
 	}
@@ -37,26 +53,19 @@ public class BossManager extends ContainerHolder implements Initializable, Runna
 			int week = cal.get(Calendar.DAY_OF_WEEK);
 
 			if ((hour == 20) && minute == 0) {
-				Threads.forGroup("game")
-				      .start(
-				            new WorldBoss("3023", "138760", "forever123F",
-				                  "-1,179051,-1,201942,-1,185227,190951,-1,195761", "1"));
-				Threads.forGroup("game").start(
-				      new WorldBoss("107", "superwyx", "wyx1116", "-2,60009,-2,-2,43887,-2,136825,128609,66097", "10"));
-				Threads.forGroup("game").start(
-				      new WorldBoss("107", "youyong2014", "forever123", "65914,-1,70058,-1,68660,-1,67302,-1,81151", "4"));
+				Threads.forGroup("game").start(new WorldBoss(m_hanfeng));
+				Threads.forGroup("game").start(new WorldBoss(m_doudou));
+				Threads.forGroup("game").start(new WorldBoss(m_kejiyao));
+				Threads.forGroup("game").start(new WorldBoss(m_yilian));
+				Threads.forGroup("game").start(new WorldBoss(m_huaiyi));
 			}
 
 			if (hour == 20 && minute == 30 && week == Calendar.FRIDAY) {
-				Threads.forGroup("game").start(
-				      new CountryBoss("3023", "138760", "forever123F", "-1,179051,-1,201942,-1,185227,190951,-1,195761",
-				            "1"));
-				Threads.forGroup("game").start(
-				      new CountryBoss("107", "superwyx", "wyx1116", "-2,60009,-2,-2,43887,-2,136825,128609,66097", "10"));
-				Threads.forGroup("game")
-				      .start(
-				            new CountryBoss("107", "youyong2014", "forever123",
-				                  "65914,-1,70058,-1,68660,-1,67302,-1,81151", "4"));
+				Threads.forGroup("game").start(new CountryBoss(m_hanfeng));
+				Threads.forGroup("game").start(new CountryBoss(m_doudou));
+				Threads.forGroup("game").start(new CountryBoss(m_kejiyao));
+				Threads.forGroup("game").start(new CountryBoss(m_yilian));
+				Threads.forGroup("game").start(new CountryBoss(m_huaiyi));
 			}
 
 			try {
@@ -68,35 +77,16 @@ public class BossManager extends ContainerHolder implements Initializable, Runna
 
 	public class CountryBoss implements Runnable {
 
-		private String m_userName;
+		private MainAccount m_account;
 
-		private String m_pwd;
-
-		private String m_server;
-
-		private String m_list;
-
-		private String m_mid;
-
-		private CountryBoss(String server, String userName, String pwd, String list, String mid) {
-			m_userName = userName;
-			m_pwd = pwd;
-			m_server = server;
-			m_list = list;
-			m_mid = mid;
+		private CountryBoss(MainAccount account) {
+			m_account = account;
 		}
 
 		@Override
 		public void run() {
 			try {
-				TaskDriver driver = lookup(TaskDriver.class);
-				Task task = lookup(Task.class, LoginTask.ID);
-
-				driver.setup(m_userName, m_pwd, m_server, "worldboss/list", m_list, "worldboss/mid", m_mid);
-				driver.execute(task);
-
-				task = lookup(Task.class, CountryBossTask.ID);
-				driver.execute(task);
+				m_account.doCountryBoss();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -105,35 +95,16 @@ public class BossManager extends ContainerHolder implements Initializable, Runna
 
 	public class WorldBoss implements Runnable {
 
-		private String m_userName;
+		private MainAccount m_account;
 
-		private String m_pwd;
-
-		private String m_server;
-
-		private String m_list;
-
-		private String m_mid;
-
-		private WorldBoss(String server, String userName, String pwd, String list, String mid) {
-			m_userName = userName;
-			m_pwd = pwd;
-			m_server = server;
-			m_list = list;
-			m_mid = mid;
+		private WorldBoss(MainAccount account) {
+			m_account = account;
 		}
 
 		@Override
 		public void run() {
 			try {
-				TaskDriver driver = lookup(TaskDriver.class);
-				Task task = lookup(Task.class, LoginTask.ID);
-
-				driver.setup(m_userName, m_pwd, m_server, "worldboss/list", m_list, "worldboss/mid", m_mid);
-				driver.execute(task);
-
-				task = lookup(Task.class, WorldbossTask.ID);
-				driver.execute(task);
+				m_account.doWorldBoss();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
