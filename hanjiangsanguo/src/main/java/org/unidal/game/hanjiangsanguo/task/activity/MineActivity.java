@@ -12,17 +12,13 @@ public class MineActivity extends AbstractTaskActivity {
 		ensure(op != null);
 		ctx.setDefaultCategory(ID);
 
-		String dahao = ctx.getAttribute("member", "dahao");
-
-		if (dahao != null) {
-			if (isMining(ctx)) {
-				if (shouldEnd(ctx)) {
-					endMine(ctx);
-					findAndStartMine(ctx);
-				}
-			} else {
+		if (isMining(ctx)) {
+			if (shouldEnd(ctx)) {
+				endMine(ctx);
 				findAndStartMine(ctx);
 			}
+		} else {
+			findAndStartMine(ctx);
 		}
 		return true;
 	}

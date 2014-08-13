@@ -19,7 +19,7 @@ public class HuaiyiMainAccount extends MainAccount implements Initializable {
    public void doFirstInDay() {
 	   super.doFirstInDay();
 	   
-	   doGeneralTask();
+	   doOtherAccountTask();
    }
 
 	@Override

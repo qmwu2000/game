@@ -230,7 +230,7 @@
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
 			<role-hint>worldboss</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.activity.CountryBossActivity</implementation>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.WorldbossActivity</implementation>
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
@@ -256,6 +256,11 @@
 			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
 			<role-hint>jiang</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.activity.JiangActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>SoulEquip</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.SoulEquipActivity</implementation>
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.router.DefaultRouter</role>

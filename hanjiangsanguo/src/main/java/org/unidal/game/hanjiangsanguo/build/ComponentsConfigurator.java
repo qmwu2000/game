@@ -40,6 +40,7 @@ import org.unidal.game.hanjiangsanguo.task.activity.MusterActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.PracticeActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.RegisterActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.SoulActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.SoulEquipActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.StrengthenActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TaskActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TowerActivity;
@@ -109,12 +110,13 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskActivity.class, DrinkActivity.ID, DrinkActivity.class));
 		all.add(C(TaskActivity.class, ZuqiuActivity.ID, ZuqiuActivity.class));
 		all.add(C(TaskActivity.class, CountryBossActivity.ID, CountryBossActivity.class));
-		all.add(C(TaskActivity.class, WorldbossActivity.ID, CountryBossActivity.class));
+		all.add(C(TaskActivity.class, WorldbossActivity.ID, WorldbossActivity.class));
 		all.add(C(TaskActivity.class, SoulActivity.ID, SoulActivity.class));
 		all.add(C(TaskActivity.class, GemActivity.ID, GemActivity.class));
 		all.add(C(TaskActivity.class, HeavenActivity.ID, HeavenActivity.class));
 		all.add(C(TaskActivity.class, HeroActivity.ID, HeroActivity.class));
 		all.add(C(TaskActivity.class, JiangActivity.ID, JiangActivity.class));
+		all.add(C(TaskActivity.class, SoulEquipActivity.ID, SoulEquipActivity.class));
 
 		return all;
 	}

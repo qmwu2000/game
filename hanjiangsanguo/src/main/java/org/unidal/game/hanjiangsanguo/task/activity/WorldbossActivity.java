@@ -6,14 +6,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.unidal.game.hanjiangsanguo.task.TaskArguments;
 import org.unidal.game.hanjiangsanguo.task.TaskContext;
-import org.unidal.game.hanjiangsanguo.task.TaskHelper;
-import org.unidal.lookup.annotation.Inject;
 
 public class WorldbossActivity extends AbstractTaskActivity {
 	public static final String ID = "worldboss";
-
-	@Inject
-	private TaskHelper m_helper;
 
 	@Override
 	public boolean execute(TaskContext ctx, TaskArguments args) throws Exception {

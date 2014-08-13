@@ -55,12 +55,12 @@ public class SpeedPlan2 extends ComponentTestCase {
 	
 	@Test
 	public void peiyang() throws Exception{
-		String name ="ERIC09245";
+		String name ="1yaoqing73";
 		TaskDriver driver = lookup(TaskDriver.class);
 		try {
-			driver.go("login", "107", name, "20100924");
+			driver.go("login", "107", name, "1yaoqing73");
 
-			driver.go("cultivate", "gold","", "马良", "300");
+			driver.go("cultivate", "gold","", "蔡文姬", "300");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

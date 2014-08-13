@@ -10,10 +10,13 @@
     <entity-ref name="soul" />
     <entity-ref name="heaven" />
     <entity-ref name="jiang" />
+    <entity-ref name="hreo" />
   </entity>
   <entity name="boss">
     <attribute name="matrix" value-type="String" />
     <attribute name="mid" value-type="String" />
+    <attribute name="gids" value-type="String" />
+    <attribute name="sids" value-type="String" />
   </entity>
   <entity name="gem">
     <attribute name="map-id" value-type="String" />
@@ -24,6 +27,14 @@
   </entity>
   <entity name="jiang">
     <attribute name="level" value-type="String" />
+    <attribute name="gids" value-type="String" />
+    <attribute name="sids" value-type="String" />
+  </entity>
+  <entity name="hreo">
+    <attribute name="matrix" value-type="String"/>
+    <attribute name="mid" value-type="String" />
+    <attribute name="gids" value-type="String" />
+    <attribute name="sids" value-type="String" />
   </entity>
   <entity name="heaven">
     <attribute name="level" value-type="String" />

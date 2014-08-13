@@ -1,14 +1,11 @@
 package org.unidal.game.hanjiangsanguo.task.core;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.unidal.game.hanjiangsanguo.account.DouDouMainAccount;
+import org.unidal.game.hanjiangsanguo.account.HanfengMainAccount;
+import org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount;
 import org.unidal.game.hanjiangsanguo.task.TaskDriver;
-import org.unidal.game.hanjiangsanguo.task.activity.GemActivity;
-import org.unidal.game.hanjiangsanguo.task.activity.HeavenActivity;
-import org.unidal.game.hanjiangsanguo.task.activity.HeroActivity;
-import org.unidal.game.hanjiangsanguo.task.activity.LoginActivity;
-import org.unidal.game.hanjiangsanguo.task.activity.SoulActivity;
-import org.unidal.game.hanjiangsanguo.task.activity.WorldbossActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.ArenaActivity;
 import org.unidal.lookup.ComponentTestCase;
 
 public class doudou extends ComponentTestCase {
@@ -16,51 +13,71 @@ public class doudou extends ComponentTestCase {
 		System.setProperty("devMode", "true");
 	}
 
-	@Before
-	public void before() throws Exception {
-		TaskDriver driver = lookup(TaskDriver.class);
+	@Test
+	public void testHanfeng() {
+		HanfengMainAccount account = lookup(HanfengMainAccount.class);
 
-		driver.setup("SUPERWYX", "wyx1116", "107", //
-		      "practice/gid", "81151", //
-		      "general/gid", "81151", "general/id", "106", //
-		      "worldboss/list", "-2,60009,-2,-2,43887,-2,136825,128609,66097", "worldboss/mid", "10" //
-		);
+		account.doDaHaoTask();
+		// account.doJiangSetUp();
+		// account.doBossSetUp();
+		// account.doHreoSetUp();
 
-		driver.go(LoginActivity.ID, "107", "SUPERWYX", "wyx1116");
+		// account.doShenJiang();
+		// account.doDaHaoTask();
+		// accout.doWorldBoss();
+		// accout.doCycleTask();
 	}
 
 	@Test
-	public void testSoul() throws Exception {
-		TaskDriver driver = lookup(TaskDriver.class);
-		driver.go(SoulActivity.ID, "150");
+	public void testKeji() {
+		KeJiYaoMainAccount account = lookup(KeJiYaoMainAccount.class);
+
+		// account.doJiangSetUp();
+		account.doBossSetUp();
+		// account.doHreoSetUp();
+
 	}
 
 	@Test
-	public void testGem() throws Exception {
-		TaskDriver driver = lookup(TaskDriver.class);
-		driver.go(GemActivity.ID, "4", "149");
+	public void doHreoSetUp() throws Exception {
+		DouDouMainAccount account = lookup(DouDouMainAccount.class);
+
+		account.doDaHaoTask();
+
+		// account.doHreoSetUp();
+		// account.doDaHaoTask();
 	}
 
 	@Test
-	public void testHeavey() throws Exception {
+	public void doBossSetup() throws Exception {
+		DouDouMainAccount account = lookup(DouDouMainAccount.class);
+
+		account.doBossSetUp();
+	}
+	
+	@Test
+	public void testArena() throws Exception{
 		TaskDriver driver = lookup(TaskDriver.class);
-		driver.go(HeavenActivity.ID, "44");
+		
+		driver.go("login", "107", "superwyx", "wyx1116");
+		driver.go("arena", "rank");
+
+		String arenaUid = driver.getContext().getAttribute("arena", "uid");
+		String arenaServerId = driver.getContext().getAttribute("arena", "server");
+		System.out.println(arenaUid+" "+arenaServerId);
+		
+		driver.getContext().setAttribute(ArenaActivity.ID, "uid", arenaUid);
+		driver.getContext().setAttribute(ArenaActivity.ID, "server", arenaServerId);
+	
+		driver.go("arena","bet");
+		
 	}
 
 	@Test
-	public void testHero() throws Exception {
-		TaskDriver driver = lookup(TaskDriver.class);
-		driver.go(LoginActivity.ID, "107", "7434081", "7434081");
-		driver.go(HeroActivity.ID, "44");
-	}
+	public void doJiangSetup() throws Exception {
+		DouDouMainAccount account = lookup(DouDouMainAccount.class);
 
-	@Test
-	public void nop() throws Exception {
-
-		TaskDriver driver = lookup(TaskDriver.class);
-
-		driver.go(LoginActivity.ID, "107", "SUPERWYX", "wyx1116");
-		driver.go(WorldbossActivity.ID);
+		account.doJiangSetUp();
 	}
 
 }

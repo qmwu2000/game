@@ -18,6 +18,7 @@ public class DouDouMainAccount extends MainAccount implements Initializable {
 	@Override
    public void doFirstInDay() {
 	   super.doFirstInDay();
+	   doDaHaoTask();
    }
 
 	@Override

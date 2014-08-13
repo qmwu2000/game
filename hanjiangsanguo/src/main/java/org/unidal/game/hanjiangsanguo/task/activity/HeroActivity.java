@@ -16,6 +16,7 @@ public class HeroActivity extends AbstractTaskActivity {
 				boolean win = action(ctx);
 
 				if (!win) {
+					end(ctx);
 					break;
 				}
 			}
@@ -24,18 +25,37 @@ public class HeroActivity extends AbstractTaskActivity {
 		return true;
 	}
 
-	private void start(TaskContext ctx) throws Exception {
-		String url = m_helper.buildUrl2(ctx, "herothrone", "start", null);
+	private void end(TaskContext ctx) throws Exception {
+		try {
+	      String url = m_helper.buildUrl2(ctx, "herothrone", "end_battle", null);
 
-		m_helper.doGet(ctx, url);
+	      m_helper.doGet(ctx, url);
+      } catch (Exception e) {
+	      e.printStackTrace();
+      }
+	}
+
+	private void start(TaskContext ctx) throws Exception {
+		try {
+	      String url = m_helper.buildUrl2(ctx, "herothrone", "start", null);
+
+	      m_helper.doGet(ctx, url);
+      } catch (Exception e) {
+	      e.printStackTrace();
+      }
 	}
 
 	private boolean action(TaskContext ctx) throws Exception {
-		String url = m_helper.buildUrl2(ctx, "herothrone", "action", null);
+		try {
+	      String url = m_helper.buildUrl2(ctx, "herothrone", "action", null);
 
-		m_helper.doGet(ctx, url, "info.win");
+	      m_helper.doGet(ctx, url, "info.win");
 
-		return ctx.getIntAttribute("info.win", -1) > 0;
+	      return ctx.getIntAttribute("info.win", -1) > 0;
+      } catch (Exception e) {
+	      e.printStackTrace();
+      }
+		return false;
 	}
 
 	private int check(TaskContext ctx) throws Exception {

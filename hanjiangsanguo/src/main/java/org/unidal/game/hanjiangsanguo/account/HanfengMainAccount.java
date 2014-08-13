@@ -3,6 +3,7 @@ package org.unidal.game.hanjiangsanguo.account;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.unidal.game.hanjiangsanguo.member.transform.DefaultSaxParser;
+import org.unidal.game.hanjiangsanguo.task.activity.MineActivity;
 import org.unidal.helper.Files;
 
 public class HanfengMainAccount extends MainAccount implements Initializable {
@@ -18,6 +19,7 @@ public class HanfengMainAccount extends MainAccount implements Initializable {
 	@Override
 	public void doFirstInDay() {
 		super.doFirstInDay();
+	   doDaHaoTask();
 	}
 
 	@Override
@@ -29,7 +31,7 @@ public class HanfengMainAccount extends MainAccount implements Initializable {
 	public void doCycleTask() {
 		super.doCycleTask();
 
-		m_driver.go("mine", "active");
+		m_driver.go(MineActivity.ID, "active");
 	}
 
 }

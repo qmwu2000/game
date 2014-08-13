@@ -28,7 +28,8 @@ public class XiaoHaoAccount implements LogEnabled {
 		Map<String, String> strs = new HashMap<String, String>();
 
 		String[] accounts2 = { "ERIC09241", "ERIC09242", "ERIC09243", "ERIC09244", "ERIC09245", "ERIC09246",
-		      "ericchen09", "ericchen10" };
+		      "ericchen09", "ericchen10", "JOYCE1000", "joyce02", "joyce03", "joyce04", "joyce05", "joyce06", "joyce07",
+		      "joyce08" };
 
 		for (String str : accounts) {
 			strs.put(str, str);
@@ -59,9 +60,9 @@ public class XiaoHaoAccount implements LogEnabled {
 		m_driver.go("gift", "login"); // 连续登录
 		m_driver.go("gift", "task"); // 任务
 		m_driver.go("lottery", "lave"); // 每日抽奖
-		m_driver.go("map", "island", "10"); // 金银洞
 		m_driver.go("gift", "arena"); // 演武榜,押注
 		m_driver.go("drink", "drink"); // 饮酒
+		m_driver.go("map", "island", "10"); // 金银洞
 		m_driver.go("trade", "business"); // 每日通商
 		m_driver.go("activity", "sacredtree"); // 神树
 		m_driver.go("activity", "springlottery"); // 幸运大转盘
@@ -74,7 +75,7 @@ public class XiaoHaoAccount implements LogEnabled {
 			m_driver.go("gift", "country"); // 国库
 			m_driver.go("country", "sacrifice"); // 祭祀
 			m_driver.go("country", "dice"); // 国家骰子
-			m_driver.go("country", "donate", "222500"); // 捐献
+			m_driver.go("country", "donate", "422500"); // 捐献
 			m_driver.go("gift", "dice"); // 骰子
 			m_driver.go("country", "expostulation"); // 谏言
 			m_driver.go("banquet", "active"); // 国宴
@@ -83,7 +84,7 @@ public class XiaoHaoAccount implements LogEnabled {
 		} else {
 			m_countryState.put(account, false);
 		}
-
+		m_driver.reset();
 	}
 
 	private void processOtherXiaohao(Map<String, String> accounts) {
@@ -167,6 +168,9 @@ public class XiaoHaoAccount implements LogEnabled {
 			for (Entry<String, String> entry : accounts.entrySet()) {
 				doClydeJob(entry.getKey(), entry.getValue());
 			}
+			for (Entry<String, String> entry : accounts.entrySet()) {
+				doClydeJob(entry.getKey(), entry.getValue());
+			}
 		} catch (Exception e) {
 			m_logger.error(e.getMessage(), e);
 		}
@@ -178,9 +182,15 @@ public class XiaoHaoAccount implements LogEnabled {
 		m_driver.go("gift", "exercise"); // 整军
 		m_driver.go("gift", "hitegg"); // 砸金蛋
 
-		if (isIdleTime()) {
-			m_driver.go("trade", "oversea"); // 海外贸易
+		if (m_driver.getContext().getIntAttribute("member", "country", 0) > 0) {
+			m_driver.go("country", "expostulation"); // 谏言
+			m_driver.go("banquet", "active"); // 国宴
+
+			if (isIdleTime()) {
+				m_driver.go("trade", "oversea"); // 海外贸易
+			}
 		}
+		m_driver.reset();
 	}
 
 	@Override

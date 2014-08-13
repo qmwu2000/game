@@ -39,35 +39,66 @@ public class AccountManager extends BaseManager implements Initializable, LogEna
 
 	@Inject
 	private YilianMainAccount m_yilian;
-	
+
 	@Inject
 	private XiaoHaoAccount m_xiaohao;
 
 	private Logger m_logger;
-
-	private String m_arenaUid = null;
-
-	private String m_arenaServerId = null;
 
 	private boolean m_firstInDay = false;
 
 	public void empty() {
 	}
 
-	private boolean buildArenaInfo(String server, String account, String password, TaskDriver driver) throws Exception {
-		boolean arena = false;
+	public static class Arena {
+		private String m_arenaUid;
+
+		private String m_arenaServerId;
+
+		private boolean m_arena;
+
+		public String getArenaUid() {
+			return m_arenaUid;
+		}
+
+		public Arena setArenaUid(String arenaUid) {
+			m_arenaUid = arenaUid;
+			return this;
+		}
+
+		public String getArenaServerId() {
+			return m_arenaServerId;
+		}
+
+		public Arena setArenaServerId(String arenaServerId) {
+			m_arenaServerId = arenaServerId;
+			return this;
+		}
+
+		public boolean isArena() {
+			return m_arena;
+		}
+
+		public Arena setArena(boolean arena) {
+			m_arena = arena;
+			return this;
+		}
+
+	}
+
+	private Arena buildArenaInfo(String server, String account, String password, TaskDriver driver) throws Exception {
+		Arena result = new Arena();
 		try {
 			Calendar cal = Calendar.getInstance();
 			int hour = cal.get(Calendar.HOUR_OF_DAY);
 
 			if (hour == 23 && isArena()) {
-				System.err.println("====== true");
 				try {
 					driver.go("login", server, account, password);
 					driver.go("arena", "rank");
 
-					m_arenaUid = driver.getContext().getAttribute("arena", "uid");
-					m_arenaServerId = driver.getContext().getAttribute("arena", "server");
+					result.setArenaUid(driver.getContext().getAttribute("arena", "uid"));
+					result.setArenaServerId(driver.getContext().getAttribute("arena", "server"));
 					driver.reset();
 				} catch (Exception e) {
 					m_logger.error(e.getMessage(), e);
@@ -84,16 +115,14 @@ public class AccountManager extends BaseManager implements Initializable, LogEna
 				String content = Files.forIO().readFrom(file, "utf-8");
 				Files.forIO().writeTo(file, content + "\n" + key + "=true");
 
-				arena = true;
+				result.setArena(true);
 			} else {
-
-				System.err.println("====== false");
-				arena = false;
+				result.setArena(false);
 			}
 		} catch (Exception e) {
 			m_logger.error(e.getMessage(), e);
 		}
-		return arena;
+		return result;
 	}
 
 	@Override
@@ -117,25 +146,25 @@ public class AccountManager extends BaseManager implements Initializable, LogEna
 							m_yilian.doFirstInDay();
 							m_huaiyi.doFirstInDay();
 							m_xiaohao.doFirstInDay();
-							
-						} else {
-							m_hanfeng.doCycleTask();
-							m_doudou.doCycleTask();
-							m_kejiyao.doCycleTask();
-							m_yilian.doCycleTask();
-							m_huaiyi.doCycleTask();
-							m_xiaohao.doClydeTask();
 						}
+						m_hanfeng.doCycleTask();
+						m_doudou.doCycleTask();
+						m_kejiyao.doCycleTask();
+						m_yilian.doCycleTask();
+						m_huaiyi.doCycleTask();
+						m_xiaohao.doClydeTask();
 
-						boolean arean = buildArenaInfo("107", "2xiaohao362", "2xiaohao362", m_driver);
+						Arena arean = buildArenaInfo("107", "2xiaohao362", "2xiaohao362", m_driver);
 
-						if(arean){
-							m_hanfeng.bet(m_arenaUid, m_arenaServerId);
-							m_doudou.bet(m_arenaUid, m_arenaServerId);
-							m_kejiyao.bet(m_arenaUid, m_arenaServerId);
-							m_yilian.bet(m_arenaUid, m_arenaServerId);
-							m_huaiyi.bet(m_arenaUid, m_arenaServerId);
-							m_xiaohao.bet(m_arenaUid, m_arenaServerId);
+						if (arean.isArena()) {
+							String arenaUid = arean.getArenaUid();
+							String arenaServerId = arean.getArenaServerId();
+							m_hanfeng.bet(arenaUid, arenaServerId);
+							m_doudou.bet(arenaUid, arenaServerId);
+							m_kejiyao.bet(arenaUid, arenaServerId);
+							m_yilian.bet(arenaUid, arenaServerId);
+							m_huaiyi.bet(arenaUid, arenaServerId);
+							m_xiaohao.bet(arenaUid, arenaServerId);
 						}
 					}
 				} catch (Throwable e) {

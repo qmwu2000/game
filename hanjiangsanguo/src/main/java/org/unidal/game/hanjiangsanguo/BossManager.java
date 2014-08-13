@@ -86,6 +86,7 @@ public class BossManager implements Initializable, Runnable, LogEnabled {
 		@Override
 		public void run() {
 			try {
+				m_account.doBossSetUp();
 				m_account.doCountryBoss();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -104,6 +105,7 @@ public class BossManager implements Initializable, Runnable, LogEnabled {
 		@Override
 		public void run() {
 			try {
+				m_account.doBossSetUp();
 				m_account.doWorldBoss();
 			} catch (Exception e) {
 				e.printStackTrace();
