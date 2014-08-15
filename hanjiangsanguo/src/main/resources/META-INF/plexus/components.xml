@@ -89,6 +89,9 @@
 				<requirement>
 					<role>org.unidal.game.hanjiangsanguo.account.XiaoHaoAccount</role>
 				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
+				</requirement>
 			</requirements>
 		</component>
 		<component>
@@ -224,7 +227,7 @@
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
-			<role-hint>countryBoss</role-hint>
+			<role-hint>countryboss</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.activity.CountryBossActivity</implementation>
 		</component>
 		<component>

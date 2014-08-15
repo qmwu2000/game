@@ -48,7 +48,7 @@ public class XiaoHaoAccount implements LogEnabled {
 			for (Entry<String, String> entry : accounts.entrySet()) {
 				doFirist(entry.getKey(), entry.getValue());
 			}
-			processOtherXiaohao(accounts);
+			// processOtherXiaohao(accounts);
 		} catch (Exception e) {
 			m_logger.error(e.getMessage(), e);
 		}
@@ -103,7 +103,10 @@ public class XiaoHaoAccount implements LogEnabled {
 
 			Thread.sleep(100);
 
+			int index = 0;
+
 			for (Entry<String, Boolean> entry : m_countryState.entrySet()) {
+				index++;
 				try {
 					String key = entry.getKey();
 					Boolean value = entry.getValue();
@@ -113,6 +116,10 @@ public class XiaoHaoAccount implements LogEnabled {
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
+				}
+
+				if (index > 15) {
+					break;
 				}
 			}
 			addCountry(firstInAccount, accounts.get(firstInAccount));

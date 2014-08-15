@@ -71,7 +71,7 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(XiaoHaoAccount.class).req(TaskDriver.class));
 
 		all.add(C(AccountManager.class).req(HanfengMainAccount.class, DouDouMainAccount.class, HuaiyiMainAccount.class,
-		      YilianMainAccount.class, KeJiYaoMainAccount.class).req(XiaoHaoAccount.class));
+		      YilianMainAccount.class, KeJiYaoMainAccount.class).req(XiaoHaoAccount.class,TaskDriver.class));
 		all.add(C(BossManager.class).req(HanfengMainAccount.class, DouDouMainAccount.class, HuaiyiMainAccount.class,
 		      YilianMainAccount.class, KeJiYaoMainAccount.class));
 		all.addAll(defineTaskActivityComponents());

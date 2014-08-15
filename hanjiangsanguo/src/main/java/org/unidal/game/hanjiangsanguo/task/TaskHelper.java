@@ -141,55 +141,64 @@ public class TaskHelper implements Initializable, LogEnabled {
 	}
 
 	public boolean doGet(TaskContext ctx, String url, String... mappings) throws Exception {
-		InputStream in = Urls.forIO().readTimeout(2000).connectTimeout(2000).openStream(url);
-		String json = Files.forIO().readFrom(in, UTF_8);
+		try {
+	      InputStream in = Urls.forIO().readTimeout(2000).connectTimeout(2000).openStream(url);
+	      String json = Files.forIO().readFrom(in, UTF_8);
 
-		if (url.indexOf("hitegg") > 0) {
-			System.err.println(json);
-		} else if (url.endsWith("#")) {
-			System.err.println(json);
-		}
-		
-		if ("403".equals(json)) {
-			ctx.setAttribute("status", "403");
+	      if (url.indexOf("hitegg") > 0) {
+	      	System.err.println(json);
+	      } else if (url.endsWith("#")) {
+	      	System.err.println(json);
+	      }
+	      
+	      if ("403".equals(json)) {
+	      	ctx.setAttribute("status", "403");
 
-			m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
-			return false;
-		} else if (!checkStatus(ctx, json)) {
-			m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
-			return false;
-		}
+	      	m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
+	      	return false;
+	      } else if (!checkStatus(ctx, json)) {
+	      	m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
+	      	return false;
+	      }
 
-		setOutputAttributes(ctx, json, mappings);
-		m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
-		return true;
+	      setOutputAttributes(ctx, json, mappings);
+	      m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
+	      return true;
+      } catch (Exception e) {
+	      e.printStackTrace();
+	      return false;
+      }
 	}
 
 	public void doGetWithScript(TaskContext ctx, String url, String script, String mapping) throws Exception {
-		InputStream in = Urls.forIO().readTimeout(2000).connectTimeout(2000).openStream(url);
-		String json = Files.forIO().readFrom(in, UTF_8);
-
 		try {
-			new Gson().fromJson(json, JsonObject.class);
-		} catch (Exception e) {
-			m_logger.warn(json, e);
-			m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
-			return;
-		}
+	      InputStream in = Urls.forIO().readTimeout(2000).connectTimeout(2000).openStream(url);
+	      String json = Files.forIO().readFrom(in, UTF_8);
 
-		if (!checkStatus(ctx, json)) {
-			m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
-			return;
-		}
+	      try {
+	      	new Gson().fromJson(json, JsonObject.class);
+	      } catch (Exception e) {
+	      	m_logger.warn(json, e);
+	      	m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
+	      	return;
+	      }
 
-		Triple<String, String, String> t = parseMapping(ctx, mapping);
-		String category = t.getMiddle();
-		String name = t.getLast();
+	      if (!checkStatus(ctx, json)) {
+	      	m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
+	      	return;
+	      }
 
-		Object value = m_engine.eval("var o=" + json + ";" + script);
+	      Triple<String, String, String> t = parseMapping(ctx, mapping);
+	      String category = t.getMiddle();
+	      String name = t.getLast();
 
-		ctx.setAttribute(category, name, value.toString());
-		m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
+	      Object value = m_engine.eval("var o=" + json + ";" + script);
+
+	      ctx.setAttribute(category, name, value.toString());
+	      m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
+      } catch (Exception e) {
+	      e.printStackTrace();
+      }
 	}
 
 	@Override

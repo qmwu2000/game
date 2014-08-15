@@ -59,7 +59,7 @@ public class doudou extends ComponentTestCase {
 	public void testArena() throws Exception{
 		TaskDriver driver = lookup(TaskDriver.class);
 		
-		driver.go("login", "107", "superwyx", "wyx1116");
+		driver.go("login", "107", "2xiaohao362", "2xiaohao362");
 		driver.go("arena", "rank");
 
 		String arenaUid = driver.getContext().getAttribute("arena", "uid");
@@ -77,7 +77,50 @@ public class doudou extends ComponentTestCase {
 	public void doJiangSetup() throws Exception {
 		DouDouMainAccount account = lookup(DouDouMainAccount.class);
 
-		account.doJiangSetUp();
+		account.doBossSetUp();
+		
+	}
+
+	@Test
+	public void doDouDouBoss() throws Exception {
+		DouDouMainAccount account = lookup(DouDouMainAccount.class);
+
+		account.doWorldBoss();
+	}
+	
+	@Test
+	public void doHanfengBosst() throws Exception {
+		HanfengMainAccount account = lookup(HanfengMainAccount.class);
+
+		account.doWorldBoss();
+	}
+
+	@Test
+	public void doKejiYaoBoss() throws Exception {
+		KeJiYaoMainAccount account = lookup(KeJiYaoMainAccount.class);
+
+		account.doWorldBoss();
+	}
+	
+	@Test
+	public void doDouDouCountryBoss() throws Exception {
+		DouDouMainAccount account = lookup(DouDouMainAccount.class);
+
+		account.doCountryBoss();
+	}
+	
+	@Test
+	public void doHanfengCountryBoss() throws Exception {
+		HanfengMainAccount account = lookup(HanfengMainAccount.class);
+
+		account.doCountryBoss();
+	}
+
+	@Test
+	public void doKejiYaoCountryBoss() throws Exception {
+		KeJiYaoMainAccount account = lookup(KeJiYaoMainAccount.class);
+
+		account.doCountryBoss();
 	}
 
 }

@@ -25,9 +25,13 @@ public class SoulEquipActivity extends AbstractTaskActivity {
 	private void unequip(TaskContext ctx, String gids[], String[] sids) throws Exception {
 		for (String gid : gids) {
 			for (String sid : sids) {
-				String url = m_helper.buildUrl2(ctx, "soul", "unequip", "&gid=" + gid + "&sid=" + sid + "&site=2");
+				try {
+	            String url = m_helper.buildUrl2(ctx, "soul", "unequip", "&gid=" + gid + "&sid=" + sid + "&site=2");
 
-				m_helper.doGet(ctx, url);
+	            m_helper.doGet(ctx, url);
+            } catch (Exception e) {
+	            e.printStackTrace();
+            }
 			}
 		}
 	}
@@ -36,11 +40,15 @@ public class SoulEquipActivity extends AbstractTaskActivity {
 		int length = gids.length;
 
 		for (int i = 0; i < length; i++) {
-			String gid = gids[i];
-			String sid = sids[i];
-			String url = m_helper.buildUrl2(ctx, "soul", "equip", "&gid=" + gid + "&sid=" + sid + "&site=2");
+			try {
+	         String gid = gids[i];
+	         String sid = sids[i];
+	         String url = m_helper.buildUrl2(ctx, "soul", "equip", "&gid=" + gid + "&sid=" + sid + "&site=2");
 
-			m_helper.doGet(ctx, url);
+	         m_helper.doGet(ctx, url);
+         } catch (Exception e) {
+	         e.printStackTrace();
+         }
 
 		}
 	}

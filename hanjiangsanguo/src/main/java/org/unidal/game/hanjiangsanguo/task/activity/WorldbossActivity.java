@@ -85,9 +85,13 @@ public class WorldbossActivity extends AbstractTaskActivity {
 	}
 
 	private void handleBattle(TaskContext ctx) throws Exception {
-		String url = m_helper.buildUrl2(ctx, "worldboss", "battle", "&now=0");
+		try {
+	      String url = m_helper.buildUrl2(ctx, "worldboss", "battle", "&now=0");
 
-		m_helper.doGet(ctx, url);
+	      m_helper.doGet(ctx, url);
+      } catch (Exception e) {
+	      e.printStackTrace();
+      }
 	}
 
 	private void handleIndex(TaskContext ctx) throws Exception {

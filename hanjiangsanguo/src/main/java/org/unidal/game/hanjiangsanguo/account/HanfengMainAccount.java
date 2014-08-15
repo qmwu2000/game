@@ -30,7 +30,7 @@ public class HanfengMainAccount extends MainAccount implements Initializable {
 	@Override
 	public void doCycleTask() {
 		super.doCycleTask();
-
+		m_driver.getContext().setAttribute(MineActivity.ID, "maxMineGold", "340000");
 		m_driver.go(MineActivity.ID, "active");
 	}
 

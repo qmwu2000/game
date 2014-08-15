@@ -119,6 +119,7 @@ public abstract class MainAccount {
 		m_driver.getContext().setAttribute("member", "dahao", "dahao");
 		m_driver.go("banquet", "active"); // 国宴
 		m_driver.go("countrymine", "active"); // 国家矿
+		m_driver.go("gift", "hitegg"); // 砸金蛋
 
 		if (isIdleTime()) {
 			m_driver.go("trade", "oversea"); // 海外贸易
@@ -153,7 +154,7 @@ public abstract class MainAccount {
 		Calendar cal = Calendar.getInstance();
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 
-		if (hour >= 4) {
+		if ((hour >= 4 && hour <= 7) || hour >= 22) {
 			return true;
 		} else {
 			return false;
