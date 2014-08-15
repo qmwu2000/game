@@ -38,7 +38,7 @@ public class ActivityActivity extends AbstractTaskActivity {
 		if (ctx.getIntAttribute("free", 0) > 0) {
 			String url = m_helper.buildUrl2(ctx, "act_treasure", "treasure", "#");
 
-			m_helper.doGet(ctx, url, "info.msg", "info.num");
+			m_helper.doGet(ctx, url);
 		}
 	}
 

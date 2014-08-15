@@ -1,5 +1,6 @@
 package org.unidal.game.hanjiangsanguo.task.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.unidal.game.hanjiangsanguo.task.TaskArguments;
@@ -25,9 +26,59 @@ public class CountryActivity extends AbstractTaskActivity {
 			handleDonate(ctx, maxSilver);
 		} else if ("dice".equals(op)) {
 			handleDice(ctx);
+		} else if ("addCountry".equals(op)) {
+			handelAddCountry(ctx);
+		} else if ("exitCountry".equals(op)) {
+			handelExitCountry(ctx);
+		} else if ("approve".equals(op)) {
+			handelApprove(ctx);
 		}
-
 		return true;
+	}
+
+	private List<Integer> findIds(TaskContext ctx) throws Exception {
+		List<Integer> results = new ArrayList<Integer>();
+		String url = m_helper.buildUrl2(ctx, "country", "get_audit_list", null);
+
+		m_helper.doGetWithScript(ctx, url,
+		      "var gs=''; for (var i in o.list) gs+=o.list[i].uid+':'+o.list[i].nickname+','; gs;", "list");
+
+		String list = ctx.getAttribute("list");
+
+		String[] strs = list.split(",");
+
+		for (String str : strs) {
+			String[] temp = str.split(":");
+			String id = temp[0];
+
+			results.add(Integer.parseInt(id));
+		}
+		return results;
+	}
+
+	private void handelApprove(TaskContext ctx) throws Exception {
+		List<Integer> ids = findIds(ctx);
+		int length = ids.size();
+
+		for (int i = length - 1; i >= 0; i--) {
+			int id = ids.get(i);
+
+			String indexUrl = m_helper.buildUrl2(ctx, "country", "audit", "&uid=" + id + "&type=1");
+
+			m_helper.doGet(ctx, indexUrl);
+		}
+	}
+
+	private void handelAddCountry(TaskContext ctx) throws Exception {
+		String indexUrl = m_helper.buildUrl2(ctx, "country", "apply", "&id=2&page=1");
+
+		m_helper.doGet(ctx, indexUrl);
+	}
+
+	private void handelExitCountry(TaskContext ctx) throws Exception {
+		String indexUrl = m_helper.buildUrl2(ctx, "country", "betray", null);
+
+		m_helper.doGet(ctx, indexUrl);
 	}
 
 	private void handleDice(TaskContext ctx) throws Exception {
@@ -57,6 +108,12 @@ public class CountryActivity extends AbstractTaskActivity {
 				String url = m_helper.buildUrl2(ctx, "country", "donate", "&type=1");
 
 				flag = m_helper.doGet(ctx, url, "donate.silver", "silver");
+
+				int left = ctx.getIntAttribute(ID, "silver", 0);
+
+				if (left > 300 * 10000) {
+					flag = true;
+				}
 			}
 
 			if (!flag) {

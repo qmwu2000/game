@@ -14,246 +14,106 @@
 			<instantiation-strategy>per-lookup</instantiation-strategy>
 		</component>
 		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>login</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.LoginTask</implementation>
+			<role>org.unidal.game.hanjiangsanguo.account.HanfengMainAccount</role>
+			<implementation>org.unidal.game.hanjiangsanguo.account.HanfengMainAccount</implementation>
 			<requirements>
 				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
 				</requirement>
 			</requirements>
 		</component>
 		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>vipwage</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.VipwageTask</implementation>
+			<role>org.unidal.game.hanjiangsanguo.account.DouDouMainAccount</role>
+			<implementation>org.unidal.game.hanjiangsanguo.account.DouDouMainAccount</implementation>
 			<requirements>
 				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
 				</requirement>
 			</requirements>
 		</component>
 		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>lottery</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.LotteryTask</implementation>
+			<role>org.unidal.game.hanjiangsanguo.account.HuaiyiMainAccount</role>
+			<implementation>org.unidal.game.hanjiangsanguo.account.HuaiyiMainAccount</implementation>
 			<requirements>
 				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
 				</requirement>
 			</requirements>
 		</component>
 		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>drink</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.DrinkTask</implementation>
+			<role>org.unidal.game.hanjiangsanguo.account.YilianMainAccount</role>
+			<implementation>org.unidal.game.hanjiangsanguo.account.YilianMainAccount</implementation>
 			<requirements>
 				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
 				</requirement>
 			</requirements>
 		</component>
 		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>business</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.BusinessTask</implementation>
+			<role>org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount</role>
+			<implementation>org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount</implementation>
 			<requirements>
 				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
 				</requirement>
 			</requirements>
 		</component>
 		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>practice</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.PracticeTask</implementation>
+			<role>org.unidal.game.hanjiangsanguo.account.XiaoHaoAccount</role>
+			<implementation>org.unidal.game.hanjiangsanguo.account.XiaoHaoAccount</implementation>
 			<requirements>
 				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
 				</requirement>
 			</requirements>
 		</component>
 		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>arena</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.ArenaTask</implementation>
+			<role>org.unidal.game.hanjiangsanguo.AccountManager</role>
+			<implementation>org.unidal.game.hanjiangsanguo.AccountManager</implementation>
 			<requirements>
 				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+					<role>org.unidal.game.hanjiangsanguo.account.HanfengMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.DouDouMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.HuaiyiMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.YilianMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.XiaoHaoAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
 				</requirement>
 			</requirements>
 		</component>
 		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>tavern</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.TavernTask</implementation>
+			<role>org.unidal.game.hanjiangsanguo.BossManager</role>
+			<implementation>org.unidal.game.hanjiangsanguo.BossManager</implementation>
 			<requirements>
 				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
-				</requirement>
-			</requirements>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>map</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.MapTask</implementation>
-			<requirements>
-				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
-				</requirement>
-			</requirements>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>map.action</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.MapActionTask</implementation>
-			<requirements>
-				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
-				</requirement>
-			</requirements>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>workshop</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.WorkshopTask</implementation>
-			<requirements>
-				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
-				</requirement>
-			</requirements>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>worldboss</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.WorldbossTask</implementation>
-			<requirements>
-				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
-				</requirement>
-			</requirements>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>general</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.GeneralTask</implementation>
-			<requirements>
-				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
-				</requirement>
-			</requirements>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>dice</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.DiceTask</implementation>
-			<requirements>
-				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
-				</requirement>
-			</requirements>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>task</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.TaskTask</implementation>
-			<requirements>
-				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+					<role>org.unidal.game.hanjiangsanguo.account.HanfengMainAccount</role>
 				</requirement>
 				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskActionManager</role>
+					<role>org.unidal.game.hanjiangsanguo.account.DouDouMainAccount</role>
 				</requirement>
-			</requirements>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>activity</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.ActivityTask</implementation>
-			<requirements>
 				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+					<role>org.unidal.game.hanjiangsanguo.account.HuaiyiMainAccount</role>
 				</requirement>
-			</requirements>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
-			<role-hint>register</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.core.RegisterTask</implementation>
-			<requirements>
 				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+					<role>org.unidal.game.hanjiangsanguo.account.YilianMainAccount</role>
 				</requirement>
-			</requirements>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.TaskActionManager</role>
-			<implementation>org.unidal.game.hanjiangsanguo.task.DefaultTaskActionManager</implementation>
-			<requirements>
 				<requirement>
-					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+					<role>org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount</role>
 				</requirement>
 			</requirements>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
-			<role-hint>practice.leap</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.action.PracticeLeap</implementation>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
-			<role-hint>city.impose</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.action.CityImpose</implementation>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
-			<role-hint>mine.occupy</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.action.MineOccupy</implementation>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
-			<role-hint>business.go_business</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.action.BusinessAction</implementation>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
-			<role-hint>gold.use</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.action.GoldUse</implementation>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
-			<role-hint>map.mission</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.action.MapMission</implementation>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
-			<role-hint>cultivate.roll</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.action.CultivateRoll</implementation>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
-			<role-hint>strengthen.strengthen_start</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.action.StrengthenUpgrade</implementation>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
-			<role-hint>island.mission</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.action.IslandMission</implementation>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
-			<role-hint>arena.action</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.action.ArenaAction</implementation>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
-			<role-hint>tavern.trade</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.action.TavernTrade</implementation>
-		</component>
-		<component>
-			<role>org.unidal.game.hanjiangsanguo.task.TaskAction</role>
-			<role-hint>worldboss</role-hint>
-			<implementation>org.unidal.game.hanjiangsanguo.task.action.WorldbossBattle</implementation>
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
@@ -342,8 +202,72 @@
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>mine</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.MineActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>countrymine</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.CountryMineActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
 			<role-hint>arena</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.activity.ArenaActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>drink</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.DrinkActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>act_kemari</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.ZuqiuActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>countryboss</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.CountryBossActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>worldboss</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.WorldbossActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>soul</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.SoulActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>gem</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.GemActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>heaven</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.HeavenActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>hero</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.HeroActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>jiang</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.JiangActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>SoulEquip</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.SoulEquipActivity</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.router.DefaultRouter</role>
+			<implementation>org.unidal.game.hanjiangsanguo.router.DefaultRouter</implementation>
 		</component>
 		<component>
 			<role>org.unidal.web.mvc.model.ModuleRegistry</role>
@@ -365,6 +289,12 @@
 				<requirement>
 					<role>org.unidal.game.hanjiangsanguo.spider.page.home.JspViewer</role>
 				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.BossManager</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.AccountManager</role>
+				</requirement>
 			</requirements>
 		</component>
 		<component>
@@ -373,6 +303,112 @@
 			<requirements>
 				<requirement>
 					<role>org.unidal.web.mvc.view.model.ModelHandler</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.BossManager</role>
+			<implementation>org.unidal.game.hanjiangsanguo.BossManager</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.DouDouMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.HanfengMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.HuaiyiMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.YilianMainAccount</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.account.DouDouMainAccount</role>
+			<implementation>org.unidal.game.hanjiangsanguo.account.DouDouMainAccount</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
+			<implementation>org.unidal.game.hanjiangsanguo.task.TaskDriver</implementation>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount</role>
+			<implementation>org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.account.HanfengMainAccount</role>
+			<implementation>org.unidal.game.hanjiangsanguo.account.HanfengMainAccount</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.account.HuaiyiMainAccount</role>
+			<implementation>org.unidal.game.hanjiangsanguo.account.HuaiyiMainAccount</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.account.YilianMainAccount</role>
+			<implementation>org.unidal.game.hanjiangsanguo.account.YilianMainAccount</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.AccountManager</role>
+			<implementation>org.unidal.game.hanjiangsanguo.AccountManager</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.DouDouMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.HanfengMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.HuaiyiMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.YilianMainAccount</role>
+				</requirement>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.account.XiaoHaoAccount</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.account.XiaoHaoAccount</role>
+			<implementation>org.unidal.game.hanjiangsanguo.account.XiaoHaoAccount</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskDriver</role>
 				</requirement>
 			</requirements>
 		</component>

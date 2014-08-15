@@ -3,62 +3,50 @@ package org.unidal.game.hanjiangsanguo.build;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.unidal.game.hanjiangsanguo.task.DefaultTaskActionManager;
+import org.unidal.game.hanjiangsanguo.AccountManager;
+import org.unidal.game.hanjiangsanguo.BossManager;
+import org.unidal.game.hanjiangsanguo.account.DouDouMainAccount;
+import org.unidal.game.hanjiangsanguo.account.HanfengMainAccount;
+import org.unidal.game.hanjiangsanguo.account.HuaiyiMainAccount;
+import org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount;
+import org.unidal.game.hanjiangsanguo.account.XiaoHaoAccount;
+import org.unidal.game.hanjiangsanguo.account.YilianMainAccount;
+import org.unidal.game.hanjiangsanguo.router.DefaultRouter;
 import org.unidal.game.hanjiangsanguo.task.DefaultTaskContext;
-import org.unidal.game.hanjiangsanguo.task.Task;
-import org.unidal.game.hanjiangsanguo.task.TaskAction;
-import org.unidal.game.hanjiangsanguo.task.TaskActionManager;
 import org.unidal.game.hanjiangsanguo.task.TaskContext;
 import org.unidal.game.hanjiangsanguo.task.TaskDriver;
 import org.unidal.game.hanjiangsanguo.task.TaskHelper;
-import org.unidal.game.hanjiangsanguo.task.action.ArenaAction;
-import org.unidal.game.hanjiangsanguo.task.action.BusinessAction;
-import org.unidal.game.hanjiangsanguo.task.action.CityImpose;
-import org.unidal.game.hanjiangsanguo.task.action.CultivateRoll;
-import org.unidal.game.hanjiangsanguo.task.action.GoldUse;
-import org.unidal.game.hanjiangsanguo.task.action.IslandMission;
-import org.unidal.game.hanjiangsanguo.task.action.MapMission;
-import org.unidal.game.hanjiangsanguo.task.action.MineOccupy;
-import org.unidal.game.hanjiangsanguo.task.action.PracticeLeap;
-import org.unidal.game.hanjiangsanguo.task.action.StrengthenUpgrade;
-import org.unidal.game.hanjiangsanguo.task.action.TavernTrade;
-import org.unidal.game.hanjiangsanguo.task.action.WorldbossBattle;
 import org.unidal.game.hanjiangsanguo.task.activity.ActivityActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.ArenaActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.BanquetActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CityActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CountryActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.CountryBossActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.CountryMineActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CultivateActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.DrinkActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.GemActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.GeneralActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.GiftActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.HeavenActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.HeroActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.JiangActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.LoginActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.LotteryActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.MapActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.MatrixActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.MineActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.MusterActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.PracticeActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.RegisterActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.SoulActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.SoulEquipActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.StrengthenActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TaskActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TowerActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TradeActivity;
-import org.unidal.game.hanjiangsanguo.task.core.ActivityTask;
-import org.unidal.game.hanjiangsanguo.task.core.ArenaTask;
-import org.unidal.game.hanjiangsanguo.task.core.BusinessTask;
-import org.unidal.game.hanjiangsanguo.task.core.DiceTask;
-import org.unidal.game.hanjiangsanguo.task.core.DrinkTask;
-import org.unidal.game.hanjiangsanguo.task.core.GeneralTask;
-import org.unidal.game.hanjiangsanguo.task.core.LoginTask;
-import org.unidal.game.hanjiangsanguo.task.core.LotteryTask;
-import org.unidal.game.hanjiangsanguo.task.core.MapActionTask;
-import org.unidal.game.hanjiangsanguo.task.core.MapTask;
-import org.unidal.game.hanjiangsanguo.task.core.PracticeTask;
-import org.unidal.game.hanjiangsanguo.task.core.RegisterTask;
-import org.unidal.game.hanjiangsanguo.task.core.TaskTask;
-import org.unidal.game.hanjiangsanguo.task.core.TavernTask;
-import org.unidal.game.hanjiangsanguo.task.core.VipwageTask;
-import org.unidal.game.hanjiangsanguo.task.core.WorkshopTask;
-import org.unidal.game.hanjiangsanguo.task.core.WorldbossTask;
+import org.unidal.game.hanjiangsanguo.task.activity.WorldbossActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.ZuqiuActivity;
 import org.unidal.lookup.configuration.AbstractResourceConfigurator;
 import org.unidal.lookup.configuration.Component;
 
@@ -75,34 +63,23 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskDriver.class));
 		all.add(C(TaskContext.class, DefaultTaskContext.class).is(PER_LOOKUP));
 
-		all.addAll(defineTaskComponents());
-		all.addAll(defineTaskActionComponents());
+		all.add(C(HanfengMainAccount.class).req(TaskDriver.class));
+		all.add(C(DouDouMainAccount.class).req(TaskDriver.class));
+		all.add(C(HuaiyiMainAccount.class).req(TaskDriver.class));
+		all.add(C(YilianMainAccount.class).req(TaskDriver.class));
+		all.add(C(KeJiYaoMainAccount.class).req(TaskDriver.class));
+		all.add(C(XiaoHaoAccount.class).req(TaskDriver.class));
+
+		all.add(C(AccountManager.class).req(HanfengMainAccount.class, DouDouMainAccount.class, HuaiyiMainAccount.class,
+		      YilianMainAccount.class, KeJiYaoMainAccount.class).req(XiaoHaoAccount.class,TaskDriver.class));
+		all.add(C(BossManager.class).req(HanfengMainAccount.class, DouDouMainAccount.class, HuaiyiMainAccount.class,
+		      YilianMainAccount.class, KeJiYaoMainAccount.class));
 		all.addAll(defineTaskActivityComponents());
+
+		all.add(C(DefaultRouter.class));
 
 		// Please keep it as last
 		all.addAll(new WebComponentConfigurator().defineComponents());
-
-		return all;
-	}
-
-	private List<Component> defineTaskActionComponents() {
-		List<Component> all = new ArrayList<Component>();
-
-		all.add(C(TaskActionManager.class, DefaultTaskActionManager.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(TaskAction.class, PracticeLeap.ID, PracticeLeap.class));
-		all.add(C(TaskAction.class, CityImpose.ID, CityImpose.class));
-		all.add(C(TaskAction.class, MineOccupy.ID, MineOccupy.class));
-		all.add(C(TaskAction.class, BusinessAction.ID, BusinessAction.class));
-		all.add(C(TaskAction.class, GoldUse.ID, GoldUse.class));
-		all.add(C(TaskAction.class, MapMission.ID, MapMission.class));
-		all.add(C(TaskAction.class, CultivateRoll.ID, CultivateRoll.class));
-		all.add(C(TaskAction.class, StrengthenUpgrade.ID, StrengthenUpgrade.class));
-		all.add(C(TaskAction.class, IslandMission.ID, IslandMission.class));
-		all.add(C(TaskAction.class, ArenaAction.ID, ArenaAction.class));
-		all.add(C(TaskAction.class, TavernTrade.ID, TavernTrade.class));
-		all.add(C(TaskAction.class, WorldbossBattle.ID, WorldbossBattle.class));
 
 		return all;
 	}
@@ -127,65 +104,21 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskActivity.class, ActivityActivity.ID, ActivityActivity.class));
 		all.add(C(TaskActivity.class, RegisterActivity.ID, RegisterActivity.class));
 		all.add(C(TaskActivity.class, BanquetActivity.ID, BanquetActivity.class));
+		all.add(C(TaskActivity.class, MineActivity.ID, MineActivity.class));
+		all.add(C(TaskActivity.class, CountryMineActivity.ID, CountryMineActivity.class));
 		all.add(C(TaskActivity.class, ArenaActivity.ID, ArenaActivity.class));
+		all.add(C(TaskActivity.class, DrinkActivity.ID, DrinkActivity.class));
+		all.add(C(TaskActivity.class, ZuqiuActivity.ID, ZuqiuActivity.class));
+		all.add(C(TaskActivity.class, CountryBossActivity.ID, CountryBossActivity.class));
+		all.add(C(TaskActivity.class, WorldbossActivity.ID, WorldbossActivity.class));
+		all.add(C(TaskActivity.class, SoulActivity.ID, SoulActivity.class));
+		all.add(C(TaskActivity.class, GemActivity.ID, GemActivity.class));
+		all.add(C(TaskActivity.class, HeavenActivity.ID, HeavenActivity.class));
+		all.add(C(TaskActivity.class, HeroActivity.ID, HeroActivity.class));
+		all.add(C(TaskActivity.class, JiangActivity.ID, JiangActivity.class));
+		all.add(C(TaskActivity.class, SoulEquipActivity.ID, SoulEquipActivity.class));
 
 		return all;
 	}
 
-	private List<Component> defineTaskComponents() {
-		List<Component> all = new ArrayList<Component>();
-
-		all.add(C(Task.class, LoginTask.ID, LoginTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, VipwageTask.ID, VipwageTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, LotteryTask.ID, LotteryTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, DrinkTask.ID, DrinkTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, BusinessTask.ID, BusinessTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, PracticeTask.ID, PracticeTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, ArenaTask.ID, ArenaTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, TavernTask.ID, TavernTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, MapTask.ID, MapTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, MapActionTask.ID, MapActionTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, WorkshopTask.ID, WorkshopTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, WorldbossTask.ID, WorldbossTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, GeneralTask.ID, GeneralTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, DiceTask.ID, DiceTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, TaskTask.ID, TaskTask.class) //
-		      .req(TaskHelper.class, TaskActionManager.class));
-
-		all.add(C(Task.class, ActivityTask.ID, ActivityTask.class) //
-		      .req(TaskHelper.class));
-
-		all.add(C(Task.class, RegisterTask.ID, RegisterTask.class) //
-		      .req(TaskHelper.class));
-
-		return all;
-	}
 }

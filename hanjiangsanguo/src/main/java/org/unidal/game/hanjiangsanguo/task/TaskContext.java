@@ -20,8 +20,4 @@ public interface TaskContext {
 	public boolean getBooleanAttribute(String name, boolean defaultValue);
 
 	public boolean getBooleanAttribute(String category, String name, boolean defaultValue);
-
-	public void setDriver(TaskDriver driver);
-
-	public TaskDriver getDriver();
 }

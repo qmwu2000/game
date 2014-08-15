@@ -60,7 +60,9 @@ public class TradeActivity extends AbstractTaskActivity {
 	private boolean handleOverseaBuyItem(TaskContext ctx) throws Exception {
 		String url = m_helper.buildUrl2(ctx, "overseastrade", "buy_item", "&id=1");
 
-		return m_helper.doGet(ctx, url);
+		m_helper.doGet(ctx, url);
+		
+		return true;
 	}
 
 	private void handleOverseaTrade(TaskContext ctx) throws Exception {

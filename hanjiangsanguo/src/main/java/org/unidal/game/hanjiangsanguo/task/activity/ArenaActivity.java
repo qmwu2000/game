@@ -125,7 +125,7 @@ public class ArenaActivity extends AbstractTaskActivity {
 		String url = m_helper
 		      .buildUrl2(ctx, "worldarena", "betting", String.format("&touid=%s&serverid=%s", uid, server));
 
-		m_helper.doGet(ctx, url, "rank.pages");
+		m_helper.doGet(ctx, url);
 	}
 
 	private void getRanks(TaskContext ctx, int page, Map<String, Integer> ranks) throws Exception {

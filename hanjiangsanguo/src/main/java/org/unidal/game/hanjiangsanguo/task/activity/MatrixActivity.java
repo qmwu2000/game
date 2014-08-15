@@ -60,9 +60,31 @@ public class MatrixActivity extends AbstractTaskActivity {
 			for (int i = 0; i < times; i++) {
 				doMatrixLevelup(ctx, mid);
 			}
+		} else if ("switch".equals(op)) {
+			String mid = args.nextString(null);
+			String matrix = args.nextString(null);
+
+			if (matrix != null) {
+				handleMatrix(ctx, mid, matrix);
+			}
 		}
 
 		return true;
+	}
+
+	protected void handleMatrix(TaskContext ctx, String mid, String matrix) throws Exception {
+		try {
+			String url = m_helper.buildUrl2(ctx, "matrix", "update_matrix", "&list=" + matrix + "&mid=" + mid);
+
+			m_helper.doGet(ctx, url);
+
+			String url2 = m_helper.buildUrl2(ctx, "matrix", "use_matrix", "&list=" + matrix + "&mid=" + mid);
+
+			m_helper.doGet(ctx, url2);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

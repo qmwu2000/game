@@ -16,7 +16,13 @@ public class GiftActivity extends AbstractTaskActivity {
 
 		String url = m_helper.buildUrl2(ctx, "arena", "get_reward", null);
 
-		return m_helper.doGet(ctx, url);
+		m_helper.doGet(ctx, url);
+		
+		String url2 = m_helper.buildUrl2(ctx, "worldarena", "get_bet_reward", null);
+
+		m_helper.doGet(ctx, url2);
+
+		return true;
 	}
 
 	private boolean doCountrySalary(TaskContext ctx) throws Exception {
@@ -185,8 +191,18 @@ public class GiftActivity extends AbstractTaskActivity {
 			doDice(ctx);
 		} else if ("code".equals(op)) {
 			doCode(ctx);
+		}else if ("get_mission_reward".equals(op)) {
+			int id = args.nextInt(40);
+			doReward(ctx,id);
 		}
 
 		return true;
 	}
+
+	private void doReward(TaskContext ctx,int id) throws Exception {
+		String indexUrl = m_helper.buildUrl2(ctx, "map", "get_mission_reward", "id="+id);
+
+		m_helper.doGet(ctx, indexUrl);
+	   
+   }
 }

@@ -1,6 +1,6 @@
 package org.unidal.game.hanjiangsanguo.task;
 
-import java.net.URL;
+import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -13,6 +13,7 @@ import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.unidal.helper.Files;
 import org.unidal.helper.Splitters;
+import org.unidal.helper.Urls;
 import org.unidal.tuple.Triple;
 
 import com.google.gson.Gson;
@@ -130,7 +131,6 @@ public class TaskHelper implements Initializable, LogEnabled {
 		if (value == 1 || value == 2) {
 			return true;
 		} else if (value == -2) {
-			m_logger.warn("Done already");
 			return false;
 		} else if ("0".equals(status) || "1".equals(status)) {
 			return true;
@@ -141,51 +141,64 @@ public class TaskHelper implements Initializable, LogEnabled {
 	}
 
 	public boolean doGet(TaskContext ctx, String url, String... mappings) throws Exception {
-		m_logger.info("GET " + url);
+		try {
+	      InputStream in = Urls.forIO().readTimeout(2000).connectTimeout(2000).openStream(url);
+	      String json = Files.forIO().readFrom(in, UTF_8);
 
-		String json = Files.forIO().readFrom(new URL(url).openStream(), UTF_8);
+	      if (url.indexOf("hitegg") > 0) {
+	      	System.err.println(json);
+	      } else if (url.endsWith("#")) {
+	      	System.err.println(json);
+	      }
+	      
+	      if ("403".equals(json)) {
+	      	ctx.setAttribute("status", "403");
 
-		if (url.indexOf("hitegg") > 0) {
-			System.err.println(json);
-		} else if (url.endsWith("#")) {
-			System.err.println(json);
-		}
+	      	m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
+	      	return false;
+	      } else if (!checkStatus(ctx, json)) {
+	      	m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
+	      	return false;
+	      }
 
-		if ("403".equals(json)) {
-			ctx.setAttribute("status", "403");
-
-			return false;
-		} else if (!checkStatus(ctx, json)) {
-			return false;
-		}
-
-		setOutputAttributes(ctx, json, mappings);
-		return true;
+	      setOutputAttributes(ctx, json, mappings);
+	      m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
+	      return true;
+      } catch (Exception e) {
+	      e.printStackTrace();
+	      return false;
+      }
 	}
 
 	public void doGetWithScript(TaskContext ctx, String url, String script, String mapping) throws Exception {
-		m_logger.info("GET " + url);
-
-		String json = Files.forIO().readFrom(new URL(url).openStream(), UTF_8);
-
 		try {
-			new Gson().fromJson(json, JsonObject.class);
-		} catch (Exception e) {
-			m_logger.warn(json, e);
-			return;
-		}
+	      InputStream in = Urls.forIO().readTimeout(2000).connectTimeout(2000).openStream(url);
+	      String json = Files.forIO().readFrom(in, UTF_8);
 
-		if (!checkStatus(ctx, json)) {
-			return;
-		}
+	      try {
+	      	new Gson().fromJson(json, JsonObject.class);
+	      } catch (Exception e) {
+	      	m_logger.warn(json, e);
+	      	m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
+	      	return;
+	      }
 
-		Triple<String, String, String> t = parseMapping(ctx, mapping);
-		String category = t.getMiddle();
-		String name = t.getLast();
+	      if (!checkStatus(ctx, json)) {
+	      	m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
+	      	return;
+	      }
 
-		Object value = m_engine.eval("var o=" + json + ";" + script);
+	      Triple<String, String, String> t = parseMapping(ctx, mapping);
+	      String category = t.getMiddle();
+	      String name = t.getLast();
 
-		ctx.setAttribute(category, name, value.toString());
+	      Object value = m_engine.eval("var o=" + json + ";" + script);
+
+	      ctx.setAttribute(category, name, value.toString());
+	      m_logger.info("{status:" + ctx.getAttribute("status") + "}" +" GET " + url);
+      } catch (Exception e) {
+	      e.printStackTrace();
+      }
 	}
 
 	@Override

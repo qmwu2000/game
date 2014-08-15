@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model>
+  <entity name="member" root="true">
+    <attribute name="server" value-type="int" />
+    <attribute name="user-name" value-type="String" />
+    <attribute name="password" value-type="String" />
+    <attribute name="main-person" value-type="String" />
+    <entity-ref name="boss" />
+    <entity-ref name="gem" />
+    <entity-ref name="soul" />
+    <entity-ref name="heaven" />
+  </entity>
+  <entity name="boss">
+    <attribute name="matrix" value-type="int" />
+  </entity>
+  <entity name="gem">
+    <attribute name="map-id" value-type="String" />
+    <attribute name="level" value-type="int" />
+  </entity>
+  <entity name="soul">
+    <attribute name="level" value-type="int" />
+  </entity>
+  <entity name="heaven">
+    <attribute name="level" value-type="int" />
+  </entity>
+</model>
+
