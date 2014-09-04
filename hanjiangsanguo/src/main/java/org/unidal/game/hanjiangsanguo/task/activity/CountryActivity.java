@@ -25,6 +25,8 @@ public class CountryActivity extends AbstractTaskActivity {
 			handleDonate(ctx, maxSilver);
 		} else if ("dice".equals(op)) {
 			handleDice(ctx);
+		} else if ("siege".equals(op)) {
+			handleSiege(ctx);
 		}
 
 		return true;
@@ -87,6 +89,18 @@ public class CountryActivity extends AbstractTaskActivity {
 				handleExpostulationReward(ctx, id);
 			}
 		}
+	}
+
+	private void handleSiege(TaskContext ctx) throws Exception {
+		String url = m_helper.buildUrl2(ctx, "siege", "battle_prepare", null);
+		String url2 = m_helper.buildUrl2(ctx, "siege", "join_battle", null);
+		String url3 = m_helper.buildUrl2(ctx, "siege", "action", null);
+		String url4 = m_helper.buildUrl2(ctx, "siege", "get_reward", "&type=1");
+
+		m_helper.doGet(ctx, url);
+		m_helper.doGet(ctx, url2);
+		m_helper.doGet(ctx, url3);
+		m_helper.doGet(ctx, url4);
 	}
 
 	private void handleExpostulationReward(TaskContext ctx, String id) throws Exception {

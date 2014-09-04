@@ -12,9 +12,9 @@ public class Xiaohao extends ComponentTestCase {
 	@Test
 	public void all() throws Exception {
 		String[] accounts = {  
-				"2xiaohao362", "2xiaohao996",
+				"1xiaohao320", "1xiaohao293", "xiaohao816", "2xiaohao362", "2xiaohao996",
 		      "2xiaohao543", "2xiaohao583", "2xiaohao508", "youyong3918", "1xiaohao24", "1xiaohao970", "1xiaohao73",
-		      "1xiaohao966", "1xiaohao428", "xiaohao531", "1xiaohao320", "1xiaohao293", "xiaohao816", "xiaoke01",
+		      "1xiaohao966", "1xiaohao428", "xiaohao531", "xiaoke01",
 		      "youyong3772", "gongxian134", "gongxian8196", "qmwu2015", "qmwu2016", "xiaohao856" };
 
 		TaskDriver driver = lookup(TaskDriver.class);
@@ -49,6 +49,30 @@ public class Xiaohao extends ComponentTestCase {
 
 			driver.reset();
 
+			System.out.println();
+			System.out.println();
+		}
+	}
+	
+	@Test
+	public void siege() throws Exception {
+		String[] accounts = {  
+				"1xiaohao320", "1xiaohao293", "xiaohao816", "2xiaohao362", "2xiaohao996",
+				"2xiaohao543", "2xiaohao583", "2xiaohao508", "youyong3918", "1xiaohao24", "1xiaohao970", "1xiaohao73",
+				"1xiaohao966", "1xiaohao428", "xiaohao531", "xiaoke01",
+				"youyong3772", "gongxian134", "gongxian8196", "qmwu2015", "qmwu2016", "xiaohao856" };
+		
+		TaskDriver driver = lookup(TaskDriver.class);
+		
+		for (String account : accounts) {
+			driver.go("login", "107", account, account);
+			
+			if (driver.getContext().getIntAttribute("member", "country", 0) > 0) {
+				driver.go("country", "siege"); // 国战
+			}
+			
+			driver.reset();
+			
 			System.out.println();
 			System.out.println();
 		}

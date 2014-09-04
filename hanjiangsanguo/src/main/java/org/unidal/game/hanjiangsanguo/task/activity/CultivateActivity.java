@@ -38,6 +38,25 @@ public class CultivateActivity extends AbstractTaskActivity {
 		int delta = (wuliup2 * wuliup2 + zhiliup2 * zhiliup2 + tiliup2 * tiliup2) //
 		      - (wuliup * wuliup + zhiliup * zhiliup + tiliup * tiliup);
 
+		if (type == 4) {
+			int diff = zhiliup2 + tiliup2 - zhiliup - tiliup;
+			int delta4 = (zhiliup2 * zhiliup2 + tiliup2 * tiliup2) //
+			      - (zhiliup * zhiliup + tiliup * tiliup);
+
+			if (diff > 0) {
+				return true;
+			} else if (diff == 0 && delta4 < 0 && zhiliup2 > zhiliup) {
+				return true;
+			} else {
+				// restore
+				ctx.setAttribute("info.wuliup", String.valueOf(wuliup));
+				ctx.setAttribute("info.zhiliup", String.valueOf(zhiliup));
+				ctx.setAttribute("info.tiliup", String.valueOf(tiliup));
+
+				return false;
+			}
+		}
+
 		if (sum2 > sum) {
 			return true;
 		} else if (sum2 == sum && delta < 0) {
@@ -77,21 +96,16 @@ public class CultivateActivity extends AbstractTaskActivity {
 		ensure(op != null);
 		ctx.setDefaultCategory(ID);
 
+		String name = args.nextString(null);
+		int times = args.nextInt(1);
+		String gid = mapId(ctx, name);
 		int type = args.nextInt(2); // 1: wuli, 2: zhili
 
 		if ("money".equals(op)) {
-			String name = args.nextString(null);
-			int times = args.nextInt(1);
-			String gid = mapId(ctx, name);
-
 			for (int i = 0; i < times; i++) {
 				doCultivate(ctx, gid, 1, type);
 			}
 		} else if ("gold".equals(op)) {
-			String name = args.nextString(null);
-			int times = args.nextInt(1);
-			String gid = mapId(ctx, name);
-
 			for (int i = 0; i < times; i++) {
 				doCultivate(ctx, gid, 2, type);
 			}

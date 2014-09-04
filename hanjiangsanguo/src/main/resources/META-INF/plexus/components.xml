@@ -135,6 +135,16 @@
 		</component>
 		<component>
 			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
+			<role-hint>newyearboss</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.core.NewyearBossTask</implementation>
+			<requirements>
+				<requirement>
+					<role>org.unidal.game.hanjiangsanguo.task.TaskHelper</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.Task</role>
 			<role-hint>general</role-hint>
 			<implementation>org.unidal.game.hanjiangsanguo.task.core.GeneralTask</implementation>
 			<requirements>
