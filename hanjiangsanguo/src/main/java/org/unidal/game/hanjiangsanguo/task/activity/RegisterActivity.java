@@ -128,7 +128,7 @@ public class RegisterActivity extends AbstractTaskActivity {
 
 	private void handleSelectRole(TaskContext ctx) throws Exception {
 		TimeUnit.MILLISECONDS.sleep(500);
-		String prefix = "小柯";
+		String prefix = "数字号码";
 		int uid = ctx.getIntAttribute("uid", 0);
 		String name = prefix + Integer.toHexString(uid);
 

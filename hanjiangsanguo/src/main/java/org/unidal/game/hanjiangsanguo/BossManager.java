@@ -10,6 +10,7 @@ import org.unidal.game.hanjiangsanguo.account.DouDouMainAccount;
 import org.unidal.game.hanjiangsanguo.account.HanfengMainAccount;
 import org.unidal.game.hanjiangsanguo.account.HuaiyiMainAccount;
 import org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount;
+import org.unidal.game.hanjiangsanguo.account.LaFengAccount;
 import org.unidal.game.hanjiangsanguo.account.MainAccount;
 import org.unidal.game.hanjiangsanguo.account.YilianMainAccount;
 import org.unidal.helper.Threads;
@@ -31,6 +32,9 @@ public class BossManager implements Initializable, Runnable, LogEnabled {
 
 	@Inject
 	private YilianMainAccount m_yilian;
+	
+	@Inject
+	private LaFengAccount m_lafeng;
 
 	public void empty() {
 	}
@@ -58,6 +62,7 @@ public class BossManager implements Initializable, Runnable, LogEnabled {
 				Threads.forGroup("game").start(new WorldBoss(m_kejiyao));
 				Threads.forGroup("game").start(new WorldBoss(m_yilian));
 				Threads.forGroup("game").start(new WorldBoss(m_huaiyi));
+				Threads.forGroup("game").start(new WorldBoss(m_lafeng));
 			}
 
 			if (hour == 20 && minute == 30 && week == Calendar.FRIDAY) {
@@ -66,6 +71,7 @@ public class BossManager implements Initializable, Runnable, LogEnabled {
 				Threads.forGroup("game").start(new CountryBoss(m_kejiyao));
 				Threads.forGroup("game").start(new CountryBoss(m_yilian));
 				Threads.forGroup("game").start(new CountryBoss(m_huaiyi));
+				Threads.forGroup("game").start(new CountryBoss(m_lafeng));
 			}
 
 			try {

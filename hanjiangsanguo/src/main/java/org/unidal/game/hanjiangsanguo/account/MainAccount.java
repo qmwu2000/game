@@ -25,7 +25,7 @@ public abstract class MainAccount {
 	@Inject
 	protected TaskDriver m_driver;
 
-	private void login() {
+	public void login() {
 		m_driver.go("login", m_member.getServer(), m_member.getUserName(), m_member.getPassword());
 	}
 
@@ -54,17 +54,18 @@ public abstract class MainAccount {
 
 	public void doDaHaoTask() {
 		login();
+		m_driver.go("map", "island", "10"); // 金银洞
+		m_driver.go("trade", "business"); // 每日通商
 		m_driver.go(SoulActivity.ID, m_member.getSoul().getLevel());
 		m_driver.go(GemActivity.ID, m_member.getGem().getMapId(), m_member.getGem().getLevel());
 		m_driver.go(HeavenActivity.ID, m_member.getHeaven().getLevel());
-		doJiangSetUp();
-		m_driver.go(JiangActivity.ID, m_member.getJiang().getLevel(), m_member.getMainPerson());
 		doHreoSetUp();
 		m_driver.go(HeroActivity.ID);
 	}
 
 	public void doShenJiang() {
 		login();
+		m_driver.go(JiangActivity.ID, m_member.getJiang().getLevel(), m_member.getMainPerson());
 	}
 
 	public void doOtherAccountTask() {
@@ -84,9 +85,7 @@ public abstract class MainAccount {
 		m_driver.getContext().setAttribute(ArenaActivity.ID, "server", arenaServerId);
 		m_driver.go("arena", "bet");
 
-		m_driver.go(SoulActivity.ID, m_member.getSoul().getLevel());
-		m_driver.go(GemActivity.ID, m_member.getGem().getMapId(), m_member.getGem().getLevel());
-		m_driver.go(HeavenActivity.ID, m_member.getHeaven().getLevel());
+		doDaHaoTask();
 		m_driver.go("trade", "business"); // 每日通商
 	}
 
@@ -108,7 +107,7 @@ public abstract class MainAccount {
 			m_driver.go("country", "dice"); // 国家骰子
 		}
 	}
-
+	
 	public void doLastInDay() {
 		login();
 	}
@@ -118,10 +117,10 @@ public abstract class MainAccount {
 
 		m_driver.getContext().setAttribute("member", "dahao", "dahao");
 		m_driver.go("banquet", "active"); // 国宴
-		m_driver.go("countrymine", "active"); // 国家矿
 		m_driver.go("gift", "hitegg"); // 砸金蛋
 
 		if (isIdleTime()) {
+			m_driver.go("countrymine", "active"); // 国家矿
 			m_driver.go("trade", "oversea"); // 海外贸易
 		}
 	}
@@ -153,8 +152,8 @@ public abstract class MainAccount {
 	private boolean isIdleTime() {
 		Calendar cal = Calendar.getInstance();
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
-
-		if ((hour >= 4 && hour <= 7) || hour >= 22) {
+		
+		if ((hour >= 3 && hour <= 7) || hour >= 22) {
 			return true;
 		} else {
 			return false;

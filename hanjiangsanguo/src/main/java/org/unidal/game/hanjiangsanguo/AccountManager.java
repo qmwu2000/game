@@ -13,6 +13,7 @@ import org.unidal.game.hanjiangsanguo.account.DouDouMainAccount;
 import org.unidal.game.hanjiangsanguo.account.HanfengMainAccount;
 import org.unidal.game.hanjiangsanguo.account.HuaiyiMainAccount;
 import org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount;
+import org.unidal.game.hanjiangsanguo.account.LaFengAccount;
 import org.unidal.game.hanjiangsanguo.account.XiaoHaoAccount;
 import org.unidal.game.hanjiangsanguo.account.YilianMainAccount;
 import org.unidal.game.hanjiangsanguo.task.TaskDriver;
@@ -39,6 +40,9 @@ public class AccountManager extends BaseManager implements Initializable, LogEna
 
 	@Inject
 	private YilianMainAccount m_yilian;
+
+	@Inject
+	private LaFengAccount m_lafeng;
 
 	@Inject
 	private XiaoHaoAccount m_xiaohao;
@@ -143,16 +147,18 @@ public class AccountManager extends BaseManager implements Initializable, LogEna
 							m_hanfeng.doFirstInDay();
 							m_doudou.doFirstInDay();
 							m_kejiyao.doFirstInDay();
+							m_lafeng.doFirstInDay();
 							m_yilian.doFirstInDay();
 							m_huaiyi.doFirstInDay();
 							m_xiaohao.doFirstInDay();
 						}
 						m_hanfeng.doCycleTask();
-						m_doudou.doCycleTask();
-						m_kejiyao.doCycleTask();
 						m_yilian.doCycleTask();
 						m_huaiyi.doCycleTask();
+						m_lafeng.doCycleTask();
 						m_xiaohao.doClydeTask();
+						m_doudou.doCycleTask();
+						m_kejiyao.doCycleTask();
 
 						Arena arean = buildArenaInfo("107", "2xiaohao362", "2xiaohao362", m_driver);
 
@@ -163,6 +169,7 @@ public class AccountManager extends BaseManager implements Initializable, LogEna
 							m_doudou.bet(arenaUid, arenaServerId);
 							m_kejiyao.bet(arenaUid, arenaServerId);
 							m_yilian.bet(arenaUid, arenaServerId);
+							m_lafeng.bet(arenaUid, arenaServerId);
 							m_huaiyi.bet(arenaUid, arenaServerId);
 							m_xiaohao.bet(arenaUid, arenaServerId);
 						}

@@ -69,7 +69,7 @@ public class MineActivity extends AbstractTaskActivity {
 		      .doGetWithScript(
 		            ctx,
 		            url,
-		            "var gs=''; for (var i in o.list) gs+=o.list[i].id+':'+o.list[i].status+':'+o.list[i].get_silver+':'+o.list[i].nickname+','; gs;",
+		            "var gs=''; for (var i in o.list) gs+=o.list[i].id+':'+o.list[i].silver+':'+o.list[i].get_silver+':'+o.list[i].nickname+','; gs;",
 		            "list");
 
 		String list = ctx.getAttribute("list");
@@ -78,12 +78,17 @@ public class MineActivity extends AbstractTaskActivity {
 		for (String str : strs) {
 			String[] temp = str.split(":");
 			String id = temp[0];
+			String silver = temp[1];
 			String getSilver = temp[2];
 
 			if (id.equals(String.valueOf(site))) {
+				int maxValue = Integer.parseInt(silver);
 				int currentValue = Integer.parseInt(getSilver);
 
-				if (currentValue >= maxGold) {
+				if (currentValue >= maxValue * 0.8) {
+					return true;
+				}
+				if (maxGold > 0 && currentValue >= maxGold) {
 					return true;
 				}
 			}
@@ -106,8 +111,9 @@ public class MineActivity extends AbstractTaskActivity {
 
 	private void endMine(TaskContext ctx) throws Exception {
 		int index = ctx.getIntAttribute("log.site", 10);
-		String url1 = m_helper.buildUrl2(ctx, "mine", "give_up", "");
-		String url2 = m_helper.buildUrl2(ctx, "mine", "get_silver", "p=2&s=" + index);
+		int page = ctx.getIntAttribute("log.page", 10);
+		String url1 = m_helper.buildUrl2(ctx, "mine", "give_up", "&p=" + page + "&s=" + index);
+		String url2 = m_helper.buildUrl2(ctx, "mine", "get_silver", "&p=" + page + "&s=" + index);
 
 		m_helper.doGet(ctx, url1);
 		m_helper.doGet(ctx, url2);

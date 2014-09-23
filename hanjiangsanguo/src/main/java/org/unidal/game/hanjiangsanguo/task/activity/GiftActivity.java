@@ -17,7 +17,7 @@ public class GiftActivity extends AbstractTaskActivity {
 		String url = m_helper.buildUrl2(ctx, "arena", "get_reward", null);
 
 		m_helper.doGet(ctx, url);
-		
+
 		String url2 = m_helper.buildUrl2(ctx, "worldarena", "get_bet_reward", null);
 
 		m_helper.doGet(ctx, url2);
@@ -191,18 +191,46 @@ public class GiftActivity extends AbstractTaskActivity {
 			doDice(ctx);
 		} else if ("code".equals(op)) {
 			doCode(ctx);
-		}else if ("get_mission_reward".equals(op)) {
+		} else if ("get_mission_reward".equals(op)) {
 			int id = args.nextInt(40);
-			doReward(ctx,id);
+			doReward(ctx, id);
+		} else if ("pass".equals(op)) {
+			int start = args.nextInt(0);
+			int end = args.nextInt(0);
+			doPaas(ctx, start, end);
+		} else if ("jingsu".equals(op)) {
+			doJingSu(ctx);
 		}
 
 		return true;
 	}
 
-	private void doReward(TaskContext ctx,int id) throws Exception {
-		String indexUrl = m_helper.buildUrl2(ctx, "map", "get_mission_reward", "id="+id);
+	private void doJingSu(TaskContext ctx) throws Exception {
+		for (int i = 1; i <= 13; i++) {
+			String indexUrl = m_helper.buildUrl2(ctx, "map", "get_mission_reward", "&id=" + String.valueOf(i * 10));
+
+			m_helper.doGet(ctx, indexUrl);
+		}
+
+		for (int i = 0; i < 8; i++) {
+			String indexUrl = m_helper.buildUrl2(ctx, "map", "get_mission_reward",
+			      "&id=" + String.valueOf((i + 13) * 10 + 7));
+
+			m_helper.doGet(ctx, indexUrl);
+		}
+	}
+
+	private void doPaas(TaskContext ctx, int start, int end) throws Exception {
+		for (int i = start; i <= end; i++) {
+			String indexUrl = m_helper.buildUrl2(ctx, "map", "get_newreward", "&id=" + i);
+
+			m_helper.doGet(ctx, indexUrl);
+		}
+	}
+
+	private void doReward(TaskContext ctx, int id) throws Exception {
+		String indexUrl = m_helper.buildUrl2(ctx, "map", "get_mission_reward", "&id=" + id);
 
 		m_helper.doGet(ctx, indexUrl);
-	   
-   }
+	}
 }

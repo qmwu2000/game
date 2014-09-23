@@ -5,10 +5,10 @@ import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationExce
 import org.unidal.game.hanjiangsanguo.member.transform.DefaultSaxParser;
 import org.unidal.helper.Files;
 
-public class KeJiYaoMainAccount extends MainAccount implements Initializable {
+public class LaFengAccount extends MainAccount implements Initializable {
 	public void initialize() throws InitializationException {
 		try {
-			String content = Files.forIO().readFrom(this.getClass().getResourceAsStream("/config/kejiyao.xml"), "utf-8");
+			String content = Files.forIO().readFrom(this.getClass().getResourceAsStream("/config/lafeng.xml"), "utf-8");
 			m_member = DefaultSaxParser.parse(content);
 		} catch (Exception e) {
 			throw new InitializationException("init error", e);
@@ -16,23 +16,19 @@ public class KeJiYaoMainAccount extends MainAccount implements Initializable {
 	}
 
 	@Override
-	public void doFirstInDay() {
-		super.doFirstInDay();
-		super.doDaHaoTask();
-		super.doShenJiang();
-
-	}
+   public void doFirstInDay() {
+	   super.doFirstInDay();
+	   doOtherAccountTask();
+   }
 
 	@Override
-	public void doLastInDay() {
-		super.doLastInDay();
-		super.doDaHaoTask();
-		super.doShenJiang();
-	}
+   public void doLastInDay() {
+	   super.doLastInDay();
+   }
 
 	@Override
-	public void doCycleTask() {
-		super.doCycleTask();
-	}
+   public void doCycleTask() {
+	   super.doCycleTask();
+   }
 
 }

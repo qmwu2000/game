@@ -32,8 +32,86 @@ public class CountryActivity extends AbstractTaskActivity {
 			handelExitCountry(ctx);
 		} else if ("approve".equals(op)) {
 			handelApprove(ctx);
+		} else if ("donate2".equals(op)) {
+			handleDonate2(ctx);
+		} else if ("donateAll".equals(op)) {
+			handleDonateAll(ctx);
+		} else if ("hero".equals(op)) {
+			handleHero(ctx);
+		} else if ("useHero".equals(op)) {
+			hadleUseHero(ctx);
+		} else if ("invitation".equals(op)) {
+			String code = args.nextString(null);
+			handelInvitation(ctx, code);
+		} else if ("shop".equals(op)) {
+			handleShoping(ctx);
 		}
 		return true;
+	}
+
+	private void handleShoping(TaskContext ctx) throws Exception {
+		for (int i = 0; i < 5; i++) {
+			String indexUrl = m_helper.buildUrl2(ctx, "country_taxes_shop", "buy", "&id=15");
+
+			m_helper.doGet(ctx, indexUrl);
+
+			indexUrl = m_helper.buildUrl2(ctx, "country_taxes_shop", "buy", "&id=18");
+
+			m_helper.doGet(ctx, indexUrl);
+		}
+	}
+
+	private void handleDonateAll(TaskContext ctx) throws Exception {
+		String storageUrl = m_helper.buildUrl2(ctx, "country", "storage", null);
+		int maxSilver = 50 * 10000;
+		m_helper.doGet(ctx, storageUrl, "donate.silver");
+
+		while (true) {
+			int silver = ctx.getIntAttribute("donate.silver", Integer.MAX_VALUE);
+			boolean flag = false;
+
+			if (silver < maxSilver) {
+				String url = m_helper.buildUrl2(ctx, "country", "donate", "&type=1");
+
+				flag = m_helper.doGet(ctx, url, "donate.silver", "silver");
+
+				int left = ctx.getIntAttribute(ID, "silver", 0);
+
+				if (left > 50 * 10000) {
+					flag = true;
+				}
+			}
+
+			if (!flag) {
+				break;
+			}
+		}
+
+		for (int i = 0; i < 200; i++) {
+			String url = m_helper.buildUrl2(ctx, "country", "donate", "&type=2");
+
+			m_helper.doGet(ctx, url, "donate.silver", "silver");
+		}
+
+	}
+
+	private void handelInvitation(TaskContext ctx, String code) throws Exception {
+		String indexUrl = m_helper.buildUrl2(ctx, "invitation", "change", "&code=" + code);
+
+		m_helper.doGet(ctx, indexUrl);
+	}
+
+	private void hadleUseHero(TaskContext ctx) throws Exception {
+		String indexUrl = m_helper.buildUrl2(ctx, "war_college", "use_buff", "&id=1");
+
+		m_helper.doGet(ctx, indexUrl);
+	}
+
+	private void handleHero(TaskContext ctx) throws Exception {
+		String indexUrl = m_helper.buildUrl2(ctx, "country_taxes_shop", "buy", "&id=1");
+
+		m_helper.doGet(ctx, indexUrl);
+
 	}
 
 	private List<Integer> findIds(TaskContext ctx) throws Exception {
@@ -119,6 +197,14 @@ public class CountryActivity extends AbstractTaskActivity {
 			if (!flag) {
 				break;
 			}
+		}
+	}
+
+	private void handleDonate2(TaskContext ctx) throws Exception {
+		for (int i = 0; i < 10; i++) {
+			String url = m_helper.buildUrl2(ctx, "country", "donate", "&type=1");
+
+			m_helper.doGet(ctx, url, "donate.silver", "silver");
 		}
 	}
 

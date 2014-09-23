@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.unidal.game.hanjiangsanguo.account.DouDouMainAccount;
 import org.unidal.game.hanjiangsanguo.account.HanfengMainAccount;
 import org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount;
+import org.unidal.game.hanjiangsanguo.account.LaFengAccount;
+import org.unidal.game.hanjiangsanguo.account.XiaoHaoAccount;
 import org.unidal.game.hanjiangsanguo.task.TaskDriver;
 import org.unidal.game.hanjiangsanguo.task.activity.ArenaActivity;
 import org.unidal.lookup.ComponentTestCase;
@@ -11,6 +13,13 @@ import org.unidal.lookup.ComponentTestCase;
 public class doudou extends ComponentTestCase {
 	static {
 		System.setProperty("devMode", "true");
+	}
+	
+	@Test
+	public void testLafeng() {
+		LaFengAccount account = lookup(LaFengAccount.class);
+
+		account.doDaHaoTask();
 	}
 
 	@Test
@@ -42,8 +51,9 @@ public class doudou extends ComponentTestCase {
 	public void doHreoSetUp() throws Exception {
 		DouDouMainAccount account = lookup(DouDouMainAccount.class);
 
-		account.doDaHaoTask();
-
+		account.doCycleTask();
+		
+		//account.doDaHaoTask();
 		// account.doHreoSetUp();
 		// account.doDaHaoTask();
 	}
@@ -53,6 +63,7 @@ public class doudou extends ComponentTestCase {
 		DouDouMainAccount account = lookup(DouDouMainAccount.class);
 
 		account.doBossSetUp();
+		account.doFirstInDay();
 	}
 	
 	@Test
@@ -77,7 +88,8 @@ public class doudou extends ComponentTestCase {
 	public void doJiangSetup() throws Exception {
 		DouDouMainAccount account = lookup(DouDouMainAccount.class);
 
-		account.doBossSetUp();
+		//account.doDaHaoTask();
+		account.doShenJiang();
 		
 	}
 
@@ -85,6 +97,7 @@ public class doudou extends ComponentTestCase {
 	public void doDouDouBoss() throws Exception {
 		DouDouMainAccount account = lookup(DouDouMainAccount.class);
 
+		account.doBossSetUp();
 		account.doWorldBoss();
 	}
 	
@@ -92,6 +105,7 @@ public class doudou extends ComponentTestCase {
 	public void doHanfengBosst() throws Exception {
 		HanfengMainAccount account = lookup(HanfengMainAccount.class);
 
+		account.doBossSetUp();
 		account.doWorldBoss();
 	}
 
@@ -99,6 +113,7 @@ public class doudou extends ComponentTestCase {
 	public void doKejiYaoBoss() throws Exception {
 		KeJiYaoMainAccount account = lookup(KeJiYaoMainAccount.class);
 
+		account.doBossSetUp();
 		account.doWorldBoss();
 	}
 	
@@ -106,13 +121,18 @@ public class doudou extends ComponentTestCase {
 	public void doDouDouCountryBoss() throws Exception {
 		DouDouMainAccount account = lookup(DouDouMainAccount.class);
 
-		account.doCountryBoss();
+		account.doCycleTask();
+		//account.doShenJiang();
+		//account.doCycleTask();
+		//account.doBossSetUp();
+		//account.doCountryBoss();
 	}
 	
 	@Test
 	public void doHanfengCountryBoss() throws Exception {
 		HanfengMainAccount account = lookup(HanfengMainAccount.class);
 
+		account.doBossSetUp();
 		account.doCountryBoss();
 	}
 
@@ -120,7 +140,17 @@ public class doudou extends ComponentTestCase {
 	public void doKejiYaoCountryBoss() throws Exception {
 		KeJiYaoMainAccount account = lookup(KeJiYaoMainAccount.class);
 
-		account.doCountryBoss();
+		account.doBossSetUp();
+		account.doWorldBoss();
+		//account.doCountryBoss();
+	}
+	
+	@Test
+	public void doXiaoHao() throws Exception {
+		XiaoHaoAccount account = lookup(XiaoHaoAccount.class);
+
+//		account.doFirstInDay();
+		account.doClydeTask();
 	}
 
 }

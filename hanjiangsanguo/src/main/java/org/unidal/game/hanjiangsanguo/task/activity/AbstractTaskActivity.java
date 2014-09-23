@@ -29,4 +29,5 @@ public abstract class AbstractTaskActivity extends ContainerHolder implements Ta
 			}
 		}
 	}
+
 }

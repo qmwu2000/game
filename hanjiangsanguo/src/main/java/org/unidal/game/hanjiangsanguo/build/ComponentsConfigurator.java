@@ -9,6 +9,7 @@ import org.unidal.game.hanjiangsanguo.account.DouDouMainAccount;
 import org.unidal.game.hanjiangsanguo.account.HanfengMainAccount;
 import org.unidal.game.hanjiangsanguo.account.HuaiyiMainAccount;
 import org.unidal.game.hanjiangsanguo.account.KeJiYaoMainAccount;
+import org.unidal.game.hanjiangsanguo.account.LaFengAccount;
 import org.unidal.game.hanjiangsanguo.account.XiaoHaoAccount;
 import org.unidal.game.hanjiangsanguo.account.YilianMainAccount;
 import org.unidal.game.hanjiangsanguo.router.DefaultRouter;
@@ -19,6 +20,8 @@ import org.unidal.game.hanjiangsanguo.task.TaskHelper;
 import org.unidal.game.hanjiangsanguo.task.activity.ActivityActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.ArenaActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.BanquetActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.BanquetXiaohaoActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.BeautyActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CityActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CountryActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.CountryBossActivity;
@@ -69,11 +72,13 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(YilianMainAccount.class).req(TaskDriver.class));
 		all.add(C(KeJiYaoMainAccount.class).req(TaskDriver.class));
 		all.add(C(XiaoHaoAccount.class).req(TaskDriver.class));
+		all.add(C(LaFengAccount.class).req(TaskDriver.class));
 
 		all.add(C(AccountManager.class).req(HanfengMainAccount.class, DouDouMainAccount.class, HuaiyiMainAccount.class,
-		      YilianMainAccount.class, KeJiYaoMainAccount.class).req(XiaoHaoAccount.class,TaskDriver.class));
+		      YilianMainAccount.class, KeJiYaoMainAccount.class).req(XiaoHaoAccount.class, TaskDriver.class,
+		      LaFengAccount.class));
 		all.add(C(BossManager.class).req(HanfengMainAccount.class, DouDouMainAccount.class, HuaiyiMainAccount.class,
-		      YilianMainAccount.class, KeJiYaoMainAccount.class));
+		      YilianMainAccount.class, KeJiYaoMainAccount.class, LaFengAccount.class));
 		all.addAll(defineTaskActivityComponents());
 
 		all.add(C(DefaultRouter.class));
@@ -104,6 +109,7 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskActivity.class, ActivityActivity.ID, ActivityActivity.class));
 		all.add(C(TaskActivity.class, RegisterActivity.ID, RegisterActivity.class));
 		all.add(C(TaskActivity.class, BanquetActivity.ID, BanquetActivity.class));
+		all.add(C(TaskActivity.class, BanquetXiaohaoActivity.ID, BanquetXiaohaoActivity.class));
 		all.add(C(TaskActivity.class, MineActivity.ID, MineActivity.class));
 		all.add(C(TaskActivity.class, CountryMineActivity.ID, CountryMineActivity.class));
 		all.add(C(TaskActivity.class, ArenaActivity.ID, ArenaActivity.class));
@@ -117,6 +123,7 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskActivity.class, HeroActivity.ID, HeroActivity.class));
 		all.add(C(TaskActivity.class, JiangActivity.ID, JiangActivity.class));
 		all.add(C(TaskActivity.class, SoulEquipActivity.ID, SoulEquipActivity.class));
+		all.add(C(TaskActivity.class, BeautyActivity.ID, BeautyActivity.class));
 
 		return all;
 	}

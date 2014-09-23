@@ -14,6 +14,8 @@ public class hanfeng extends ComponentTestCase{
 	public void test(){
 		HanfengMainAccount accout = lookup(HanfengMainAccount.class);
 		
+		accout.doDaHaoTask();
+		
 		accout.doShenJiang();
 //		accout.doDaHaoTask();
 //		accout.doCountryBoss();

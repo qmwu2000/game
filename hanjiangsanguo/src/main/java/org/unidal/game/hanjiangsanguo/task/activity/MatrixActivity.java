@@ -78,6 +78,7 @@ public class MatrixActivity extends AbstractTaskActivity {
 
 			m_helper.doGet(ctx, url);
 
+			Thread.sleep(300);
 			String url2 = m_helper.buildUrl2(ctx, "matrix", "use_matrix", "&list=" + matrix + "&mid=" + mid);
 
 			m_helper.doGet(ctx, url2);

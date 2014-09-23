@@ -58,6 +58,10 @@ public class CityActivity extends AbstractTaskActivity {
 					times--;
 				}
 			}
+		} else if ("exerciseAll".equals(op)) {
+			for (int i = 0; i < 50; i++) {
+				doImpose(ctx);
+			}
 		}
 
 		return true;

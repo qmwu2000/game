@@ -21,6 +21,18 @@ public class MapActivity extends AbstractTaskActivity {
 	}
 
 	private void doIsland(TaskContext ctx, int maxAct) throws Exception {
+		int actNum = ctx.getIntAttribute("member", "act", 0);
+
+		if (actNum > 1000) {
+			maxAct = 15;
+		} else if (actNum > 300) {
+			maxAct = 12;
+		} else if (actNum > 100) {
+			maxAct = 10;
+		} else {
+			maxAct = 6;
+		}
+		
 		while (true) {
 			String indexUrl = m_helper.buildUrl2(ctx, "island", "index", null);
 
