@@ -42,6 +42,7 @@ import org.unidal.game.hanjiangsanguo.task.activity.StrengthenActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TaskActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TowerActivity;
 import org.unidal.game.hanjiangsanguo.task.activity.TradeActivity;
+import org.unidal.game.hanjiangsanguo.task.activity.TreeActivity;
 import org.unidal.game.hanjiangsanguo.task.core.ActivityTask;
 import org.unidal.game.hanjiangsanguo.task.core.ArenaTask;
 import org.unidal.game.hanjiangsanguo.task.core.BusinessTask;
@@ -129,6 +130,7 @@ public class ComponentsConfigurator extends AbstractResourceConfigurator {
 		all.add(C(TaskActivity.class, RegisterActivity.ID, RegisterActivity.class));
 		all.add(C(TaskActivity.class, BanquetActivity.ID, BanquetActivity.class));
 		all.add(C(TaskActivity.class, ArenaActivity.ID, ArenaActivity.class));
+		all.add(C(TaskActivity.class, TreeActivity.ID, TreeActivity.class));
 
 		return all;
 	}

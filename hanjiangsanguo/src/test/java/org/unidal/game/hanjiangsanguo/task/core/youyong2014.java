@@ -95,9 +95,7 @@ public class youyong2014 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
 
-		for (int i = 0; i < 1; i++) {
-			driver.execute(task, "map/action", "reputation");
-		}
+		driver.execute(task, "map/action", "reputation");
 	}
 
 	@Test
@@ -105,7 +103,7 @@ public class youyong2014 extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
 
-		for (int type : new int[] { 9, 7 }) {
+		for (int type : new int[] { 6, 7 }) {
 			driver.execute(task, "map/action", "scroll", "map/scroll.color", "purple", "map/scroll.type", "" + type);
 		}
 	}

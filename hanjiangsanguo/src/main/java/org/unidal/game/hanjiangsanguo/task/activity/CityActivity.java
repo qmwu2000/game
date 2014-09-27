@@ -9,7 +9,7 @@ public class CityActivity extends AbstractTaskActivity {
 	public static final String ID = "city";
 
 	private boolean doImpose(TaskContext ctx) throws Exception {
-		TimeUnit.MILLISECONDS.sleep(500);
+		TimeUnit.MILLISECONDS.sleep(400);
 
 		String url = m_helper.buildUrl2(ctx, "city", "impose", "&e=0");
 
@@ -24,7 +24,7 @@ public class CityActivity extends AbstractTaskActivity {
 
 	public boolean execute(TaskContext ctx, TaskArguments args) throws Exception {
 		String op = args.nextString(null);
-
+		
 		ensure(op != null);
 		ctx.setDefaultCategory(ID);
 
@@ -45,17 +45,18 @@ public class CityActivity extends AbstractTaskActivity {
 				}
 			}
 		} else if ("exercise".equals(op)) {
-			int times = getTimes(ctx);
+			int times = args.nextInt(38);
+			int availableTimes = getTimes(ctx);
 
-			while (times > 38) {
+			while (availableTimes > times) {
 				doImpose(ctx);
-				times--;
+				availableTimes--;
 			}
 
 			if (ctx.getBooleanAttribute("member", "exercise", false)) {
-				while (times > 0) {
+				while (availableTimes > 0) {
 					doImpose(ctx);
-					times--;
+					availableTimes--;
 				}
 			}
 		}

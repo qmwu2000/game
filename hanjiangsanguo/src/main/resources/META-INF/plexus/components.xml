@@ -356,6 +356,11 @@
 			<implementation>org.unidal.game.hanjiangsanguo.task.activity.ArenaActivity</implementation>
 		</component>
 		<component>
+			<role>org.unidal.game.hanjiangsanguo.task.activity.TaskActivity</role>
+			<role-hint>tree</role-hint>
+			<implementation>org.unidal.game.hanjiangsanguo.task.activity.TreeActivity</implementation>
+		</component>
+		<component>
 			<role>org.unidal.web.mvc.model.ModuleRegistry</role>
 			<implementation>org.unidal.web.mvc.model.ModuleRegistry</implementation>
 			<configuration>

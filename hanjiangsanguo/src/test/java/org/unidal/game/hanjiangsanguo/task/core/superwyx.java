@@ -151,9 +151,7 @@ public class superwyx extends ComponentTestCase {
 		TaskDriver driver = lookup(TaskDriver.class);
 		Task task = lookup(Task.class, MapTask.ID);
 
-		for (int i = 0; i < 1; i++) {
-			driver.execute(task, "map/action", "reputation");
-		}
+		driver.execute(task, "map/action", "reputation");
 	}
 
 	@Test
@@ -164,7 +162,7 @@ public class superwyx extends ComponentTestCase {
 		for (int type : new int[] { 7 }) {
 			driver.execute(task, "map/action", "scroll", "map/scroll.color", "yellow", "map/scroll.type", "" + type);
 		}
-		
+
 		for (int type : new int[] { 9, 7 }) {
 			driver.execute(task, "map/action", "scroll", "map/scroll.color", "purple", "map/scroll.type", "" + type);
 		}

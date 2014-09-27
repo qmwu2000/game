@@ -79,7 +79,7 @@ public class GiftActivity extends AbstractTaskActivity {
 		return m_helper.doGet(ctx, url);
 	}
 
-	private boolean doLoginReward(TaskContext ctx) throws Exception {
+	private boolean doLogin(TaskContext ctx) throws Exception {
 		String indexUrl = m_helper.buildUrl2(ctx, "logined", "index", null);
 
 		m_helper.doGetWithScript(ctx, indexUrl,
@@ -97,8 +97,33 @@ public class GiftActivity extends AbstractTaskActivity {
 		return true;
 	}
 
+	private boolean doLoginReward(TaskContext ctx) throws Exception {
+		String indexUrl = m_helper.buildUrl2(ctx, "loginreward", "index", null);
+
+		m_helper.doGetWithScript(ctx, indexUrl,
+		      "var gs=''; for (var i in o.reward) if (o.reward[i].is_re=='1') gs+=o.reward[i].id+','; gs;", "list");
+
+		String list = ctx.getAttribute("list");
+		List<String> ids = Splitters.by(',').noEmptyItem().split(list);
+
+		doLoginRewardAction(ctx, 1, "1");
+
+		for (String id : ids) {
+			doLoginRewardAction(ctx, 2, id);
+		}
+
+		return true;
+	}
+
 	private boolean doTaskReward(TaskContext ctx, String id) throws Exception {
 		String url = m_helper.buildUrl2(ctx, "mainquest", "get_task_reward", String.format("&id=%s", id));
+
+		return m_helper.doGet(ctx, url);
+	}
+
+	private boolean doLoginRewardAction(TaskContext ctx, int type, String id) throws Exception {
+		String url = m_helper.buildUrl2(ctx, "loginreward", "action_reward",
+		      String.format("&type=%s&reward_id=%s", type, id));
 
 		return m_helper.doGet(ctx, url);
 	}
@@ -170,6 +195,8 @@ public class GiftActivity extends AbstractTaskActivity {
 		} else if ("vip".equals(op)) {
 			doVipWage(ctx);
 		} else if ("login".equals(op)) {
+			doLogin(ctx);
+		} else if ("loginReward".equals(op)) {
 			doLoginReward(ctx);
 		} else if ("hitegg".equals(op)) {
 			doHitEgg(ctx);
