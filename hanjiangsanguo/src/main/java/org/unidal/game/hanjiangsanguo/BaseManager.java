@@ -22,7 +22,7 @@ public class BaseManager {
 		}
 		return false;
 	}
-	
+
 	protected Date getCurrentDay() {
 		Calendar cal = Calendar.getInstance();
 
@@ -79,7 +79,7 @@ public class BaseManager {
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 		int minute = cal.get(Calendar.MINUTE);
 
-		if ((hour == 12) || (hour == 20) || (hour == 23 && minute > 30) || (hour == 0)) {
+		if ((hour == 12 && minute < 20) || (hour == 20) || (hour == 23 && minute > 30) || (hour == 0)) {
 			return true;
 		} else {
 			return false;

@@ -1,8 +1,8 @@
 <member server="107" user-name="superwyx" password="wyx1116" main-person="66097">
 	<boss  matrix="-2,43887,-2,-2,60009,-2,136825,128609,66097" mid="10"  gids="66097,136825,43887" sids="42652,33617,42026"></boss>
 	<gem map-id="4" level="149"></gem>
-	<soul level="103"></soul>
+	<soul level="109"></soul>
 	<heaven level="87"></heaven>
-	<jiang level="197" gids="66097,136825,43887" sids="33617,42652,42026"></jiang>
+	<jiang level="203" gids="66097,136825,43887" sids="33617,42652,42026"></jiang>
 	<hreo matrix="-2,66097,-2,-2,136825,-2,140355,128609,137148" mid="10"  gids="66097,136825,43887" sids="33617,42652,42026"></hreo>
 </member>

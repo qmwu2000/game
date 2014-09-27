@@ -39,15 +39,15 @@ public class DouDouMainAccount extends MainAccount implements Initializable {
 
 	private void updateMatrix() {
 		m_driver.go(MatrixActivity.ID, "switch", "10", "-2,43887,-2,-2,136825,-2,128609,66097,60009");
+		m_driver.go(SoulEquipActivity.ID, "66097,136825,43887", "42026,42652,33617");
 	}
 
 	@Override
 	public void doCycleTask() {
 		super.doCycleTask();
-		m_driver.go(SoulEquipActivity.ID, "66097,136825,43887", "42026,42652,33617");
 		updateMatrix();
 		
-		m_driver.getContext().setAttribute(MineActivity.ID, "maxMineGold", "300000");
+		m_driver.getContext().setAttribute(MineActivity.ID, "maxMineGold", "400000");
 		m_driver.go(MineActivity.ID, "active");
 	}
 

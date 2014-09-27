@@ -169,7 +169,7 @@ public class XiaoHaoAccount implements LogEnabled {
 			m_driver.getContext().setAttribute(MineActivity.ID, "maxMineGold", "150000");
 			m_driver.go(MineActivity.ID, "active");
 
-			sb.append("\"").append(account).append("").append(m_driver.getContext().getAttribute("member", "nickname")).append("\",");
+			sb.append("\"").append(account).append("").append(m_driver.getContext().getAttribute("member", "gold")).append("\",");
 
 			if (isIdleTime()) {
 				m_driver.go("trade", "oversea"); // 海外贸易

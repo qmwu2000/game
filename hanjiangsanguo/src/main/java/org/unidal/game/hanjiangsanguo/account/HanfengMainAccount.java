@@ -33,7 +33,7 @@ public class HanfengMainAccount extends MainAccount implements Initializable {
 	public void doCycleTask() {
 		super.doCycleTask();
 		m_driver.go(MatrixActivity.ID, "switch", "1", "-1,195761,-1,185227,-1,192370,190951,-1,201942");
-		m_driver.getContext().setAttribute(MineActivity.ID, "maxMineGold", "400000");
+		m_driver.getContext().setAttribute(MineActivity.ID, "maxMineGold", "200000");
 		m_driver.go(MineActivity.ID, "active");
 	}
 

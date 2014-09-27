@@ -121,7 +121,9 @@ public class doudou extends ComponentTestCase {
 	public void doDouDouCountryBoss() throws Exception {
 		DouDouMainAccount account = lookup(DouDouMainAccount.class);
 
-		account.doCycleTask();
+		account.doFirstInDay();
+		
+		//account.doCycleTask();
 		//account.doShenJiang();
 		//account.doCycleTask();
 		//account.doBossSetUp();
@@ -132,8 +134,10 @@ public class doudou extends ComponentTestCase {
 	public void doHanfengCountryBoss() throws Exception {
 		HanfengMainAccount account = lookup(HanfengMainAccount.class);
 
-		account.doBossSetUp();
-		account.doCountryBoss();
+		account.doFirstInDay();
+		
+//		account.doBossSetUp();
+//		account.doCountryBoss();
 	}
 
 	@Test

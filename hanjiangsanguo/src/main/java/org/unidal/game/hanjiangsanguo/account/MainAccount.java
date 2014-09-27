@@ -153,7 +153,7 @@ public abstract class MainAccount {
 		Calendar cal = Calendar.getInstance();
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 		
-		if ((hour >= 3 && hour <= 7) || hour >= 22) {
+		if ((hour >= 3 && hour <= 7) || hour >= 21) {
 			return true;
 		} else {
 			return false;
